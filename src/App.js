@@ -1,9 +1,12 @@
 import './App.css';
 import Routing from './Routes';
+import { AuthProvider } from './context/Auth';
 
 function App() {
   return (
-    <Routing />
+    <AuthProvider>
+      <Routing />
+    </AuthProvider>
   );
 }
 

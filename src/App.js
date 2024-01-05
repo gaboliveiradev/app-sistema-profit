@@ -1,4 +1,3 @@
-import './App.css';
 import Routing from './Routes';
 import { AuthProvider } from './context/Auth';
 import { MainProvider } from './context/Main';

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, createContext, useContext } from "react";
+import * as auth from './../services/auth';
 import { useNavigate } from 'react-router-dom';
 
 export const AuthContext = createContext();
@@ -10,7 +11,7 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [gym, setGym] = useState(null);
 
-  useEffect(() => {
+  /*useEffect(() => {
     const token = localStorage.getItem('profit-token');
     const user = localStorage.getItem('profit-user');
     const gym = localStorage.getItem('profit-gym');
@@ -24,50 +25,76 @@ export const AuthProvider = ({ children }) => {
     }
 
     return navigate('/login')
-  }, [navigate])
+  }, [])*/
 
-  /*async function signIn(login, password) {
+  async function signIn(login, password) {
     const response = await auth.signIn(login, password)
 
     if (response.status !== 200) {
       return false
     }
 
-    const { token, user, companie } = response.data;
-    const { id, name, email, phone, birthday, cpf, rg, profile, id_companie, created_at, updated_at } = user;
+    const { token, user, gym } = response.data;
+    const { id, first_name, last_name, email, phone, id_gym, profile, avatar_url, gender, cpf, rg, birthday, height, weight, observation, zip_code, street, district, number, city, state, complement, created_at, updated_at } = user;
 
     setUser({
-      id: id,
-      name: name,
-      email: email,
-      phone: phone,
-      birthday: birthday,
-      cpf: cpf,
-      rg: rg,
-      profile: profile,
-      id_companie: id_companie,
-      created_at: created_at,
+      id: id, 
+      first_name: first_name, 
+      last_name: last_name, 
+      email: email, 
+      phone: phone, 
+      id_gym: id_gym, 
+      profile: profile, 
+      avatar_url: avatar_url, 
+      gender: gender, 
+      cpf: cpf, 
+      rg: rg, 
+      birthday: birthday, 
+      height: height, 
+      weight: weight, 
+      observation: observation, 
+      zip_code: zip_code, 
+      street: street, 
+      district: district, 
+      number: number, 
+      city: city, 
+      state: state, 
+      complement: complement, 
+      created_at: created_at, 
       updated_at: updated_at,
     })
 
-    setCompanie(companie);
+    setGym(gym);
     setToken(token)
 
-    localStorage.setItem('sis360-token', token)
-    localStorage.setItem('sis360-user', JSON.stringify({
-      id: id,
-      name: name,
-      email: email,
-      phone: phone,
-      birthday: birthday,
-      cpf: cpf,
-      rg: rg,
-      profile: profile,
-      id_companie: id_companie,
-      created_at: created_at,
+    localStorage.setItem('profit-token', token)
+    localStorage.setItem('profit-user', JSON.stringify({
+      id: id, 
+      first_name: first_name, 
+      last_name: last_name, 
+      email: email, 
+      phone: phone, 
+      id_gym: id_gym, 
+      profile: profile, 
+      avatar_url: avatar_url, 
+      gender: gender, 
+      cpf: cpf, 
+      rg: rg, 
+      birthday: birthday, 
+      height: height, 
+      weight: weight, 
+      observation: observation, 
+      zip_code: zip_code, 
+      street: street, 
+      district: district, 
+      number: number, 
+      city: city, 
+      state: state, 
+      complement: complement, 
+      created_at: created_at, 
       updated_at: updated_at,
     }))
-    localStorage.setItem('sis360-companie', JSON.stringify(companie))
+    localStorage.setItem('profit-gym', JSON.stringify(gym))
 
     return true
   }
@@ -81,22 +108,22 @@ export const AuthProvider = ({ children }) => {
 
     setUser(null);
     setToken(null);
-    setCompanie(null);
+    setGym(null);
 
-    localStorage.removeItem('sis360-token');
-    localStorage.removeItem('sis360-user');
-    localStorage.removeItem('sis360-companie');
+    localStorage.removeItem('profit-token');
+    localStorage.removeItem('profit-user');
+    localStorage.removeItem('profit-gym');
 
     return true
-  }*/
+  }
 
   const context = {
     user: user,
     gym: gym,
     token: token,
     signed: Boolean(user),
-    /*signIn: signIn,
-    signOut: signOut,*/
+    signIn: signIn,
+    signOut: signOut,
   };
 
   return (

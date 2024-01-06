@@ -3,12 +3,21 @@ import { Route, Routes } from 'react-router-dom';
 
 import Login from './pages/Login';
 import DashboardLayout from './layouts/DashboardLayout';
+import ProtectedRoutes from './ProtectedRoutes';
+import NotFound from './pages/NotFound';
 
 const Routing = () => {
     return (
         <Routes>
-            <Route element={<Login />} path="/login" exact />
-            <Route element={<DashboardLayout />} path="/" exact />
+            <Route element={ <Login /> } path="/login" exact />
+            <Route element={ <NotFound /> } path="*" exact />
+
+            {/* Dashboard */}
+            <Route path="/" exact element={
+                <ProtectedRoutes>
+                    <DashboardLayout />
+                </ProtectedRoutes>
+            } />
         </Routes>
     )
 }

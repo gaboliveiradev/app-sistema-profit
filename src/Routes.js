@@ -18,6 +18,13 @@ const Routing = () => {
                     <DashboardLayout />
                 </ProtectedRoutes>
             } />
+
+            {/* Alunos */}
+            <Route path="/alunos" exact element={
+                <ProtectedRoutes>
+                    <DashboardLayout />
+                </ProtectedRoutes>
+            } />
         </Routes>
     )
 }

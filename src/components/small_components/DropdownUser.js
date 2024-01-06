@@ -1,10 +1,11 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
-import { AuthContext } from "../../context/Auth";
+import { useAuthContext } from "../../context/Auth";
+import { capitalizeFirstLetter } from "../../common/string";
 
 export default function DropdownUser() {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuthContext();
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -47,9 +48,9 @@ export default function DropdownUser() {
       >
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium text-black dark:text-white">
-            user.name
+            {user.first_name} {user.last_name}
           </span>
-          <span className="block text-xs">user.accessGroup.name</span>
+          <span className="block text-xs">{capitalizeFirstLetter(user.profile)}</span>
         </span>
 
         <span className="h-12 w-12 ">

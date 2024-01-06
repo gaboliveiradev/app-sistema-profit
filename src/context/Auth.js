@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext } from "react";
+import React, { useEffect, useState, createContext, useContext } from "react";
 import * as auth from './../services/auth';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,10 +11,10 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [gym, setGym] = useState(null);
 
-  /*useEffect(() => {
-    const token = localStorage.getItem('profit-token');
-    const user = localStorage.getItem('profit-user');
-    const gym = localStorage.getItem('profit-gym');
+  useEffect(() => {
+    const token = localStorage.getItem('adm-profit-token');
+    const user = localStorage.getItem('adm-profit-user');
+    const gym = localStorage.getItem('adm-profit-gym');
 
     if (token && user && gym) {
       setGym(JSON.parse(gym));
@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     return navigate('/login')
-  }, [])*/
+  }, [])
 
   async function signIn(login, password) {
     const response = await auth.signIn(login, password)
@@ -67,8 +67,8 @@ export const AuthProvider = ({ children }) => {
     setGym(gym);
     setToken(token)
 
-    localStorage.setItem('profit-token', token)
-    localStorage.setItem('profit-user', JSON.stringify({
+    localStorage.setItem('adm-profit-token', token)
+    localStorage.setItem('adm-profit-user', JSON.stringify({
       id: id, 
       first_name: first_name, 
       last_name: last_name, 
@@ -94,7 +94,7 @@ export const AuthProvider = ({ children }) => {
       created_at: created_at, 
       updated_at: updated_at,
     }))
-    localStorage.setItem('profit-gym', JSON.stringify(gym))
+    localStorage.setItem('adm-profit-gym', JSON.stringify(gym))
 
     return true
   }
@@ -110,9 +110,9 @@ export const AuthProvider = ({ children }) => {
     setToken(null);
     setGym(null);
 
-    localStorage.removeItem('profit-token');
-    localStorage.removeItem('profit-user');
-    localStorage.removeItem('profit-gym');
+    localStorage.removeItem('adm-profit-token');
+    localStorage.removeItem('adm-profit-user');
+    localStorage.removeItem('adm-profit-gym');
 
     return true
   }

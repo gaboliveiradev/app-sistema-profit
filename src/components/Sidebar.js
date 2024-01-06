@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import Logo from './../assets/logo.png';
+import Logo from './../assets/logo_dark.png';
 import SidebarLinkGroup from './small_components/SidebarLinkGroup';
 
 export default function Sidebar(props) {
@@ -53,9 +53,10 @@ export default function Sidebar(props) {
   }, [sidebarExpanded]);
 
   return (
+
     <aside
       ref={sidebar}
-      className={`scrollbarConfig absolute left-0 top-0 z-9999 flex h-screen w-72.5 flex-col overflow-y-auto bg-sidebar duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 ${props.sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+      className={`scrollbarConfig absolute left-0 top-0 z-49 flex h-screen w-72.5 flex-col overflow-y-auto bg-sidebar duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 ${props.sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
     >
       {/* <!-- SIDEBAR HEADER --> */}

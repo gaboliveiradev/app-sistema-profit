@@ -12,6 +12,10 @@ export default function DropdownUser() {
   const trigger = useRef(null);
   const dropdown = useRef(null);
 
+  const handleClickSignOut = async (e) => {
+    e.preventDefault();
+  }
+
   // close on click outside
   useEffect(() => {
     const clickHandler = ({ target }) => {
@@ -112,9 +116,8 @@ export default function DropdownUser() {
             </Link>
           </li>
         </ul>
-        <button className="flex items-center gap-3.5 py-4 px-6 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
+        <button onClick={(e) => handleClickSignOut(e)} className="flex items-center gap-3.5 py-4 px-6 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
           <Link
-            to="/login"
             className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
           >
             <svg

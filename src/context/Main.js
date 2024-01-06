@@ -29,9 +29,9 @@ export const MainProvider = ({ children }) => {
       ],
     },*/
     {
-      name: 'Parceiro Técnico',
+      name: 'Aluno',
       icon: BuildingOffice2Icon,
-      href: '/technical-partner'
+      href: '/aluno'
     },
     /*{
       name: 'Vendas',

@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import DashboardLayout from './layouts/DashboardLayout';
 import ProtectedRoutes from './ProtectedRoutes';
 import NotFound from './pages/NotFound';
+import GymGoer from './pages/GymGoer';
 
 const Routing = () => {
     return (
@@ -22,7 +23,7 @@ const Routing = () => {
             {/* Alunos */}
             <Route path="/alunos" exact element={
                 <ProtectedRoutes>
-                    <DashboardLayout />
+                    <DashboardLayout page={<GymGoer />} />
                 </ProtectedRoutes>
             } />
         </Routes>

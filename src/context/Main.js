@@ -8,46 +8,10 @@ export const MainContext = createContext();
 
 export const MainProvider = ({ children }) => {
 
-  const [isListTechnicalPartner, setIsListTechnicalPartner] = useState(false);
-
-  const [navigation, setNavigation] = useState([
-    {
-      name: 'Dashboard',
-      icon: Squares2X2Icon,
-      href: '/'
-    },
-    /*{
-      name: 'Cadastros',
-      icon: BookOpenIcon,
-      children: [
-        { name: 'Lojas Afiliadas', href: '/affiliate-store' },
-        { name: 'Categorias', href: '/categories' },
-        { name: 'Sub Categorias', href: '/sub-categories' },
-        { name: 'Produtos', href: '/products' },
-        { name: 'Ofertas', href: '/offers' },
-        { name: 'Avaliações', href: '/rates' },
-      ],
-    },*/
-    {
-      name: 'Aluno',
-      icon: BuildingOffice2Icon,
-      href: '/aluno'
-    },
-    /*{
-      name: 'Vendas',
-      icon: ShoppingCartIcon,
-      href: '/sales'
-    },
-    {
-      name: 'Logout',
-      icon: ClipboardDocumentCheckIcon,
-      href: '/login'
-    },*/
-  ]);
+  const [isListGymGoer, setIsListGymGoer] = useState(false);
 
   const context = {
-    navigation, setNavigation,
-    isListTechnicalPartner, setIsListTechnicalPartner,
+    isListGymGoer, setIsListGymGoer,
   };
 
   return (

@@ -1,5 +1,6 @@
 import React from 'react';
 import { IMaskInput } from 'react-imask';
+import SelectCombo from '../../SelectCombo';
 
 export default function GymGoer() {
     return (
@@ -88,11 +89,7 @@ export default function GymGoer() {
                         Sexo *
                     </label>
                     <div className="mt-1">
-                        <input
-                            class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color-purple rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5"
-                            type="text"
-                            maxLength="255"
-                        />
+                        <SelectCombo />
                     </div>
                 </div>
 
@@ -167,7 +164,7 @@ export default function GymGoer() {
                 </div>
             </div>
             <div className='mt-4 w-full flex flex-row items-center justify-end'>
-                <button class="bg-white border-[1px] border-gray-400 text-gray-600 hover:bg-red-600 hover:text-white hover:border-red-600 flex flex-row justify-center items-center uppercase text-sm px-6 py-2 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
+                <button class="dark:bg-boxdark dark:text-white bg-white border-[1px] border-gray-400 text-gray-600 hover:bg-red-600 hover:text-white hover:border-red-600 flex flex-row justify-center items-center uppercase text-sm px-6 py-2 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
                     </svg>

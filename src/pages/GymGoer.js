@@ -11,8 +11,8 @@ export default function GymGoer() {
             <div className="py-6 md:py-0 sm:px-4 z-40 md:top-0 w-screen">
                 <div className='flex flex-col items-start justify-start mx-auto md:mx-0'>
                     <div>
-                        <h1 className="text-2xl font-semibold text-gray-900">Alunos</h1>
-                        <span className='text-gray-500 text-sm'>Página de cadastro/listagem de matrículas e alunos.</span>
+                        <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">Alunos</h1>
+                        <span className='text-gray-500 text-sm dark:text-gray-300'>Página de cadastro/listagem de matrículas e alunos.</span>
                     </div>
                 </div>
                 <div className="mt-4">

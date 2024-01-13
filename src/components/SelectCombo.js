@@ -27,7 +27,7 @@ export default function SelectCombo() {
                 <div class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color-purple rounded-md bg-gray-50 text-gray-900 block flex-1 min-w-0 w-full text-sm" displayValue={(person) => person.name}
                 >
                     <Combobox.Input
-                        class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color-purple rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5" displayValue={(person) => person.name}
+                        class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color-purple rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2" displayValue={(person) => person.name}
                         onChange={(event) => setQuery(event.target.value)}
                     />
                     <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">

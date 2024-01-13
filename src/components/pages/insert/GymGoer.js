@@ -3,11 +3,12 @@ import { IMaskInput } from 'react-imask';
 import SelectCombo from '../../SelectCombo';
 import { Tab } from '@headlessui/react'
 import TabHeader from '../../TabHeader';
+import Address from '../../Tabs/GymGoer/Address';
 
 export default function GymGoer() {
     return (
         <form>
-            <div className="mt-[20px] grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-12 pb-8 border-b-2 border-gray-200 dark:border-gray-500">
+            <div className="mt-[20px] grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-12 pb-2">
                 <div className="sm:col-span-4">
                     <label className="block text-sm font-medium text-[16px] text-gray-700 dark:text-white">
                         Nome *
@@ -194,7 +195,9 @@ export default function GymGoer() {
                         />
                     </Tab.List>
                     <Tab.Panels>
-                        <Tab.Panel>Endereço | Modulo em Desenvolvimento</Tab.Panel>
+                        <Tab.Panel>
+                            <Address />
+                        </Tab.Panel>
                         <Tab.Panel>Plano | Modulo em Desenvolvimento</Tab.Panel>
                         <Tab.Panel>Pagamento | Modulo em Desenvolvimento</Tab.Panel>
                     </Tab.Panels>

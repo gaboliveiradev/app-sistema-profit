@@ -8,7 +8,7 @@ export default function GymGoer() {
 
     return (
         <main className="flex-1 px-2">
-            <div className="py-6 md:py-0 sm:px-4 z-40 md:top-0 w-screen">
+            <div className="py-6 md:py-0 sm:px-4 z-40 md:top-0 w-screen flex flex-col justify-end">
                 <div className='flex flex-col items-start justify-start mx-auto md:mx-0'>
                     <div>
                         <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">Alunos</h1>

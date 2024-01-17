@@ -1,4 +1,5 @@
 import React from 'react';
+import Insert from '../components/pages/insert/Plan';
 import { useMainContext } from '../context/Main';
 
 export default function Plan() {
@@ -47,7 +48,7 @@ export default function Plan() {
                     : (
                         <div className="mx-auto max-w-7xl px-4">
                             <div className='mx-auto'>
-                                Insert
+                                <Insert />
                             </div>
                         </div>
                     )

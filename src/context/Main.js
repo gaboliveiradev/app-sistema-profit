@@ -1,17 +1,15 @@
 import React, { useContext, useState, createContext } from 'react';
-import {
-  Squares2X2Icon,
-  BuildingOffice2Icon,
-} from '@heroicons/react/24/outline';
 
 export const MainContext = createContext();
 
 export const MainProvider = ({ children }) => {
 
   const [isListGymGoer, setIsListGymGoer] = useState(false);
+  const [isListPlan, setIsListPlan] = useState(false);
 
   const context = {
     isListGymGoer, setIsListGymGoer,
+    isListPlan, setIsListPlan,
   };
 
   return (

@@ -6,6 +6,7 @@ import DashboardLayout from './layouts/DashboardLayout';
 import ProtectedRoutes from './ProtectedRoutes';
 import NotFound from './pages/NotFound';
 import GymGoer from './pages/GymGoer';
+import Plan from './pages/Plan';
 
 const Routing = () => {
     return (
@@ -24,6 +25,13 @@ const Routing = () => {
             <Route path="/alunos" exact element={
                 <ProtectedRoutes>
                     <DashboardLayout page={<GymGoer />} />
+                </ProtectedRoutes>
+            } />
+
+            {/* Planos */}
+            <Route path="/planos" exact element={
+                <ProtectedRoutes>
+                    <DashboardLayout page={<Plan />} />
                 </ProtectedRoutes>
             } />
         </Routes>

@@ -1,10 +1,37 @@
 import React, { useState } from 'react';
+import * as plan from '../../../services/plan';
+import { useMainContext } from '../../../context/Main';
+import Swal from 'sweetalert2'
 
 export default function Plan() {
 
     const [name, setName] = useState('');
     const [days, setDays] = useState('');
     const [price, setPrice] = useState('');
+
+    const { setIsLoader } = useMainContext();
+
+    const handleClickSave = async (e) => {
+        e.preventDefault();
+        setIsLoader(true);
+
+        const paramerts = {
+            description: name,
+            days: days,
+            price: price,
+        };
+
+        const response = await plan.create(paramerts);
+
+        if(response) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Plano Criado.',
+            })
+        }
+
+        setIsLoader(false);
+    }
 
     return (
         <form>
@@ -67,7 +94,7 @@ export default function Plan() {
                     </svg>
                     Cancelar
                 </button>
-                <button class="hover:bg-secondary-color-purple flex flex-row justify-center border border-primary-color-purple items-center bg-primary-color-purple text-white active:bg-blue-600 uppercase text-sm px-6 py-2 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
+                <button onClick={(e) => handleClickSave(e)} class="hover:bg-secondary-color-purple flex flex-row justify-center border border-primary-color-purple items-center bg-primary-color-purple text-white active:bg-blue-600 uppercase text-sm px-6 py-2 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                     </svg>

@@ -34,7 +34,7 @@ const api = axios.create({
 });
 
 api.interceptors.request.use(config => {
-  const token = localStorage.getItem('profit-token');
+  const token = localStorage.getItem('adm-profit-token');
 
   config.headers.Authorization = `Bearer ${token}`
   return config

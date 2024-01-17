@@ -6,6 +6,12 @@ import TabHeader from '../../TabHeader';
 import Address from '../../Tabs/GymGoer/Address';
 
 export default function GymGoer() {
+
+    const genders = [
+        { id: 1, name: 'Masculino', initial: 'M' },
+        { id: 2, name: 'Femenino', initial: 'F' },
+    ]
+
     return (
         <form>
             <div className="mt-[20px] grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-12 pb-2">
@@ -92,7 +98,10 @@ export default function GymGoer() {
                         Sexo *
                     </label>
                     <div className="mt-1">
-                        <SelectCombo />
+                        <SelectCombo 
+                            field='name'
+                            object={genders}
+                        />
                     </div>
                 </div>
 

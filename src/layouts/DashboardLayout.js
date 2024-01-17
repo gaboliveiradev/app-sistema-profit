@@ -3,11 +3,15 @@ import './style.css';
 import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
 import Loader from '../components/modals/Loader';
+import { useMainContext } from '../context/Main';
 
 export default function DashboardLayout(props) {
-    const [sidebarOpen, setSidebarOpen] = useState(false);
+    const { isLoader } = useMainContext();
+
+    const [ sidebarOpen, setSidebarOpen ] = useState(false);
 
     return (
+        <>
             <div className="dark:bg-boxdark-2 dark:text-bodydark">
                 {/* <!-- ===== Page Wrapper Start ===== --> */}
                 <div className="flex h-screen">
@@ -26,6 +30,11 @@ export default function DashboardLayout(props) {
                         <main className='h-full h-[100%] overflow-auto'>
                             <div className="scrollbarConfig overflow-auto w-screen-2xl h-full p-4 md:p-6 2xl:p-4 bg-white dark:bg-boxdark duration-300 ease-linear rounded-xl shadow-xl">
                                 {props.page}
+                                {
+                                    isLoader && (
+                                        <Loader />
+                                    )
+                                }
                             </div>
                         </main>
                         {/* <!-- ===== Main Content End ===== --> */}
@@ -34,5 +43,6 @@ export default function DashboardLayout(props) {
                 </div>
                 {/* <!-- ===== Page Wrapper End ===== --> */}
             </div>
+        </>
     );
 }

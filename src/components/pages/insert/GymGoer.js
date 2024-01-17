@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { IMaskInput } from 'react-imask';
 import SelectCombo from '../../SelectCombo';
 import { Tab } from '@headlessui/react'
@@ -6,6 +6,17 @@ import TabHeader from '../../TabHeader';
 import Address from '../../Tabs/GymGoer/Address';
 
 export default function GymGoer() {
+
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [cpf, setCpf] = useState('');
+    const [birthday, setBirthday] = useState('');
+    const [phone, setPhone] = useState('');
+    const [gender, setGender] = useState('');
+    const [height, setHeight] = useState('');
+    const [weight, setWeight] = useState('');
+    const [observation, setObservation] = useState('');
 
     const genders = [
         { id: 1, name: 'Masculino', initial: 'M' },
@@ -21,6 +32,8 @@ export default function GymGoer() {
                     </label>
                     <div className="mt-1">
                         <input
+                            value={firstName}
+                            onChange={(e) => setFirstName(e.target.value)}
                             class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color-purple rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                             type="text"
                             maxLength="255"
@@ -34,6 +47,8 @@ export default function GymGoer() {
                     </label>
                     <div className="mt-1">
                         <input
+                            value={lastName}
+                            onChange={(e) => setLastName(e.target.value)}
                             class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color-purple rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                             type="text"
                             maxLength="255"
@@ -47,6 +62,8 @@ export default function GymGoer() {
                     </label>
                     <div className="mt-1">
                         <input
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                             class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color-purple rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                             type="text"
                             maxLength="255"
@@ -60,6 +77,8 @@ export default function GymGoer() {
                     </label>
                     <div className="mt-1">
                         <IMaskInput
+                            value={cpf}
+                            onChange={(e) => setCpf(e.target.value)}
                             mask="000.000.000-00"
                             class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color-purple rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                         />
@@ -72,6 +91,8 @@ export default function GymGoer() {
                     </label>
                     <div className="mt-1">
                         <input
+                            value={birthday}
+                            onChange={(e) => setBirthday(e.target.value)}
                             class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color-purple rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                             type="date"
                             maxLength="255"
@@ -85,6 +106,8 @@ export default function GymGoer() {
                     </label>
                     <div className="mt-1">
                         <IMaskInput
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
                             mask="(00) 00000-0000"
                             class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color-purple rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                             type="text"
@@ -98,7 +121,7 @@ export default function GymGoer() {
                         Sexo *
                     </label>
                     <div className="mt-1">
-                        <SelectCombo 
+                        <SelectCombo
                             field='name'
                             object={genders}
                         />
@@ -112,6 +135,8 @@ export default function GymGoer() {
                     <div className="mt-1">
                         <div class="relative mt-1 rounded-md shadow-sm">
                             <IMaskInput
+                                value={height}
+                                onChange={(e) => setHeight(e.target.value)}
                                 mask="num"
                                 blocks={{
                                     num: {
@@ -140,6 +165,8 @@ export default function GymGoer() {
                     <div className="mt-1">
                         <div class="relative mt-1 rounded-md shadow-sm">
                             <IMaskInput
+                                value={weight}
+                                onChange={(e) => setWeight(e.target.value)}
                                 mask="num"
                                 blocks={{
                                     num: {
@@ -167,6 +194,8 @@ export default function GymGoer() {
                     </label>
                     <div className="mt-1">
                         <textarea
+                            value={observation}
+                            onChange={(e) => setObservation(e.target.value)}
                             class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color-purple rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                             type="text"
                             rows={3}
@@ -213,13 +242,13 @@ export default function GymGoer() {
                 </Tab.Group>
             </div>
             <div className='mt-4 w-full flex flex-row items-center justify-end'>
-                <button class="dark:bg-boxdark dark:text-white bg-white border-[1px] border-gray-400 text-gray-600 hover:bg-red-600 hover:text-white hover:border-red-600 flex flex-row justify-center items-center uppercase text-sm px-6 py-2 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
+                <button class="dark:bg-boxdark dark:text-white hover:text-white hover:bg-red-600 border border-gray-400 flex flex-row justify-center items-center bg-white text-gray-600 active:bg-blue-600 uppercase text-sm px-6 py-2 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
                     </svg>
                     Cancelar
                 </button>
-                <button class="hover:bg-secondary-color-purple flex flex-row justify-center items-center bg-primary-color-purple text-white active:bg-blue-600 uppercase text-sm px-6 py-2 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
+                <button class="hover:bg-secondary-color-purple flex flex-row justify-center border border-primary-color-purple items-center bg-primary-color-purple text-white active:bg-blue-600 uppercase text-sm px-6 py-2 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                     </svg>

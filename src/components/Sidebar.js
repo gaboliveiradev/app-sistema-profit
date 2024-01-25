@@ -7,8 +7,6 @@ export default function Sidebar(props) {
   const location = useLocation();
   const { pathname } = location;
 
-  console.log(location);
-
   const trigger = useRef(null);
   const sidebar = useRef(null);
 

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import * as plan from '../../../services/plan';
 import { useMainContext } from '../../../context/Main';
 import Swal from 'sweetalert2'
+import { useAuthContext } from '../../../context/Auth';
 
 export default function Plan() {
 
@@ -10,12 +11,14 @@ export default function Plan() {
     const [price, setPrice] = useState('');
 
     const { setIsLoader } = useMainContext();
+    const { gym } = useAuthContext();
 
     const handleClickSave = async (ev) => {
         ev.preventDefault();
         setIsLoader(true);
 
         const paramerts = {
+            id_gym: gym.id,
             description: name,
             days: days,
             price: price,

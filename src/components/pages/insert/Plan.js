@@ -1,7 +1,6 @@
 import React from 'react';
-import * as plan from '../../../services/plan';
 import { useMainContext } from '../../../context/Main';
-import { ToastContainer, toast, Flip } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { useAuthContext } from '../../../context/Auth';
 import { usePlanContext } from '../../../context/Plan';
@@ -11,41 +10,7 @@ export default function Plan() {
     const { name, setName } = usePlanContext();
     const { days, setDays } = usePlanContext();
     const { price, setPrice } = usePlanContext();
-    const { clear } = usePlanContext();
-
-    const { setIsLoader } = useMainContext();
-    const { gym } = useAuthContext();
-
-    const handleClickSave = async (ev) => {
-        ev.preventDefault();
-        setIsLoader(true);
-
-        const paramerts = {
-            id_gym: gym.id,
-            description: name,
-            days: days,
-            price: price,
-        };
-
-        const response = await plan.create(paramerts);
-
-        if (response) {
-            toast.success('🏋🏻‍♀️ Plano criado com sucesso!', {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-                transition: Flip,
-            });
-        }
-
-        clear(ev);
-        setIsLoader(false);
-    }
+    const { clear, save } = usePlanContext();
 
     return (
         <form>
@@ -117,7 +82,7 @@ export default function Plan() {
                 <button onClick={(e) => clear(e)} class="dark:bg-boxdark dark:text-white hover:text-white hover:bg-red-600 border border-gray-400 flex flex-row justify-center items-center bg-white text-gray-600 active:bg-blue-600 uppercase text-sm px-6 py-2 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
                     Cancelar
                 </button>
-                <button onClick={(e) => handleClickSave(e)} class="hover:bg-secondary-color-purple flex flex-row justify-center border border-primary-color-purple items-center bg-primary-color-purple text-white active:bg-blue-600 uppercase text-sm px-6 py-2 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
+                <button onClick={(e) => save(e)} class="hover:bg-secondary-color-purple flex flex-row justify-center border border-primary-color-purple items-center bg-primary-color-purple text-white active:bg-blue-600 uppercase text-sm px-6 py-2 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
                     Salvar
                 </button>
             </div>

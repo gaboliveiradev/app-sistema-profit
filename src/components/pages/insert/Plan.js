@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import * as plan from '../../../services/plan';
 import { useMainContext } from '../../../context/Main';
-import Swal from 'sweetalert2'
+import { ToastContainer, toast, Flip } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 import { useAuthContext } from '../../../context/Auth';
 
 export default function Plan() {
@@ -26,11 +27,18 @@ export default function Plan() {
 
         const response = await plan.create(paramerts);
 
-        if(response) {
-            Swal.fire({
-                icon: 'success',
-                title: 'Plano Criado.',
-            })
+        if (response) {
+            toast.success('🏋🏻‍♀️ Plano criado com sucesso!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Flip,
+            });
         }
 
         handleClickClear(ev);
@@ -48,6 +56,18 @@ export default function Plan() {
 
     return (
         <form>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored"
+            />
             <div className="mt-[20px] grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-12 pb-2">
                 <div className="sm:col-span-9">
                     <label className="block text-sm font-medium text-[16px] text-gray-700 dark:text-white">

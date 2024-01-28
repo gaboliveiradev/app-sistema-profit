@@ -4,8 +4,9 @@ import { useMainContext } from "../../../context/Main";
 import DataTable from 'react-data-table-component';
 import { optionsPagination } from "../../../common/options";
 import { formatCurrencyBRL } from "../../../common/format";
-import { Toast } from "../../../common/toast";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
+import { ToastContainer, toast, Flip } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 export default function PlanDesktop() {
     const { setIsLoader } = useMainContext();
@@ -45,19 +46,33 @@ export default function PlanDesktop() {
                 if (response) {
                     getPlans();
 
-                    Toast.fire({
-                        icon: 'success',
-                        title: 'Plano Deletado.'
-                    })
+                    toast.success('🏋🏻‍♀️ Plano deletado com sucesso!', {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                        transition: Flip,
+                    });
 
                     return;
                 }
 
                 setIsLoader(false);
-                Toast.fire({
-                    icon: 'error',
-                    title: 'Não foi possível deletar.'
-                })
+                toast.error('🏋🏻‍♀️ Plano não deletado!', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                    transition: Flip,
+                });
             }
         })
     }
@@ -116,6 +131,18 @@ export default function PlanDesktop() {
 
     return (
         <div class="mt-8 flex flex-col">
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored"
+            />
             <div className="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-12 pb-10">
                 <div className="sm:col-span-10">
                     <label className="block text-sm font-medium text-[16px] text-gray-700 dark:text-white">

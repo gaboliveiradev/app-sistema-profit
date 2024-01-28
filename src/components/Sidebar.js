@@ -54,7 +54,7 @@ export default function Sidebar(props) {
 
     <aside
       ref={sidebar}
-      className={`scrollbarConfig absolute left-0 top-0 z-1001 flex h-screen w-72.5 flex-col overflow-y-auto bg-sidebar duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 ${props.sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+      className={`scrollbarConfig absolute left-0 top-0 z-1 flex h-screen w-72.5 flex-col overflow-y-auto bg-sidebar duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 ${props.sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
     >
       {/* <!-- SIDEBAR HEADER --> */}

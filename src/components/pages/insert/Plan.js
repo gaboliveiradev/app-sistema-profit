@@ -1,8 +1,6 @@
 import React from 'react';
-import { useMainContext } from '../../../context/Main';
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-import { useAuthContext } from '../../../context/Auth';
 import { usePlanContext } from '../../../context/Plan';
 
 export default function Plan() {

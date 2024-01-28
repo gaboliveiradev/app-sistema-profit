@@ -1,5 +1,6 @@
 import React, { useContext, useState, createContext } from 'react';
 
+import Swal from "sweetalert2";
 import * as plan from '../services/plan';
 import { toast, Flip } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
@@ -16,6 +17,15 @@ export const PlanProvider = ({ children }) => {
   const [name, setName] = useState('');
   const [days, setDays] = useState('');
   const [price, setPrice] = useState('');
+  const [list, setList] = useState([]);
+
+  const get = async () => {
+    setIsLoader(true);
+
+    const response = await plan.get();
+    setList(response.data.filter((plan) => plan.deleted_at === null));
+    setIsLoader(false);
+  }
 
   const save = async (ev) => {
     ev.preventDefault();
@@ -48,6 +58,57 @@ export const PlanProvider = ({ children }) => {
     setIsLoader(false);
   }
 
+  const destroy = async (e, id) => {
+    e.preventDefault();
+
+    Swal.fire({
+      title: 'Você tem Certeza?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Sim, deletar!'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        setIsLoader(true);
+
+        const response = await plan.destroy(id);
+
+        if (response) {
+          get();
+
+          toast.success('🏋🏻‍♀️ Plano deletado com sucesso!', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            transition: Flip,
+          });
+
+          return;
+        }
+
+        setIsLoader(false);
+        toast.error('🏋🏻‍♀️ Plano não deletado!', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          transition: Flip,
+        });
+      }
+    })
+  }
+
   const clear = async (ev) => {
     ev.preventDefault();
 
@@ -60,8 +121,9 @@ export const PlanProvider = ({ children }) => {
     name, setName,
     days, setDays,
     price, setPrice,
+    list, setList,
     // methods
-    clear, save
+    clear, save, get, destroy
   };
 
   return (

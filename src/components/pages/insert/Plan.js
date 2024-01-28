@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import * as plan from '../../../services/plan';
 import { useMainContext } from '../../../context/Main';
 import { ToastContainer, toast, Flip } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { useAuthContext } from '../../../context/Auth';
+import { usePlanContext } from '../../../context/Plan';
 
 export default function Plan() {
 
-    const [name, setName] = useState('');
-    const [days, setDays] = useState('');
-    const [price, setPrice] = useState('');
+    const { name, setName } = usePlanContext();
+    const { days, setDays } = usePlanContext();
+    const { price, setPrice } = usePlanContext();
+    const { clear } = usePlanContext();
 
     const { setIsLoader } = useMainContext();
     const { gym } = useAuthContext();
@@ -41,17 +43,8 @@ export default function Plan() {
             });
         }
 
-        handleClickClear(ev);
+        clear(ev);
         setIsLoader(false);
-    }
-
-    const handleClickClear = async (ev) => {
-        ev.preventDefault();
-
-        setName('');
-        setDays('');
-        setPrice('');
-
     }
 
     return (
@@ -121,7 +114,7 @@ export default function Plan() {
                 </div>
             </div>
             <div className='mt-4 w-full flex flex-row items-center justify-end border-t pt-3 text-gray-700'>
-                <button onClick={(e) => handleClickClear(e)} class="dark:bg-boxdark dark:text-white hover:text-white hover:bg-red-600 border border-gray-400 flex flex-row justify-center items-center bg-white text-gray-600 active:bg-blue-600 uppercase text-sm px-6 py-2 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
+                <button onClick={(e) => clear(e)} class="dark:bg-boxdark dark:text-white hover:text-white hover:bg-red-600 border border-gray-400 flex flex-row justify-center items-center bg-white text-gray-600 active:bg-blue-600 uppercase text-sm px-6 py-2 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
                     Cancelar
                 </button>
                 <button onClick={(e) => handleClickSave(e)} class="hover:bg-secondary-color-purple flex flex-row justify-center border border-primary-color-purple items-center bg-primary-color-purple text-white active:bg-blue-600 uppercase text-sm px-6 py-2 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">

@@ -12,6 +12,10 @@ module.exports = {
       Merriweather: ['Merriweather', 'serif']
     },
     colors: {
+      'roxo1': '#2B0957',
+      'roxo2': '#3E0075',
+      'verde1': '#00857C',
+      'verde2': '#43AF99',
       'primary-color-purple': '#5A1A92',
       'secondary-color-purple': '#6343AF',
       'primary-color-green': '#46BC9C',

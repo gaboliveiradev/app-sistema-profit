@@ -19,7 +19,6 @@ export default function Plan() {
                     </div>
                 </div>
             </div>
-
             {
                 pathname === URL_VIEW ? (
                     <div className="mx-auto max-w-7xl px-4">

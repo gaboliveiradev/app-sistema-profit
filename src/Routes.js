@@ -27,6 +27,11 @@ const Routing = () => {
                     <DashboardLayout page={<GymGoer />} />
                 </ProtectedRoutes>
             } />
+            <Route path="/aluno" exact element={
+                <ProtectedRoutes>
+                    <DashboardLayout page={<GymGoer />} />
+                </ProtectedRoutes>
+            } />
 
             {/* Planos */}
             <Route path="/planos" exact element={

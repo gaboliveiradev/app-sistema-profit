@@ -11,8 +11,8 @@ import Plan from './pages/Plan';
 const Routing = () => {
     return (
         <Routes>
-            <Route element={ <Login /> } path="/login" exact />
-            <Route element={ <NotFound /> } path="*" exact />
+            <Route element={<Login />} path="/login" exact />
+            <Route element={<NotFound />} path="*" exact />
 
             {/* Dashboard */}
             <Route path="/" exact element={
@@ -30,6 +30,11 @@ const Routing = () => {
 
             {/* Planos */}
             <Route path="/planos" exact element={
+                <ProtectedRoutes>
+                    <DashboardLayout page={<Plan />} />
+                </ProtectedRoutes>
+            } />
+            <Route path="/plano" exact element={
                 <ProtectedRoutes>
                     <DashboardLayout page={<Plan />} />
                 </ProtectedRoutes>

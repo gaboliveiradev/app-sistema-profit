@@ -12,6 +12,7 @@ module.exports = {
       Merriweather: ['Merriweather', 'serif']
     },
     colors: {
+      'stepper-active': '#0ea611',
       'roxo1': '#2B0957',
       'roxo2': '#3E0075',
       'verde1': '#00857C',

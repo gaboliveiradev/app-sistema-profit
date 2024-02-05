@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IMaskInput } from 'react-imask';
 import { Tab } from '@headlessui/react'
 import TabHeader from '../../TabHeader';
 import Address from '../../Tabs/GymGoer/Address';
 import Enroll from '../../Tabs/GymGoer/Enroll';
+import { usePlanContext } from '../../../context/Plan';
 
 export default function GymGoer() {
     const [firstName, setFirstName] = useState('');
@@ -16,6 +17,12 @@ export default function GymGoer() {
     const [height, setHeight] = useState('');
     const [weight, setWeight] = useState('');
     const [observation, setObservation] = useState('');
+
+    const { get } = usePlanContext();
+
+    useEffect(() => {
+        get();
+    }, []);
 
     return (
         <form>

@@ -1,6 +1,9 @@
 import React from 'react';
+import { usePlanContext } from '../../../context/Plan';
 
 export default function Address() {
+    const { list } = usePlanContext();
+
     return (
         <form>
             <div className="mt-[20px] grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-12 pb-8 border-b-2 border-gray-200 dark:border-gray-500">
@@ -12,7 +15,11 @@ export default function Address() {
                         <select
                             class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color-purple rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                         >
-                            <option value="id">Plano Básico</option>
+                            {
+                                list.map((plan) => {
+                                    return <option value={plan.id}>{plan.description}</option>
+                                })
+                            }
                         </select>
                     </div>
                 </div>

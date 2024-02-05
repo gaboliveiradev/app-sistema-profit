@@ -12,13 +12,13 @@ module.exports = {
       Merriweather: ['Merriweather', 'serif']
     },
     colors: {
-      'stepper-active': '#0ea611',
+      'primary-color': '#05a670',
+      'secondary-color': '#27bc88',
+      'stepper-active': '#27bc88',
       'roxo1': '#2B0957',
       'roxo2': '#3E0075',
       'verde1': '#00857C',
       'verde2': '#43AF99',
-      'primary-color': '#05a670',
-      'secondary-color': '#27bc88',
       'primary-color-green': '#46BC9C',
       blueProfile: '#3D3ADC',
       current: 'currentColor',

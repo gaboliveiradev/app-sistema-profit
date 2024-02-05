@@ -75,7 +75,7 @@ export default function Login() {
 
                                 <div class="mt-6">
                                     <button
-                                        class="flex items-center justify-center w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-primary-color rounded-md hover:bg-secondary-color focus:outline-none focus:bg-secondary-color focus:ring focus:ring-blue-300 focus:ring-opacity-50"
+                                        class="flex items-center justify-center w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-primary-color rounded-md hover:bg-secondary-color focus:outline-none focus:bg-secondary-color focus:ring focus:ring-secondary-color focus:ring-opacity-50"
                                         onClick={(e) => handleClickSignIn(e)}
                                     >
                                         {

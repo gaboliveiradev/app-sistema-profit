@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { IMaskInput } from 'react-imask';
-import SelectCombo from '../../SelectCombo';
 import { Tab } from '@headlessui/react'
 import TabHeader from '../../TabHeader';
 import Address from '../../Tabs/GymGoer/Address';
+import Enroll from '../../Tabs/GymGoer/Enroll';
 
 export default function GymGoer() {
-
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
@@ -17,11 +16,6 @@ export default function GymGoer() {
     const [height, setHeight] = useState('');
     const [weight, setWeight] = useState('');
     const [observation, setObservation] = useState('');
-
-    const genders = [
-        { id: 1, name: 'Masculino', initial: 'M' },
-        { id: 2, name: 'Femenino', initial: 'F' },
-    ]
 
     return (
         <form>
@@ -121,10 +115,14 @@ export default function GymGoer() {
                         Sexo *
                     </label>
                     <div className="mt-1">
-                        <SelectCombo
-                            field='name'
-                            object={genders}
-                        />
+                        <select
+                            value={gender}
+                            onChange={(e) => setGender(e)}
+                            class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
+                        >
+                            <option value="M">Masculino</option>
+                            <option value="F">Femenino</option>
+                        </select>
                     </div>
                 </div>
 
@@ -204,7 +202,22 @@ export default function GymGoer() {
                     </div>
                 </div>
             </div>
-            <hr className='mt-3'></hr>
+            <div className='pt-3'>
+                <Tab.Group>
+                    <Tab.List class="flex flex-row w-[100%] border-b-2 text-gray-700">
+                        <TabHeader title='Endereço' />
+                        <TabHeader title='Matrícula' />
+                    </Tab.List>
+                    <Tab.Panels>
+                        <Tab.Panel>
+                            <Address />
+                        </Tab.Panel>
+                        <Tab.Panel>
+                            <Enroll />
+                        </Tab.Panel>
+                    </Tab.Panels>
+                </Tab.Group>
+            </div>
             <div className='mt-4 w-full flex flex-row items-center justify-end'>
                 <button class="dark:bg-boxdark dark:text-white hover:text-white hover:bg-red-600 border border-gray-400 flex flex-row justify-center items-center bg-white text-gray-600 active:bg-blue-600 uppercase text-sm px-6 py-2 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
                     Cancelar

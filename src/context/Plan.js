@@ -17,13 +17,13 @@ export const PlanProvider = ({ children }) => {
   const [name, setName] = useState('');
   const [days, setDays] = useState('');
   const [price, setPrice] = useState('');
-  const [list, setList] = useState([]);
+  const [listPlans, setListPlans] = useState([]);
 
   const get = async () => {
     setIsLoader(true);
 
     const response = await plan.get();
-    setList(response.data.filter((plan) => plan.deleted_at === null));
+    setListPlans(response.data.filter((plan) => plan.deleted_at === null));
     setIsLoader(false);
   }
 
@@ -121,7 +121,7 @@ export const PlanProvider = ({ children }) => {
     name, setName,
     days, setDays,
     price, setPrice,
-    list, setList,
+    listPlans, setListPlans,
     // methods
     clear, save, get, destroy
   };

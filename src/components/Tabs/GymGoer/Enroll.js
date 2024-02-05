@@ -2,7 +2,7 @@ import React from 'react';
 import { usePlanContext } from '../../../context/Plan';
 
 export default function Address() {
-    const { list } = usePlanContext();
+    const { listPlans } = usePlanContext();
 
     return (
         <form>
@@ -16,7 +16,7 @@ export default function Address() {
                             class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color-purple rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                         >
                             {
-                                list.map((plan) => {
+                                listPlans.map((plan) => {
                                     return <option value={plan.id}>{plan.description}</option>
                                 })
                             }

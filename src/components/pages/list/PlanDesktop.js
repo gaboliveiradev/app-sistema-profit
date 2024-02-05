@@ -12,7 +12,7 @@ export default function PlanDesktop() {
     const { 
         get, 
         destroy, 
-        list 
+        listPlans 
     } = usePlanContext();
     const [selecetedFilter, setSelecetedFilter] = useState('ativo');
 
@@ -122,7 +122,7 @@ export default function PlanDesktop() {
                     <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
                         <DataTable
                             columns={columns}
-                            data={list}
+                            data={listPlans}
                             paginationPerPage={6}
                             pagination paginationComponentOptions={optionsPagination}
                             paginationRowsPerPageOptions={[6, 12, 18]}

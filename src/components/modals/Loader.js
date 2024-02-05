@@ -12,7 +12,7 @@ export default function Loader() {
                         height="80"
                         width="80"
                         ariaLabel="hourglass-loading"
-                        colors={['#5A1A92', '#46BC9C']}
+                        colors={['#05a670', '#49d3a0']}
                     />
                     <h2 class="text-xl font-bold py-4 ">Aguarde...</h2>
                 </div>

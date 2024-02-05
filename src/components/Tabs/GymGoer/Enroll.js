@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { usePlanContext } from '../../../context/Plan';
 
 export default function Address() {
     const { listPlans } = usePlanContext();
+
+    const [selectedPlan, setSelectedPlan] = useState(listPlans[0]);
 
     return (
         <form>
@@ -13,6 +15,10 @@ export default function Address() {
                     </label>
                     <div className="mt-1">
                         <select
+                            value={selectedPlan.id}
+                            onChange={(e) => {
+                                setSelectedPlan(listPlans.filter((plan) => plan.id === parseInt(e.target.value))[0]);
+                            }}
                             class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color-purple rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                         >
                             {
@@ -31,6 +37,7 @@ export default function Address() {
                     <div className="mt-1">
                         <input
                             disabled
+                            value={selectedPlan.days}
                             class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                             type="number"
                             maxLength="255"
@@ -48,6 +55,7 @@ export default function Address() {
                         </div>
                         <input
                             disabled
+                            value={selectedPlan.price}
                             class="pl-9 pr-12 dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                             type="text"
                             maxLength="255"

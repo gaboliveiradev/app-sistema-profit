@@ -1,6 +1,7 @@
 import Routing from './Routes';
 
 import { AuthProvider } from './context/Auth';
+import { CardFeesProvider } from './context/CardFees';
 import { GymGoerProvider } from './context/GymGoer';
 import { MainProvider } from './context/Main';
 import { PlanProvider } from './context/Plan';
@@ -11,7 +12,9 @@ function App() {
       <MainProvider>
         <GymGoerProvider>
           <PlanProvider>
-            <Routing />
+            <CardFeesProvider>
+              <Routing />
+            </CardFeesProvider>
           </PlanProvider>
         </GymGoerProvider>
       </MainProvider>

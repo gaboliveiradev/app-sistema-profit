@@ -1,23 +1,17 @@
 import React, { useEffect, useState } from "react";
 import DataTable from 'react-data-table-component';
 import { optionsPagination } from "../../../common/options";
-import { formatCurrencyBRL } from "../../../common/format";
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import '../../../css/toastify.css';
-import { usePlanContext } from "../../../context/Plan";
+import { useCardFeesContext } from "../../../context/CardFees";
 
-export default function PlanDesktop() {
+export default function CardFeesDesktop() {
     const { 
-        get, 
-        destroy, 
-        listPlans 
-    } = usePlanContext();
+        listCardFees, 
+        destroy,
+    } = useCardFeesContext();
     const [selecetedFilter, setSelecetedFilter] = useState('ativo');
-
-    useEffect(() => {
-        get();
-    }, []);
 
     const columns = [
         {
@@ -38,26 +32,26 @@ export default function PlanDesktop() {
             )
         },
         {
-            name: <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-normal text-gray-900">Descrição</th>,
+            name: <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-normal text-gray-900">Bandeira</th>,
             selector: row => (
                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                    <div class="text-gray-500">Nome: <strong>{row.description}</strong></div>
+                    <div class="text-gray-500">Bandeira: <strong>{row.flag}</strong></div>
                 </td>
             ),
         },
         {
-            name: <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-normal text-gray-900">Dias</th>,
+            name: <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-normal text-gray-900">Crédito/Débito</th>,
             selector: row => (
                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                    <div class="text-gray-500">Tempo: <strong>{row.days}x por semana</strong></div>
+                    <div class="text-gray-500">Tipo: <strong>{row.type}</strong></div>
                 </td>
             ),
         },
         {
-            name: <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-normal text-gray-900">Valor</th>,
+            name: <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-normal text-gray-900">Taxa</th>,
             selector: row => (
                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                    <div class="text-gray-500">Preço: <strong>{formatCurrencyBRL(row.price)}</strong></div>
+                    <div class="text-gray-500">Porcentagem: <strong>{row.percentage}</strong></div>
                 </td>
             ),
         },
@@ -121,7 +115,7 @@ export default function PlanDesktop() {
                     <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
                         <DataTable
                             columns={columns}
-                            data={listPlans}
+                            data={listCardFees}
                             paginationPerPage={6}
                             pagination paginationComponentOptions={optionsPagination}
                             paginationRowsPerPageOptions={[6, 12, 18]}

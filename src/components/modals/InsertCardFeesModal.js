@@ -14,13 +14,26 @@ export default function InsertCardFeesModal() {
                 <div className="px-5 mt-[20px] grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-12 pb-2">
                     <div className="sm:col-span-12">
                         <label className="block text-sm font-medium text-[16px] text-gray-700 dark:text-white">
-                            Tipo *
+                            Apelido Maquininha *
+                        </label>
+                        <div className="mt-1">
+                            <input
+                                class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
+                                type="text"
+                                maxLength="255"
+                            />
+                        </div>
+                    </div>
+                    <div className="sm:col-span-12">
+                        <label className="block text-sm font-medium text-[16px] text-gray-700 dark:text-white">
+                            Tipo
                         </label>
                         <div className="mt-1">
                             <select
                                 class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                                 type="text"
                             >
+                                <option selected value={null}>N/A</option>
                                 <option value="credit">Crédito</option>
                                 <option value="debit">Débito</option>
                             </select>
@@ -28,13 +41,14 @@ export default function InsertCardFeesModal() {
                     </div>
                     <div className="sm:col-span-12">
                         <label className="block text-sm font-medium text-[16px] text-gray-700 dark:text-white">
-                            Bandeira *
+                            Bandeira
                         </label>
                         <div className="mt-1">
                             <select
                                 class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                                 type="text"
                             >
+                                <option selected value={null}>N/A</option>
                                 <option value="mastercard">Mastercard</option>
                                 <option value="visa">Visa</option>
                                 <option value="elo">Elo</option>

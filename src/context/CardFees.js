@@ -16,16 +16,18 @@ export const CardFeesProvider = ({ children }) => {
 
     const [isOpenModalInsert, setIsOpenModalInsert] = useState(false);
 
-    const [flag, setFlag] = useState('');
-    const [type, setType] = useState('');
+    const [cardMachine, setCardMachine] = useState('');
+    const [flag, setFlag] = useState(null);
+    const [type, setType] = useState(null);
     const [percentage, setPercentage] = useState('');
     const [listCardFees, setListCardFees] = useState([]);
 
     const clear = async (ev) => {
         ev.preventDefault();
 
-        setFlag('');
-        setType('');
+        setCardMachine('');
+        setFlag(null);
+        setType(null);
         setPercentage('');
 
         setIsOpenModalInsert(false);

@@ -1,5 +1,5 @@
 import api from './api';
-const url = '/plans';
+const url = '/card-fees';
 
 export const get = async () => {
     try {
@@ -15,9 +15,10 @@ export const create = async (paramerts) => {
     try {
         const respose = await api.post(url, {
             id_gym: paramerts.id_gym,
-            description: paramerts.description,
-            days: paramerts.days,
-            price: paramerts.price,
+            card_machine: paramerts.cardMachine,
+            flag: paramerts.flag,
+            type: paramerts.type,
+            percentage: paramerts.percentage,
         });
 
         return (respose.status === 201) ? true : false;

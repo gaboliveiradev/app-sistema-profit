@@ -47,7 +47,7 @@ const Routing = () => {
             } />
 
             {/* Taxas de Cartão */}
-            <Route path="/taxas-cartao" exact element={
+            <Route path="/taxas-cobranca" exact element={
                 <ProtectedRoutes>
                     <DashboardLayout page={<CardFees />} />
                 </ProtectedRoutes>

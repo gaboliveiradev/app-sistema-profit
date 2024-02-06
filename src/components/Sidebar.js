@@ -202,11 +202,11 @@ export default function Sidebar(props) {
               }}
             </SidebarLinkGroup>
 
-            <SidebarLinkGroup activeCondition={pathname === '/taxas-cartao'}>
+            <SidebarLinkGroup activeCondition={pathname === '/taxas-cobranca'}>
               {(handleClick, open) => {
                 return (
                   <React.Fragment>
-                    <NavLink to="#" className={`${(pathname === '/taxas-cartao') && 'bg-graydark dark:bg-meta-4'} group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4`} onClick={(e) => { e.preventDefault(); sidebarExpanded ? handleClick() : setSidebarExpanded(true); }}>
+                    <NavLink to="#" className={`${(pathname === '/taxas-cobranca') && 'bg-graydark dark:bg-meta-4'} group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4`} onClick={(e) => { e.preventDefault(); sidebarExpanded ? handleClick() : setSidebarExpanded(true); }}>
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
                       </svg>
@@ -219,8 +219,8 @@ export default function Sidebar(props) {
                     <div className={`translate transform overflow-hidden ${!open && 'hidden'}`}>
                       <ul className="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
                         <li>
-                          <NavLink to="/taxas-cartao" className={({ isActive }) => 'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' + (isActive && '!text-white')}>
-                            Taxas de Cartão
+                          <NavLink to="/taxas-cobranca" className={({ isActive }) => 'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' + (isActive && '!text-white')}>
+                            Taxas de Cobrança
                           </NavLink>
                         </li>
                         <li>

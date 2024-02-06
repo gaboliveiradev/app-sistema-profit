@@ -1,7 +1,7 @@
 import React, { useState, createContext, useContext } from "react";
 
 import Swal from "sweetalert2";
-import * as plan from '../services/plan';
+import * as cardfees from '../services/cardfees';
 import { toast, Flip } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { useMainContext } from './Main';
@@ -16,17 +16,46 @@ export const CardFeesProvider = ({ children }) => {
 
     const [isOpenModalInsert, setIsOpenModalInsert] = useState(false);
 
-    const [cardMachine, setCardMachine] = useState('');
-    const [flag, setFlag] = useState(null);
+    const [identification, setIdentification] = useState('');
     const [type, setType] = useState(null);
     const [percentage, setPercentage] = useState('');
     const [listCardFees, setListCardFees] = useState([]);
 
+    const save = async (ev) => {
+        ev.preventDefault();
+        setIsLoader(true);
+
+        const paramerts = {
+            id_gym: gym.id,
+            identification: identification,
+            type: type,
+            percentage: percentage,
+        };
+
+        const response = await cardfees.create(paramerts);
+
+        if (response) {
+            toast.success('🏋🏻‍♀️ Taxa de Cartão criada com sucesso!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Flip,
+            });
+        }
+
+        clear(ev);
+        setIsLoader(false);
+    }
+
     const clear = async (ev) => {
         ev.preventDefault();
 
-        setCardMachine('');
-        setFlag(null);
+        setIdentification('');
         setType(null);
         setPercentage('');
 
@@ -36,13 +65,13 @@ export const CardFeesProvider = ({ children }) => {
     const get = async () => {
         setIsLoader(true);
 
-        const response = await plan.get();
+        const response = await cardfees.get();
         setListCardFees(response.data.filter((plan) => plan.deleted_at === null));
         setIsLoader(false);
     }
 
-    const destroy = async (e, id) => {
-        e.preventDefault();
+    const destroy = async (ev, id) => {
+        ev.preventDefault();
 
         Swal.fire({
             title: 'Você tem Certeza?',
@@ -56,7 +85,7 @@ export const CardFeesProvider = ({ children }) => {
             if (result.isConfirmed) {
                 setIsLoader(true);
 
-                const response = await plan.destroy(id);
+                const response = await cardfees.destroy(id);
 
                 if (response) {
                     get();
@@ -93,14 +122,13 @@ export const CardFeesProvider = ({ children }) => {
     }
 
     const context = {
-        cardMachine, setCardMachine,
-        flag, setFlag,
+        identification, setIdentification,
         type, setType,
         percentage, setPercentage,
         listCardFees, setListCardFees,
         isOpenModalInsert, setIsOpenModalInsert,
         // methods
-        get, destroy, clear,
+        get, destroy, clear, save
     };
 
     return (

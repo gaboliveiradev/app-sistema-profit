@@ -93,6 +93,7 @@ export const CardFeesProvider = ({ children }) => {
     }
 
     const context = {
+        cardMachine, setCardMachine,
         flag, setFlag,
         type, setType,
         percentage, setPercentage,

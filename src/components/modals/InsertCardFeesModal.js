@@ -2,7 +2,14 @@ import React from 'react';
 import { useCardFeesContext } from '../../context/CardFees';
 
 export default function InsertCardFeesModal() {
-    const { clear } = useCardFeesContext();
+    const {
+        cardMachine, setCardMachine,
+        flag, setFlag,
+        type, setType,
+        percentage, setPercentage,
+        // methods
+        clear,
+    } = useCardFeesContext();
 
     return (
         <div class="min-w-screen h-screen animated fadeIn faster fixed left-0 top-0 flex justify-center items-center inset-0 z-1 outline-none focus:outline-none" id="modal-id">
@@ -18,6 +25,8 @@ export default function InsertCardFeesModal() {
                         </label>
                         <div className="mt-1">
                             <input
+                                value={cardMachine}
+                                onChange={(e) => setCardMachine(e.target.value)}
                                 class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                                 type="text"
                                 maxLength="255"
@@ -30,6 +39,8 @@ export default function InsertCardFeesModal() {
                         </label>
                         <div className="mt-1">
                             <select
+                                value={type}
+                                onChange={(e) => setType(e.target.value)}
                                 class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                                 type="text"
                             >
@@ -45,6 +56,8 @@ export default function InsertCardFeesModal() {
                         </label>
                         <div className="mt-1">
                             <select
+                                value={flag}
+                                onChange={(e) => setFlag(e.target.value)}
                                 class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                                 type="text"
                             >
@@ -64,6 +77,8 @@ export default function InsertCardFeesModal() {
                         </label>
                         <div className="mt-1">
                             <input
+                                value={percentage}
+                                onChange={(e) => setPercentage(e.target.value)}
                                 class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                                 type="text"
                                 maxLength="255"

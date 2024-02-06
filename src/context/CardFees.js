@@ -14,10 +14,22 @@ export const CardFeesProvider = ({ children }) => {
     const { setIsLoader } = useMainContext();
     const { gym } = useAuthContext();
 
+    const [isOpenModalInsert, setIsOpenModalInsert] = useState(false);
+
     const [flag, setFlag] = useState('');
     const [type, setType] = useState('');
     const [percentage, setPercentage] = useState('');
     const [listCardFees, setListCardFees] = useState([]);
+
+    const clear = async (ev) => {
+        ev.preventDefault();
+
+        setFlag('');
+        setType('');
+        setPercentage('');
+
+        setIsOpenModalInsert(false);
+    }
 
     const get = async () => {
         setIsLoader(true);
@@ -83,8 +95,9 @@ export const CardFeesProvider = ({ children }) => {
         type, setType,
         percentage, setPercentage,
         listCardFees, setListCardFees,
+        isOpenModalInsert, setIsOpenModalInsert,
         // methods
-        get, destroy,
+        get, destroy, clear,
     };
 
     return (

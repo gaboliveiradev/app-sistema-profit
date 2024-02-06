@@ -1,5 +1,5 @@
 import React from 'react';
-import { Hourglass } from 'react-loader-spinner'
+import { Hourglass } from 'react-loader-spinner';
 
 export default function Loader() {
     return (

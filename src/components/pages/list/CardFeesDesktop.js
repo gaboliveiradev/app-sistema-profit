@@ -5,11 +5,13 @@ import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import '../../../css/toastify.css';
 import { useCardFeesContext } from "../../../context/CardFees";
+import InsertCardFeesModal from "../../modals/InsertCardFeesModal";
 
 export default function CardFeesDesktop() {
     const {
         listCardFees,
         destroy,
+        isOpenModalInsert, setIsOpenModalInsert,
     } = useCardFeesContext();
     const [selecetedFilter, setSelecetedFilter] = useState('ativo');
 
@@ -67,6 +69,11 @@ export default function CardFeesDesktop() {
 
     return (
         <div class="mt-8 flex flex-col">
+            {
+                (isOpenModalInsert) && (
+                    <InsertCardFeesModal />
+                )
+            }
             <ToastContainer
                 position="top-right"
                 autoClose={5000}
@@ -112,7 +119,7 @@ export default function CardFeesDesktop() {
 
                 <div className="sm:col-span-10"></div>
 
-                <div className="flex items-center justify-end sm:col-span-2 text-right">
+                <div onClick={(e) => setIsOpenModalInsert(true)} className="flex items-center justify-end sm:col-span-2 text-right">
                     <div className="cursor-pointer text-primary-color">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />

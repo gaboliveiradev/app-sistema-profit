@@ -1,7 +1,7 @@
 import React, { useState, createContext, useContext } from "react";
 
 import Swal from "sweetalert2";
-import * as cardfees from '../services/billingfees';
+import * as billingfees from '../services/billingfees';
 import { toast, Flip } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { useMainContext } from './Main';
@@ -17,6 +17,7 @@ export const BillingFeesProvider = ({ children }) => {
     const [isOpenModalInsert, setIsOpenModalInsert] = useState(false);
 
     const [identification, setIdentification] = useState('');
+    const [flag, setFlag] = useState('');
     const [type, setType] = useState(null);
     const [percentage, setPercentage] = useState('');
     const [listCardFees, setListCardFees] = useState([]);
@@ -28,11 +29,12 @@ export const BillingFeesProvider = ({ children }) => {
         const paramerts = {
             id_gym: gym.id,
             identification: identification,
+            flag: flag,
             type: type,
             percentage: percentage,
         };
 
-        const response = await cardfees.create(paramerts);
+        const response = await billingfees.create(paramerts);
 
         if (response) {
             toast.success('🏋🏻‍♀️ Taxa de Cartão criada com sucesso!', {
@@ -49,6 +51,7 @@ export const BillingFeesProvider = ({ children }) => {
         }
 
         clear(ev);
+        await get();
         setIsLoader(false);
     }
 
@@ -65,7 +68,7 @@ export const BillingFeesProvider = ({ children }) => {
     const get = async () => {
         setIsLoader(true);
 
-        const response = await cardfees.get();
+        const response = await billingfees.get();
         setListCardFees(response.data);
         setIsLoader(false);
     }
@@ -85,7 +88,7 @@ export const BillingFeesProvider = ({ children }) => {
             if (result.isConfirmed) {
                 setIsLoader(true);
 
-                const response = await cardfees.destroy(id);
+                const response = await billingfees.destroy(id);
 
                 if (response) {
                     get();
@@ -123,6 +126,7 @@ export const BillingFeesProvider = ({ children }) => {
 
     const context = {
         identification, setIdentification,
+        flag, setFlag,
         type, setType,
         percentage, setPercentage,
         listCardFees, setListCardFees,

@@ -6,13 +6,19 @@ import "react-toastify/dist/ReactToastify.css";
 import '../../../css/toastify.css';
 import { useBillingFeesContext } from "../../../context/BillingFees";
 import InsertCardFeesModal from "../../modals/InsertBillingFeesModal";
+import { capitalizeFirstLetter } from "../../../common/string";
 
 export default function CardFeesDesktop() {
     const {
         listCardFees,
         destroy,
+        get,
         isOpenModalInsert, setIsOpenModalInsert,
     } = useBillingFeesContext();
+
+    useEffect(() => {
+        get();
+    }, []);
 
     const columns = [
         {
@@ -33,18 +39,26 @@ export default function CardFeesDesktop() {
             )
         },
         {
-            name: <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-normal text-gray-900">Bandeira</th>,
+            name: <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-normal text-gray-900">Maquina de Cartão</th>,
             selector: row => (
                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                    <div class="text-gray-500">Bandeira: <strong>{row.flag}</strong></div>
+                    <div class="text-gray-500">Identificação: <strong>{ row.identification }</strong></div>
                 </td>
             ),
         },
         {
-            name: <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-normal text-gray-900">Crédito/Débito</th>,
+            name: <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-normal text-gray-900">Bandeira</th>,
             selector: row => (
                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                    <div class="text-gray-500">Tipo: <strong>{row.type}</strong></div>
+                    <div class="text-gray-500">Tipo: <strong>{ capitalizeFirstLetter(row.flag) }</strong></div>
+                </td>
+            ),
+        },
+        {
+            name: <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-normal text-gray-900">Canal de Pagamento</th>,
+            selector: row => (
+                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                    <div class="text-gray-500">Tipo: <strong>{ (row.type === 'credit' ? 'Cartão de Crédito' : (row.type === 'debit') ? 'Cartão de Débito' : 'Pix') }</strong></div>
                 </td>
             ),
         },
@@ -52,15 +66,7 @@ export default function CardFeesDesktop() {
             name: <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-normal text-gray-900">Taxa</th>,
             selector: row => (
                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                    <div class="text-gray-500">Porcentagem: <strong>{row.percentage}</strong></div>
-                </td>
-            ),
-        },
-        {
-            name: <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-normal text-gray-900">Status</th>,
-            selector: row => (
-                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                    <div class="text-gray-500">Tipo: <strong>{row.deleted_at === null ? "Ativo" : "Inativo"}</strong></div>
+                    <div class="text-gray-500">Porcentagem: <strong>{ row.percentage } %</strong></div>
                 </td>
             ),
         },

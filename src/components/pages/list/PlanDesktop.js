@@ -60,14 +60,6 @@ export default function PlanDesktop() {
                 </td>
             ),
         },
-        {
-            name: <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-normal text-gray-900">Status</th>,
-            selector: row => (
-                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                    <div class="text-gray-500">Tipo: <strong>{row.deleted_at === null ? "Ativo" : "Inativo"}</strong></div>
-                </td>
-            ),
-        },
     ];
 
     return (

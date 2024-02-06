@@ -4,6 +4,7 @@ import { useBillingFeesContext } from '../../context/BillingFees';
 export default function InsertCardFeesModal() {
     const {
         identification, setIdentification,
+        flag, setFlag,
         type, setType,
         percentage, setPercentage,
         // methods
@@ -47,6 +48,25 @@ export default function InsertCardFeesModal() {
                                 <option value="credit">Crédito</option>
                                 <option value="debit">Débito</option>
                                 <option value="pix">PIX</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div className="sm:col-span-12">
+                        <label className="block text-sm font-medium text-[16px] text-gray-700 dark:text-white">
+                            Bandeira
+                        </label>
+                        <div className="mt-1">
+                            <select
+                                value={flag}
+                                onChange={(e) => setFlag(e.target.value)}
+                                class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
+                                type="text"
+                            >
+                                <option selected value={null}>N/A</option>
+                                <option value="mastercard">Mastercard</option>
+                                <option value="visa">Visa</option>
+                                <option value="elo">Elo</option>
+                                <option value="hipercard">Hipercard</option>
                             </select>
                         </div>
                     </div>

@@ -5,6 +5,7 @@ export default function Address() {
     const { listPlans } = usePlanContext();
 
     const [selectedPlan, setSelectedPlan] = useState(listPlans[0]);
+    const [paymentMethod, setPaymentMethod] = useState('credit_card');
 
     return (
         <form>
@@ -72,12 +73,14 @@ export default function Address() {
                     </label>
                     <div className="mt-1">
                         <select
+                            value={paymentMethod}
+                            onChange={(e) => setPaymentMethod(e.target.value)}
                             class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color-purple rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                         >
-                            <option value="">Cartão de Crédito</option>
-                            <option value="">Cartão de Débito</option>
-                            <option value="">Dinheiro</option>
-                            <option value="">PIX</option>
+                            <option value="credit_card">Cartão de Crédito</option>
+                            <option value="debit_card">Cartão de Débito</option>
+                            <option value="money">Dinheiro</option>
+                            <option value="pix">PIX</option>
                         </select>
                     </div>
                 </div>
@@ -88,9 +91,10 @@ export default function Address() {
                     </label>
                     <div className="mt-1">
                         <select
-                            disabled
+                            disabled={paymentMethod === "money" || paymentMethod === "pix"}
                             class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color-purple rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                         >
+                            <option className='text-center'>-- Selecione --</option>
                             <option value="">Mastercard - Débito - 3.5%</option>
                             <option value="">Visa - Crédito - 2.5%</option>
                         </select>
@@ -109,7 +113,7 @@ export default function Address() {
                         />
                     </div>
                 </div>
-                
+
                 <div className="sm:col-span-6">
                     <label className="block text-sm font-medium text-[16px] text-gray-700 dark:text-white">
                         Próximo Pagamento *

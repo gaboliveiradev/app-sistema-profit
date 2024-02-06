@@ -7,6 +7,7 @@ import ProtectedRoutes from './ProtectedRoutes';
 import NotFound from './pages/NotFound';
 import GymGoer from './pages/GymGoer';
 import Plan from './pages/Plan';
+import CardFees from './pages/CardFees';
 
 const Routing = () => {
     return (
@@ -42,6 +43,13 @@ const Routing = () => {
             <Route path="/plano" exact element={
                 <ProtectedRoutes>
                     <DashboardLayout page={<Plan />} />
+                </ProtectedRoutes>
+            } />
+
+            {/* Taxas de Cartão */}
+            <Route path="/taxas-cartao" exact element={
+                <ProtectedRoutes>
+                    <DashboardLayout page={<CardFees />} />
                 </ProtectedRoutes>
             } />
         </Routes>

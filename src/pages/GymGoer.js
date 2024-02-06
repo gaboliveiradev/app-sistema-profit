@@ -1,7 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import Insert from './../components/pages/insert/GymGoer';
-import { useGymGoerContext } from '../context/GymGoer';
 
 export default function GymGoer() {
     const URL_INSERT = '/aluno';

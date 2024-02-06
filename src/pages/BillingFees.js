@@ -1,5 +1,5 @@
 import React from 'react';
-import CardFeesDesktop from '../components/pages/list/CardFeesDesktop';
+import BillingFeesDesktop from '../components/pages/list/BillingFeesDesktop';
 
 export default function Plan() {
     return (
@@ -13,7 +13,7 @@ export default function Plan() {
             </div>
             <div className="mx-auto max-w-7xl px-4">
                 <div className='py-4 mx-auto'>
-                    <CardFeesDesktop />
+                    <BillingFeesDesktop />
                 </div >
             </div>
         </main >

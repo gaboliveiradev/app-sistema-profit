@@ -1,5 +1,5 @@
 import React from 'react';
-import { useCardFeesContext } from '../../context/CardFees';
+import { useBillingFeesContext } from '../../context/BillingFees';
 
 export default function InsertCardFeesModal() {
     const {
@@ -8,7 +8,7 @@ export default function InsertCardFeesModal() {
         percentage, setPercentage,
         // methods
         clear, save,
-    } = useCardFeesContext();
+    } = useBillingFeesContext();
 
     return (
         <div class="min-w-screen h-screen animated fadeIn faster fixed left-0 top-0 flex justify-center items-center inset-0 z-1 outline-none focus:outline-none" id="modal-id">

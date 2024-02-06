@@ -1,5 +1,5 @@
 import api from './api';
-const url = '/card-fees';
+const url = '/billing-fees';
 
 export const get = async () => {
     try {
@@ -15,7 +15,7 @@ export const create = async (paramerts) => {
     try {
         const respose = await api.post(url, {
             id_gym: paramerts.id_gym,
-            card_machine: paramerts.cardMachine,
+            identification: paramerts.identification,
             flag: paramerts.flag,
             type: paramerts.type,
             percentage: paramerts.percentage,

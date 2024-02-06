@@ -4,15 +4,15 @@ import { optionsPagination } from "../../../common/options";
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import '../../../css/toastify.css';
-import { useCardFeesContext } from "../../../context/CardFees";
-import InsertCardFeesModal from "../../modals/InsertCardFeesModal";
+import { useBillingFeesContext } from "../../../context/BillingFees";
+import InsertCardFeesModal from "../../modals/InsertBillingFeesModal";
 
 export default function CardFeesDesktop() {
     const {
         listCardFees,
         destroy,
         isOpenModalInsert, setIsOpenModalInsert,
-    } = useCardFeesContext();
+    } = useBillingFeesContext();
     const [selecetedFilter, setSelecetedFilter] = useState('ativo');
 
     const columns = [

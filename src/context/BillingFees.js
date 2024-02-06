@@ -1,15 +1,15 @@
 import React, { useState, createContext, useContext } from "react";
 
 import Swal from "sweetalert2";
-import * as cardfees from '../services/cardfees';
+import * as cardfees from '../services/billingfees';
 import { toast, Flip } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { useMainContext } from './Main';
 import { useAuthContext } from './Auth';
 
-export const CardFeesContext = createContext();
+export const BillingFeesContext = createContext();
 
-export const CardFeesProvider = ({ children }) => {
+export const BillingFeesProvider = ({ children }) => {
 
     const { setIsLoader } = useMainContext();
     const { gym } = useAuthContext();
@@ -132,12 +132,12 @@ export const CardFeesProvider = ({ children }) => {
     };
 
     return (
-        <CardFeesContext.Provider value={context}>
+        <BillingFeesContext.Provider value={context}>
             {children}
-        </CardFeesContext.Provider>
+        </BillingFeesContext.Provider>
     )
 }
 
-export const useCardFeesContext = () => {
-    return useContext(CardFeesContext);
+export const useBillingFeesContext = () => {
+    return useContext(BillingFeesContext);
 }

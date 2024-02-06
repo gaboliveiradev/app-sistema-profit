@@ -85,7 +85,7 @@ export default function PlanDesktop() {
                 pauseOnHover
                 theme="colored"
             />
-            <div className="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-12 pb-10">
+            <div className="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-12 pb-5">
                 <div className="sm:col-span-10">
                     <label className="block text-sm font-medium text-[16px] text-gray-700 dark:text-white">
                         Pesquisar

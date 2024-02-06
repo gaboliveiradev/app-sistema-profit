@@ -7,8 +7,8 @@ import '../../../css/toastify.css';
 import { useCardFeesContext } from "../../../context/CardFees";
 
 export default function CardFeesDesktop() {
-    const { 
-        listCardFees, 
+    const {
+        listCardFees,
         destroy,
     } = useCardFeesContext();
     const [selecetedFilter, setSelecetedFilter] = useState('ativo');
@@ -79,7 +79,7 @@ export default function CardFeesDesktop() {
                 pauseOnHover
                 theme="colored"
             />
-            <div className="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-12 pb-10">
+            <div className="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-12 pb-5">
                 <div className="sm:col-span-10">
                     <label className="block text-sm font-medium text-[16px] text-gray-700 dark:text-white">
                         Pesquisar
@@ -109,8 +109,22 @@ export default function CardFeesDesktop() {
                         </select>
                     </div>
                 </div>
+
+                <div className="sm:col-span-10"></div>
+
+                <div className="flex items-center justify-end sm:col-span-2 text-right">
+                    <div className="cursor-pointer text-primary-color">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                        </svg>
+                    </div>
+                    <label className="text-primary-color cursor-pointer block text-sm font-bold text-[18px] text-gray-700 dark:text-white">
+                        Adicionar Taxa
+                    </label>
+                </div>
+
             </div>
-            <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="-my-2    -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
                     <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
                         <DataTable

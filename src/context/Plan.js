@@ -23,7 +23,7 @@ export const PlanProvider = ({ children }) => {
     setIsLoader(true);
 
     const response = await plan.get();
-    setListPlans(response.data.filter((plan) => plan.deleted_at === null));
+    setListPlans(response.data);
     setIsLoader(false);
   }
 

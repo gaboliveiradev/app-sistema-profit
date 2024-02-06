@@ -66,7 +66,7 @@ export const BillingFeesProvider = ({ children }) => {
         setIsLoader(true);
 
         const response = await cardfees.get();
-        setListCardFees(response.data.filter((plan) => plan.deleted_at === null));
+        setListCardFees(response.data);
         setIsLoader(false);
     }
 

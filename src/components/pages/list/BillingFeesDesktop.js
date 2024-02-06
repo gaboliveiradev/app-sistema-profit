@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import DataTable from 'react-data-table-component';
 import { optionsPagination } from "../../../common/options";
 import { ToastContainer } from 'react-toastify';
@@ -13,7 +13,6 @@ export default function CardFeesDesktop() {
         destroy,
         isOpenModalInsert, setIsOpenModalInsert,
     } = useBillingFeesContext();
-    const [selecetedFilter, setSelecetedFilter] = useState('ativo');
 
     const columns = [
         {
@@ -87,7 +86,7 @@ export default function CardFeesDesktop() {
                 theme="colored"
             />
             <div className="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-12 pb-5">
-                <div className="sm:col-span-10">
+                <div className="sm:col-span-12">
                     <label className="block text-sm font-medium text-[16px] text-gray-700 dark:text-white">
                         Pesquisar
                     </label>
@@ -97,23 +96,6 @@ export default function CardFeesDesktop() {
                             type="text"
                             maxLength="255"
                         />
-                    </div>
-                </div>
-                <div className="sm:col-span-2">
-                    <label className="block text-sm font-medium text-[16px] text-gray-700 dark:text-white">ㅤ</label>
-                    <div className="mt-1">
-                        <select
-                            value={selecetedFilter}
-                            onChange={(e) => {
-                                setSelecetedFilter(e.target.value);
-                            }}
-                            class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
-                            type="text"
-                            maxLength="255"
-                        >
-                            <option selected value='ativo'>Ativo</option>
-                            <option value='inativo'>Inativo</option>
-                        </select>
                     </div>
                 </div>
 

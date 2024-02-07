@@ -16,14 +16,14 @@ export const BillingFeesProvider = ({ children }) => {
 
     const [isOpenModalInsert, setIsOpenModalInsert] = useState(false);
 
+    const [idBillingFees, setIdBillingFees] = useState(null);
     const [identification, setIdentification] = useState('');
     const [flag, setFlag] = useState('');
     const [type, setType] = useState(null);
     const [percentage, setPercentage] = useState('');
     const [listCardFees, setListCardFees] = useState([]);
 
-    const save = async (ev) => {
-        ev.preventDefault();
+    async function insert(ev) {
         setIsLoader(true);
 
         const paramerts = {
@@ -55,9 +55,20 @@ export const BillingFeesProvider = ({ children }) => {
         setIsLoader(false);
     }
 
+    async function update(ev) {
+
+    }
+
+    const save = async (ev) => {
+        ev.preventDefault();
+
+        (idBillingFees === null) ? insert(ev) : update(ev)
+    }
+
     const clear = async (ev) => {
         ev.preventDefault();
 
+        setIdBillingFees(null);
         setIdentification('');
         setType(null);
         setPercentage('');
@@ -125,6 +136,7 @@ export const BillingFeesProvider = ({ children }) => {
     }
 
     const context = {
+        idBillingFees, setIdBillingFees,
         identification, setIdentification,
         flag, setFlag,
         type, setType,

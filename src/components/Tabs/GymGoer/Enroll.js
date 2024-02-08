@@ -2,13 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { usePlanContext } from '../../../context/Plan';
 import { useBillingFeesContext } from '../../../context/BillingFees';
 import { capitalizeFirstLetter } from '../../../common/string';
+import { useGymGoerContext } from '../../../context/GymGoer';
 
 export default function Address() {
     const { listPlans } = usePlanContext();
     const { listBillingFees } = useBillingFeesContext();
 
-    const [selectedPlan, setSelectedPlan] = useState(listPlans[0]);
-    const [paymentMethod, setPaymentMethod] = useState('credit_card');
+    const {
+        idPlan, setIdPlan,
+        billingDate, setBillingDate,
+        paymentDate, setPaymentDate,
+        paymentMethod, setPaymentMethod,
+        amountPaid, setAmountPaid,
+        amountReceived, setAmountReceived,
+    } = useGymGoerContext();
 
     const textBillingFees = (obj) => {
         var identification = obj.identification;
@@ -21,6 +28,20 @@ export default function Address() {
         return string;
     }
 
+    const days = () => {
+        if (idPlan === '' || idPlan === null) return 'N/A';
+
+        const filteredPlans = listPlans.filter((p) => p.id === parseInt(idPlan))[0];
+        return filteredPlans.days;
+    }
+
+    const price = () => {
+        if (idPlan === '' || idPlan === null) return 'N/A';
+
+        const filteredPlans = listPlans.filter((p) => p.id === parseInt(idPlan))[0];
+        return filteredPlans.price;
+    }
+
     return (
         <form>
             <div className="mt-[20px] grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-12 pb-8 border-b-2 border-gray-200 dark:border-gray-500">
@@ -30,12 +51,11 @@ export default function Address() {
                     </label>
                     <div className="mt-1">
                         <select
-                            value={selectedPlan.id}
-                            onChange={(e) => {
-                                setSelectedPlan(listPlans.filter((plan) => plan.id === parseInt(e.target.value))[0]);
-                            }}
+                            value={idPlan}
+                            onChange={(e) => setIdPlan(e.target.value)}
                             class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color-purple rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                         >
+                            <option value='' className='text-center'>-- Selecione --</option>
                             {
                                 listPlans.map((plan) => {
                                     return <option value={plan.id}>{plan.description}</option>
@@ -52,9 +72,9 @@ export default function Address() {
                     <div className="mt-1">
                         <input
                             disabled
-                            value={selectedPlan.days}
+                            value={days()}
                             class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
-                            type="number"
+                            type="text"
                             maxLength="255"
                         />
                     </div>
@@ -62,7 +82,7 @@ export default function Address() {
 
                 <div className="sm:col-span-2">
                     <label className="block text-sm font-medium text-[16px] text-gray-700 dark:text-white">
-                        Preço *
+                        Valor *
                     </label>
                     <div className="relative mt-1 rounded-md shadow-sm">
                         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
@@ -70,7 +90,7 @@ export default function Address() {
                         </div>
                         <input
                             disabled
-                            value={selectedPlan.price}
+                            value={price()}
                             class="pl-9 pr-12 dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                             type="text"
                             maxLength="255"
@@ -91,6 +111,7 @@ export default function Address() {
                             onChange={(e) => setPaymentMethod(e.target.value)}
                             class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color-purple rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                         >
+                            <option value='' className='text-center'>-- Selecione --</option>
                             <option value="credit_card">Cartão de Crédito</option>
                             <option value="debit_card">Cartão de Débito</option>
                             <option value="pix">PIX</option>
@@ -108,7 +129,7 @@ export default function Address() {
                             disabled={paymentMethod === "money"}
                             class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color-purple rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                         >
-                            <option className='text-center'>-- Selecione --</option>
+                            <option value='' className='text-center'>-- Selecione --</option>
                             {
                                 listBillingFees.map((billingfees) => {
                                     return <option value={billingfees.id}>{textBillingFees(billingfees)}</option>
@@ -124,6 +145,8 @@ export default function Address() {
                     </label>
                     <div className="mt-1">
                         <input
+                            value={billingDate}
+                            onChange={(e) => setBillingDate(e.target.value)}
                             class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                             type="date"
                             maxLength="255"
@@ -137,6 +160,8 @@ export default function Address() {
                     </label>
                     <div className="mt-1">
                         <input
+                            value={paymentDate}
+                            onChange={(e) => setPaymentDate(e.target.value)}
                             class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                             type="date"
                             maxLength="255"
@@ -144,7 +169,129 @@ export default function Address() {
                     </div>
                 </div>
 
+                {
+                    (paymentMethod === 'money') ? (
+                        <div className="sm:col-span-12 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-12">
+                            <div className="sm:col-span-6">
+                                <label className="block text-sm font-medium text-[16px] text-gray-700 dark:text-white">
+                                    Valor Recebido
+                                </label>
+                                <div className="relative mt-1 rounded-md shadow-sm">
+                                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                        <span class="text-gray-500 sm:text-sm">R$</span>
+                                    </div>
+                                    <input
+                                        class="pl-9 pr-12 dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
+                                        type="text"
+                                        maxLength="255"
+                                    />
+                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                        <span class="text-gray-500 sm:text-sm" id="valor">BRL</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="sm:col-span-6">
+                                <label className="block text-sm font-medium text-[16px] text-gray-700 dark:text-white">
+                                    Troco
+                                </label>
+                                <div className="relative mt-1 rounded-md shadow-sm">
+                                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                        <span class="text-gray-500 sm:text-sm">R$</span>
+                                    </div>
+                                    <input
+                                        class="pl-9 pr-12 dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
+                                        type="text"
+                                        maxLength="255"
+                                    />
+                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                        <span class="text-gray-500 sm:text-sm" id="valor">BRL</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    ) : (paymentMethod === 'credit_card' || paymentMethod === 'debit_card' || paymentMethod === 'pix' || paymentMethod === '') && (
+                        <div className="sm:col-span-12 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-12">
+                            <div className="sm:col-span-2">
+                                <label className="block text-sm font-medium text-[16px] text-gray-700 dark:text-white">
+                                    Taxa (%)
+                                </label>
+                                <div className="relative mt-1 rounded-md shadow-sm">
+                                    <input
+                                        class="pr-12 dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
+                                        type="text"
+                                        maxLength="255"
+                                        disabled
+                                    />
+                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                        <span class="text-gray-500 sm:text-sm" id="valor">%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="sm:col-span-2">
+                                <label className="block text-sm font-medium text-[16px] text-gray-700 dark:text-white">
+                                    Taxa (R$)
+                                </label>
+                                <div className="relative mt-1 rounded-md shadow-sm">
+                                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                        <span class="text-gray-500 sm:text-sm">R$</span>
+                                    </div>
+                                    <input
+                                        class="pl-9 pr-12 dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
+                                        type="text"
+                                        maxLength="255"
+                                        disabled
+                                    />
+                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                        <span class="text-gray-500 sm:text-sm" id="valor">BRL</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="sm:col-span-4">
+                                <label className="block text-sm font-medium text-[16px] text-gray-700 dark:text-white">
+                                    Valor s/Taxa
+                                </label>
+                                <div className="relative mt-1 rounded-md shadow-sm">
+                                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                        <span class="text-gray-500 sm:text-sm">R$</span>
+                                    </div>
+                                    <input
+                                        class="pl-9 pr-12 dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
+                                        type="text"
+                                        maxLength="255"
+                                    />
+                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                        <span class="text-gray-500 sm:text-sm" id="valor">BRL</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="sm:col-span-4">
+                                <label className="block text-sm font-medium text-[16px] text-gray-700 dark:text-white">
+                                    Valor c/Taxa
+                                </label>
+                                <div className="relative mt-1 rounded-md shadow-sm">
+                                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                        <span class="text-gray-500 sm:text-sm">R$</span>
+                                    </div>
+                                    <input
+                                        class="pl-9 pr-12 dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
+                                        type="text"
+                                        maxLength="255"
+                                    />
+                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                        <span class="text-gray-500 sm:text-sm" id="valor">BRL</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                }
+
+
             </div>
-        </form>
+        </form >
     );
 }

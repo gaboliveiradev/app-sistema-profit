@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { IMaskInput } from 'react-imask';
 import { Tab } from '@headlessui/react'
 import TabHeader from '../../TabHeader';
@@ -6,18 +6,21 @@ import Address from '../../Tabs/GymGoer/Address';
 import Enroll from '../../Tabs/GymGoer/Enroll';
 import { usePlanContext } from '../../../context/Plan';
 import { useBillingFeesContext } from '../../../context/BillingFees';
+import { useGymGoerContext } from '../../../context/GymGoer';
 
 export default function GymGoer() {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
-    const [cpf, setCpf] = useState('');
-    const [birthday, setBirthday] = useState('');
-    const [phone, setPhone] = useState('');
-    const [gender, setGender] = useState('');
-    const [height, setHeight] = useState('');
-    const [weight, setWeight] = useState('');
-    const [observation, setObservation] = useState('');
+    const {
+        firstName, setFirstName,
+        lastName, setLastName,
+        email, setEmail,
+        cpf, setCpf,
+        birthday, setBirthday,
+        phone, setPhone,
+        gender, setGender,
+        height, setHeight,
+        weight, setWeight,
+        observation, setObservation,
+    } = useGymGoerContext();
 
     const { getPlans } = usePlanContext();
     const { getBillingFees } = useBillingFeesContext();

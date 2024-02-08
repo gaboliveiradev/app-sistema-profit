@@ -5,6 +5,7 @@ import TabHeader from '../../TabHeader';
 import Address from '../../Tabs/GymGoer/Address';
 import Enroll from '../../Tabs/GymGoer/Enroll';
 import { usePlanContext } from '../../../context/Plan';
+import { useBillingFeesContext } from '../../../context/BillingFees';
 
 export default function GymGoer() {
     const [firstName, setFirstName] = useState('');
@@ -18,10 +19,12 @@ export default function GymGoer() {
     const [weight, setWeight] = useState('');
     const [observation, setObservation] = useState('');
 
-    const { get } = usePlanContext();
+    const { getPlans } = usePlanContext();
+    const { getBillingFees } = useBillingFeesContext();
 
     useEffect(() => {
-        get();
+        getPlans();
+        getBillingFees();
     }, []);
 
     return (

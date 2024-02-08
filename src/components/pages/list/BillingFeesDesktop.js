@@ -10,16 +10,16 @@ import { capitalizeFirstLetter } from "../../../common/string";
 
 export default function CardFeesDesktop() {
     const {
-        listCardFees,
+        listBillingFees,
         destroy,
-        get,
+        getBillingFees,
         isOpenModalInsert, setIsOpenModalInsert,
         setIdBillingFees, setIdentification,
         setFlag, setType, setPercentage,
     } = useBillingFeesContext();
 
     useEffect(() => {
-        get();
+        getBillingFees();
     }, []);
 
     const update = async (e, row) => {
@@ -138,7 +138,7 @@ export default function CardFeesDesktop() {
                     <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
                         <DataTable
                             columns={columns}
-                            data={listCardFees}
+                            data={listBillingFees}
                             paginationPerPage={6}
                             pagination paginationComponentOptions={optionsPagination}
                             paginationRowsPerPageOptions={[6, 12, 18]}

@@ -19,7 +19,7 @@ export const PlanProvider = ({ children }) => {
   const [price, setPrice] = useState('');
   const [listPlans, setListPlans] = useState([]);
 
-  const get = async () => {
+  const getPlans = async () => {
     setIsLoader(true);
 
     const response = await plan.get();
@@ -76,7 +76,7 @@ export const PlanProvider = ({ children }) => {
         const response = await plan.destroy(id);
 
         if (response) {
-          get();
+          getPlans();
 
           toast.success('🏋🏻‍♀️ Plano deletado com sucesso!', {
             position: "top-right",
@@ -123,7 +123,7 @@ export const PlanProvider = ({ children }) => {
     price, setPrice,
     listPlans, setListPlans,
     // methods
-    clear, save, get, destroy
+    clear, save, getPlans, destroy
   };
 
   return (

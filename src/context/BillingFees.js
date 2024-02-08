@@ -21,7 +21,7 @@ export const BillingFeesProvider = ({ children }) => {
     const [flag, setFlag] = useState('');
     const [type, setType] = useState(null);
     const [percentage, setPercentage] = useState('');
-    const [listCardFees, setListCardFees] = useState([]);
+    const [listBillingFees, setListBillingFees] = useState([]);
 
     async function insert(ev) {
         setIsLoader(true);
@@ -51,7 +51,7 @@ export const BillingFeesProvider = ({ children }) => {
         }
 
         clear(ev);
-        await get();
+        await getBillingFees();
         setIsLoader(false);
     }
 
@@ -76,11 +76,11 @@ export const BillingFeesProvider = ({ children }) => {
         setIsOpenModalInsert(false);
     }
 
-    const get = async () => {
+    const getBillingFees = async () => {
         setIsLoader(true);
 
         const response = await billingfees.get();
-        setListCardFees(response.data);
+        setListBillingFees(response.data);
         setIsLoader(false);
     }
 
@@ -102,7 +102,7 @@ export const BillingFeesProvider = ({ children }) => {
                 const response = await billingfees.destroy(id);
 
                 if (response) {
-                    get();
+                    getBillingFees();
 
                     toast.success('🏋🏻‍♀️ Plano deletado com sucesso!', {
                         position: "top-right",
@@ -141,10 +141,10 @@ export const BillingFeesProvider = ({ children }) => {
         flag, setFlag,
         type, setType,
         percentage, setPercentage,
-        listCardFees, setListCardFees,
+        listBillingFees, setListBillingFees,
         isOpenModalInsert, setIsOpenModalInsert,
         // methods
-        get, destroy, clear, save
+        getBillingFees, destroy, clear, save
     };
 
     return (

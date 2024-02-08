@@ -1,11 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { usePlanContext } from '../../../context/Plan';
+import { useBillingFeesContext } from '../../../context/BillingFees';
+import { capitalizeFirstLetter } from '../../../common/string';
 
 export default function Address() {
     const { listPlans } = usePlanContext();
+    const { listBillingFees } = useBillingFeesContext();
 
     const [selectedPlan, setSelectedPlan] = useState(listPlans[0]);
     const [paymentMethod, setPaymentMethod] = useState('credit_card');
+
+    const textBillingFees = (obj) => {
+        var identification = obj.identification;
+        var flag = capitalizeFirstLetter(obj.flag);
+        var type = obj.type === 'credit' ? 'Crédito' : (obj.type === 'debit') ? 'Débito' : 'Pix';
+        var percentage = obj.percentage + "%";
+
+        var string = identification + ' - ' + flag + ' - ' + type + ' - ' + percentage;
+
+        return string;
+    }
 
     return (
         <form>
@@ -79,24 +93,27 @@ export default function Address() {
                         >
                             <option value="credit_card">Cartão de Crédito</option>
                             <option value="debit_card">Cartão de Débito</option>
-                            <option value="money">Dinheiro</option>
                             <option value="pix">PIX</option>
+                            <option value="money">Dinheiro</option>
                         </select>
                     </div>
                 </div>
 
                 <div className="sm:col-span-3">
                     <label className="block text-sm font-medium text-[16px] text-gray-700 dark:text-white">
-                        Taxas de Cartão *
+                        Taxas de Cobrança *
                     </label>
                     <div className="mt-1">
                         <select
-                            disabled={paymentMethod === "money" || paymentMethod === "pix"}
+                            disabled={paymentMethod === "money"}
                             class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color-purple rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                         >
                             <option className='text-center'>-- Selecione --</option>
-                            <option value="">Mastercard - Débito - 3.5%</option>
-                            <option value="">Visa - Crédito - 2.5%</option>
+                            {
+                                listBillingFees.map((billingfees) => {
+                                    return <option value={billingfees.id}>{textBillingFees(billingfees)}</option>
+                                })
+                            }
                         </select>
                     </div>
                 </div>

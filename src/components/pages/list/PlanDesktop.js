@@ -9,13 +9,13 @@ import { usePlanContext } from "../../../context/Plan";
 
 export default function PlanDesktop() {
     const { 
-        get, 
+        getPlans, 
         destroy, 
         listPlans 
     } = usePlanContext();
 
     useEffect(() => {
-        get();
+        getPlans();
     }, []);
 
     const columns = [

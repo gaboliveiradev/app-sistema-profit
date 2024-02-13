@@ -30,6 +30,42 @@ export const GymGoerProvider = ({ children }) => {
     const [amountPaid, setAmountPaid] = useState('');
     const [amountReceived, setAmountReceived] = useState('');
 
+    const [idBillingFees, setIdBillingFees] = useState('');
+    const [percentageRate, setPercentageRate] = useState('0');
+
+    const clear = async (ev) => {
+        ev.preventDefault();
+
+        setFirstName('');
+        setLastName('');
+        setEmail('');
+        setCpf('');
+        setBirthday('');
+        setPhone('');
+        setGender('');
+        setHeight('');
+        setWeight('');
+        setObservation('');
+
+        setZipCode('');
+        setStreet('');
+        setNumber('');
+        setDistrict('');
+        setCity('');
+        setState('');
+        setComplement('');
+
+        setIdPlan('')
+        setBillingDate('')
+        setPaymentDate('')
+        setPaymentMethod('')
+        setAmountPaid('');
+        setAmountReceived('');
+
+        setIdBillingFees('');
+        setPercentageRate('0');
+    }
+
     const context = {
         // header
         firstName, setFirstName,
@@ -57,6 +93,11 @@ export const GymGoerProvider = ({ children }) => {
         paymentMethod, setPaymentMethod,
         amountPaid, setAmountPaid,
         amountReceived, setAmountReceived,
+        // controlls payments
+        idBillingFees, setIdBillingFees,
+        percentageRate, setPercentageRate,
+        // methods
+        clear,
     };
 
     return (

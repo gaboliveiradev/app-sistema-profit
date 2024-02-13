@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { usePlanContext } from '../../../context/Plan';
 import { useBillingFeesContext } from '../../../context/BillingFees';
 import { capitalizeFirstLetter } from '../../../common/string';
@@ -15,10 +15,9 @@ export default function Address() {
         paymentMethod, setPaymentMethod,
         amountPaid, setAmountPaid,
         amountReceived, setAmountReceived,
+        idBillingFees, setIdBillingFees,
+        percentageRate, setPercentageRate,
     } = useGymGoerContext();
-
-    const [idBillingFees, setIdBillingFees] = useState('');
-    const [percentageRate, setPercentageRate] = useState('');
 
     const textBillingFees = (obj) => {
         var identification = obj.identification;
@@ -148,7 +147,7 @@ export default function Address() {
                             onChange={(e) => {
                                 setIdBillingFees(e.target.value);
 
-                                const filteredBillingFees = (e.target.value === '' || e.target.value === null) ? 'N/A' : listBillingFees.filter((billingfees) => billingfees.id === parseInt(e.target.value))[0].percentage;
+                                const filteredBillingFees = (e.target.value === '' || e.target.value === null) ? '0' : listBillingFees.filter((billingfees) => billingfees.id === parseInt(e.target.value))[0].percentage;
                                 setPercentageRate(filteredBillingFees);
                             }}
                             disabled={paymentMethod === "money"}
@@ -245,6 +244,8 @@ export default function Address() {
                                         <span class="text-gray-500 sm:text-sm">R$</span>
                                     </div>
                                     <input
+                                        value={amountPaid}
+                                        onChange={(e) => setAmountPaid(e.target.value)}
                                         class="pl-9 pr-12 dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                                         type="text"
                                         maxLength="255"

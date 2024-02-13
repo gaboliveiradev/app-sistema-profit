@@ -17,6 +17,9 @@ export default function Address() {
         amountReceived, setAmountReceived,
     } = useGymGoerContext();
 
+    const [idBillingFees, setIdBillingFees] = useState('');
+    const [percentageRate, setPercentageRate] = useState('');
+
     const textBillingFees = (obj) => {
         var identification = obj.identification;
         var flag = capitalizeFirstLetter(obj.flag);
@@ -36,9 +39,14 @@ export default function Address() {
     }
 
     const price = () => {
-        if (idPlan === '' || idPlan === null) return 'N/A';
+        if (idPlan === '' || idPlan === null) {
+            setAmountReceived('');
 
-        const filteredPlans = listPlans.filter((p) => p.id === parseInt(idPlan))[0];
+            return 'N/A';
+        }
+
+        const filteredPlans = listPlans.filter((plan) => plan.id === parseInt(idPlan))[0];
+        setAmountReceived(filteredPlans.price);
         return filteredPlans.price;
     }
 
@@ -108,7 +116,17 @@ export default function Address() {
                     <div className="mt-1">
                         <select
                             value={paymentMethod}
-                            onChange={(e) => setPaymentMethod(e.target.value)}
+                            onChange={(e) => {
+                                setPaymentMethod(e.target.value);
+
+                                if (e.target.value === "") {
+                                    setPercentageRate('0');
+                                }
+
+                                if (e.target.value === 'money') {
+                                    setIdBillingFees('');
+                                }
+                            }}
                             class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color-purple rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                         >
                             <option value='' className='text-center'>-- Selecione --</option>
@@ -126,6 +144,13 @@ export default function Address() {
                     </label>
                     <div className="mt-1">
                         <select
+                            value={idBillingFees}
+                            onChange={(e) => {
+                                setIdBillingFees(e.target.value);
+
+                                const filteredBillingFees = (e.target.value === '' || e.target.value === null) ? 'N/A' : listBillingFees.filter((billingfees) => billingfees.id === parseInt(e.target.value))[0].percentage;
+                                setPercentageRate(filteredBillingFees);
+                            }}
                             disabled={paymentMethod === "money"}
                             class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color-purple rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                         >
@@ -172,7 +197,46 @@ export default function Address() {
                 {
                     (paymentMethod === 'money') ? (
                         <div className="sm:col-span-12 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-12">
-                            <div className="sm:col-span-6">
+                            <div className="sm:col-span-2">
+                                <label className="block text-sm font-medium text-[16px] text-gray-700 dark:text-white">
+                                    Taxa (%)
+                                </label>
+                                <div className="relative mt-1 rounded-md shadow-sm">
+                                    <input
+                                        value='0'
+                                        class="pr-12 dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
+                                        type="text"
+                                        maxLength="255"
+                                        disabled
+                                    />
+                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                        <span class="text-gray-500 sm:text-sm" id="valor">%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="sm:col-span-2">
+                                <label className="block text-sm font-medium text-[16px] text-gray-700 dark:text-white">
+                                    Taxa (R$)
+                                </label>
+                                <div className="relative mt-1 rounded-md shadow-sm">
+                                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                        <span class="text-gray-500 sm:text-sm">R$</span>
+                                    </div>
+                                    <input
+                                        value="0"
+                                        class="pl-9 pr-12 dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
+                                        type="text"
+                                        maxLength="255"
+                                        disabled
+                                    />
+                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                        <span class="text-gray-500 sm:text-sm" id="valor">BRL</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="sm:col-span-4">
                                 <label className="block text-sm font-medium text-[16px] text-gray-700 dark:text-white">
                                     Valor Recebido
                                 </label>
@@ -191,7 +255,7 @@ export default function Address() {
                                 </div>
                             </div>
 
-                            <div className="sm:col-span-6">
+                            <div className="sm:col-span-4">
                                 <label className="block text-sm font-medium text-[16px] text-gray-700 dark:text-white">
                                     Troco
                                 </label>
@@ -200,6 +264,7 @@ export default function Address() {
                                         <span class="text-gray-500 sm:text-sm">R$</span>
                                     </div>
                                     <input
+                                        disabled
                                         class="pl-9 pr-12 dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                                         type="text"
                                         maxLength="255"
@@ -218,6 +283,7 @@ export default function Address() {
                                 </label>
                                 <div className="relative mt-1 rounded-md shadow-sm">
                                     <input
+                                        value={percentageRate}
                                         class="pr-12 dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                                         type="text"
                                         maxLength="255"
@@ -258,9 +324,11 @@ export default function Address() {
                                         <span class="text-gray-500 sm:text-sm">R$</span>
                                     </div>
                                     <input
+                                        value={amountReceived}
                                         class="pl-9 pr-12 dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                                         type="text"
                                         maxLength="255"
+                                        disabled
                                     />
                                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                         <span class="text-gray-500 sm:text-sm" id="valor">BRL</span>
@@ -280,6 +348,7 @@ export default function Address() {
                                         class="pl-9 pr-12 dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                                         type="text"
                                         maxLength="255"
+                                        disabled
                                     />
                                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                         <span class="text-gray-500 sm:text-sm" id="valor">BRL</span>

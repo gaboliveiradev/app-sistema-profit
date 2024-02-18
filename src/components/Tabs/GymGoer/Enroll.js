@@ -17,15 +17,15 @@ export default function Address() {
         amountReceived, setAmountReceived,
         idBillingFees, setIdBillingFees,
         percentageRate, setPercentageRate,
+        moneyRate, setMoneyRate,
     } = useGymGoerContext();
 
     const textBillingFees = (obj) => {
         var identification = obj.identification;
         var flag = capitalizeFirstLetter(obj.flag);
-        var type = obj.type === 'credit' ? 'Crédito' : (obj.type === 'debit') ? 'Débito' : 'Pix';
         var percentage = obj.percentage + "%";
 
-        var string = identification + ' - ' + flag + ' - ' + type + ' - ' + percentage;
+        var string = identification + ' - ' + flag + ' - ' + percentage;
 
         return string;
     }
@@ -45,8 +45,8 @@ export default function Address() {
         }
 
         const filteredPlans = listPlans.filter((plan) => plan.id === parseInt(idPlan))[0];
-        setAmountReceived(filteredPlans.price);
-        return filteredPlans.price;
+        setAmountReceived(filteredPlans.price.toFixed(2));
+        return parseFloat(filteredPlans.price).toFixed(2);
     }
 
     return (
@@ -64,9 +64,11 @@ export default function Address() {
                         >
                             <option value='' className='text-center'>-- Selecione --</option>
                             {
-                                listPlans.map((plan) => {
+                                (listPlans.length > 0) ? listPlans.map((plan) => {
                                     return <option value={plan.id}>{plan.description}</option>
-                                })
+                                }) : (
+                                    <option disabled>N/A</option>
+                                )
                             }
                         </select>
                     </div>
@@ -126,6 +128,7 @@ export default function Address() {
                                     setIdBillingFees('');
                                 }
                             }}
+                            disabled={idPlan === '' || idPlan === null}
                             class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color-purple rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                         >
                             <option value='' className='text-center'>-- Selecione --</option>
@@ -148,16 +151,21 @@ export default function Address() {
                                 setIdBillingFees(e.target.value);
 
                                 const filteredBillingFees = (e.target.value === '' || e.target.value === null) ? '0' : listBillingFees.filter((billingfees) => billingfees.id === parseInt(e.target.value))[0].percentage;
+                                
                                 setPercentageRate(filteredBillingFees);
+                                setMoneyRate(((parseFloat(filteredBillingFees) / 100) * amountReceived).toFixed(2))
+                                setAmountPaid((parseFloat(((parseFloat(filteredBillingFees) / 100) * amountReceived)) + parseFloat(amountReceived)).toFixed(2))
                             }}
-                            disabled={paymentMethod === "money"}
+                            disabled={paymentMethod === "money" || paymentMethod === '' || paymentMethod === null}
                             class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color-purple rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                         >
                             <option value='' className='text-center'>-- Selecione --</option>
                             {
-                                listBillingFees.map((billingfees) => {
+                                (listBillingFees.length > 0) ? listBillingFees.map((billingfees) => {
                                     return <option value={billingfees.id}>{textBillingFees(billingfees)}</option>
-                                })
+                                }) : (
+                                    <option disabled>N/A</option>
+                                )
                             }
                         </select>
                     </div>
@@ -244,8 +252,11 @@ export default function Address() {
                                         <span class="text-gray-500 sm:text-sm">R$</span>
                                     </div>
                                     <input
-                                        value={amountPaid}
-                                        onChange={(e) => setAmountPaid(e.target.value)}
+                                        value={amountReceived}
+                                        onChange={(e) => {
+                                            setAmountReceived(e.target.value);
+                                            setAmountPaid(e.target.value);
+                                        }}
                                         class="pl-9 pr-12 dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                                         type="text"
                                         maxLength="255"
@@ -305,6 +316,7 @@ export default function Address() {
                                         <span class="text-gray-500 sm:text-sm">R$</span>
                                     </div>
                                     <input
+                                        value={parseFloat(moneyRate).toFixed(2)}
                                         class="pl-9 pr-12 dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                                         type="text"
                                         maxLength="255"
@@ -325,7 +337,7 @@ export default function Address() {
                                         <span class="text-gray-500 sm:text-sm">R$</span>
                                     </div>
                                     <input
-                                        value={amountReceived}
+                                        value={(idPlan === '' || idPlan === null) ? '0.00' : parseFloat(amountReceived)}
                                         class="pl-9 pr-12 dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                                         type="text"
                                         maxLength="255"
@@ -346,6 +358,7 @@ export default function Address() {
                                         <span class="text-gray-500 sm:text-sm">R$</span>
                                     </div>
                                     <input
+                                        value={parseFloat(amountPaid).toFixed(2)}
                                         class="pl-9 pr-12 dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                                         type="text"
                                         maxLength="255"
@@ -359,8 +372,6 @@ export default function Address() {
                         </div>
                     )
                 }
-
-
             </div>
         </form >
     );

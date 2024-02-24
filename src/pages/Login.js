@@ -3,6 +3,7 @@ import { useAuthContext } from '../context/Auth';
 import { useNavigate } from 'react-router-dom';
 
 import Logo from './../assets/logo_light.png';
+import { useConfigContext } from '../context/Config';
 
 export default function Login() {
     const navigate = useNavigate();
@@ -12,6 +13,10 @@ export default function Login() {
     const [isLoginLoader, setIsLoginLoader] = useState(false);
 
     const { signIn } = useAuthContext();
+
+    const {
+        LOGIN_FOOTER_TEXT, LOGIN_IMAGE_TEXT
+    } = useConfigContext();
 
     const handleClickSignIn = async (e) => {
         e.preventDefault();
@@ -32,7 +37,7 @@ export default function Login() {
                     <div class="flex items-center h-full px-20 bg-gray-900 bg-opacity-90">
                         <div>
                             <h2 class="text-4xl font-bold text-white">SISTEMA <span className='text-primary-color'>PROFIT</span></h2>
-                            <p class="max-w-xl mt-3 text-gray-300">O SISTEMA PROFIT é uma inovação projetada para aprimorar a gestão de academias, proporcionando uma experiência mais eficiente e satisfatória aos usuários.</p>
+                            <p class="max-w-xl mt-3 text-gray-300">{LOGIN_IMAGE_TEXT}</p>
                         </div>
                     </div>
                 </div>
@@ -40,7 +45,7 @@ export default function Login() {
                 <div class="flex items-center w-full max-w-md px-6 mx-auto lg:w-2/6">
                     <div class="flex-1">
                         <div class="flex justify-center items-center">
-                            <img src={Logo} className='w-50' />
+                            <img src={Logo}  className='w-50' />
                         </div>
 
                         <div class="mt-8">
@@ -96,7 +101,7 @@ export default function Login() {
 
                             </form>
 
-                            <p class="mt-6 text-sm text-center text-gray-400">© Gabriel Oliveira, 2024. 💜</p>
+                            <p class="mt-6 text-sm text-center text-gray-400">{LOGIN_FOOTER_TEXT}</p>
                         </div>
                     </div>
                 </div>

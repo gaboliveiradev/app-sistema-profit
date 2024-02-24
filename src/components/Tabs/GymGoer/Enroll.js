@@ -60,7 +60,7 @@ export default function Address() {
                         <select
                             value={idPlan}
                             onChange={(e) => setIdPlan(e.target.value)}
-                            class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color-purple rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
+                            class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:ring-primary-color focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                         >
                             <option value='' className='text-center'>-- Selecione --</option>
                             {
@@ -82,7 +82,7 @@ export default function Address() {
                         <input
                             disabled
                             value={days()}
-                            class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
+                            class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:ring-primary-color focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                             type="text"
                             maxLength="255"
                         />
@@ -100,7 +100,7 @@ export default function Address() {
                         <input
                             disabled
                             value={price()}
-                            class="pl-9 pr-12 dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
+                            class="pl-9 pr-12 dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:ring-primary-color focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                             type="text"
                             maxLength="255"
                         />
@@ -129,11 +129,11 @@ export default function Address() {
                                 }
                             }}
                             disabled={idPlan === '' || idPlan === null}
-                            class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color-purple rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
+                            class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:ring-primary-color focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                         >
                             <option value='' className='text-center'>-- Selecione --</option>
-                            <option value="credit_card">Cartão de Crédito</option>
-                            <option value="debit_card">Cartão de Débito</option>
+                            <option value="credit">Cartão de Crédito</option>
+                            <option value="debit">Cartão de Débito</option>
                             <option value="pix">PIX</option>
                             <option value="money">Dinheiro</option>
                         </select>
@@ -157,7 +157,7 @@ export default function Address() {
                                 setAmountPaid((parseFloat(((parseFloat(filteredBillingFees) / 100) * amountReceived)) + parseFloat(amountReceived)).toFixed(2))
                             }}
                             disabled={paymentMethod === "money" || paymentMethod === '' || paymentMethod === null}
-                            class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color-purple rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
+                            class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:ring-primary-color focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                         >
                             <option value='' className='text-center'>-- Selecione --</option>
                             {
@@ -179,7 +179,7 @@ export default function Address() {
                         <input
                             value={billingDate}
                             onChange={(e) => setBillingDate(e.target.value)}
-                            class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
+                            class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:ring-primary-color focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                             type="date"
                             maxLength="255"
                         />
@@ -194,7 +194,7 @@ export default function Address() {
                         <input
                             value={paymentDate}
                             onChange={(e) => setPaymentDate(e.target.value)}
-                            class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
+                            class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:ring-primary-color focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                             type="date"
                             maxLength="255"
                         />
@@ -211,7 +211,7 @@ export default function Address() {
                                 <div className="relative mt-1 rounded-md shadow-sm">
                                     <input
                                         value='0'
-                                        class="pr-12 dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
+                                        class="pr-12 dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:ring-primary-color focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                                         type="text"
                                         maxLength="255"
                                         disabled
@@ -232,7 +232,7 @@ export default function Address() {
                                     </div>
                                     <input
                                         value="0"
-                                        class="pl-9 pr-12 dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
+                                        class="pl-9 pr-12 dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:ring-primary-color focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                                         type="text"
                                         maxLength="255"
                                         disabled
@@ -257,7 +257,7 @@ export default function Address() {
                                             setAmountReceived(e.target.value);
                                             setAmountPaid(e.target.value);
                                         }}
-                                        class="pl-9 pr-12 dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
+                                        class="pl-9 pr-12 dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:ring-primary-color focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                                         type="text"
                                         maxLength="255"
                                     />
@@ -277,7 +277,7 @@ export default function Address() {
                                     </div>
                                     <input
                                         disabled
-                                        class="pl-9 pr-12 dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
+                                        class="pl-9 pr-12 dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:ring-primary-color focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                                         type="text"
                                         maxLength="255"
                                     />
@@ -287,7 +287,7 @@ export default function Address() {
                                 </div>
                             </div>
                         </div>
-                    ) : (paymentMethod === 'credit_card' || paymentMethod === 'debit_card' || paymentMethod === 'pix' || paymentMethod === '') && (
+                    ) : (paymentMethod === 'credit' || paymentMethod === 'debit' || paymentMethod === 'pix' || paymentMethod === '') && (
                         <div className="sm:col-span-12 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-12">
                             <div className="sm:col-span-2">
                                 <label className="block text-sm font-medium text-[16px] text-gray-700 dark:text-white">
@@ -296,7 +296,7 @@ export default function Address() {
                                 <div className="relative mt-1 rounded-md shadow-sm">
                                     <input
                                         value={percentageRate}
-                                        class="pr-12 dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
+                                        class="pr-12 dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:ring-primary-color focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                                         type="text"
                                         maxLength="255"
                                         disabled
@@ -317,7 +317,7 @@ export default function Address() {
                                     </div>
                                     <input
                                         value={parseFloat(moneyRate).toFixed(2)}
-                                        class="pl-9 pr-12 dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
+                                        class="pl-9 pr-12 dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:ring-primary-color focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                                         type="text"
                                         maxLength="255"
                                         disabled
@@ -338,7 +338,7 @@ export default function Address() {
                                     </div>
                                     <input
                                         value={(idPlan === '' || idPlan === null) ? '0.00' : parseFloat(amountReceived)}
-                                        class="pl-9 pr-12 dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
+                                        class="pl-9 pr-12 dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:ring-primary-color focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                                         type="text"
                                         maxLength="255"
                                         disabled
@@ -359,7 +359,7 @@ export default function Address() {
                                     </div>
                                     <input
                                         value={parseFloat(amountPaid).toFixed(2)}
-                                        class="pl-9 pr-12 dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
+                                        class="pl-9 pr-12 dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:ring-primary-color focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                                         type="text"
                                         maxLength="255"
                                         disabled

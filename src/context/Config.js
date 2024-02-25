@@ -18,6 +18,6 @@ export const ConfigProvider = ({ children }) => {
     )
 }
 
-export const useConfigContext = () =>{
+export const useConfigContext = () => {
     return useContext(ConfigContext);
 }

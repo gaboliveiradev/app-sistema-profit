@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Insert from './../components/pages/insert/GymGoer';
+import ButtonAdd from '../components/ButtonAdd';
 
 export default function GymGoer() {
     const navigate = useNavigate();
@@ -11,6 +12,10 @@ export default function GymGoer() {
     const location = useLocation();
     const { pathname } = location;
 
+    const handleAddPage = async () => {
+        navigate(URL_INSERT);
+    }
+
     return (
         <main className="flex-1 px-2">
             <div className="py-6 md:py-0 sm:px-4 z-40 md:top-0 flex flex-row flex-wrap items-center justify-between">
@@ -18,9 +23,7 @@ export default function GymGoer() {
                     <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">Alunos</h1>
                     {
                         (pathname === URL_LIST) && (
-                            <div className='px-4 flex flex-row items-start justify-start md:mx-0'>
-                                <button onClick={(e) => navigate(URL_INSERT)} class="hover:bg-secondary-color flex flex-row justify-center border border-primary-color items-center bg-primary-color text-white active:bg-secondary-color uppercase text-sm px-6 py-2 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">Adicionar</button>
-                            </div>
+                            <ButtonAdd method={handleAddPage} />
                         )
                     }
                 </div>

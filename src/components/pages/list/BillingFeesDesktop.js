@@ -118,20 +118,6 @@ export default function CardFeesDesktop() {
                         />
                     </div>
                 </div>
-
-                <div className="sm:col-span-10"></div>
-
-                <div onClick={(e) => setIsOpenModalInsert(true)} className="flex items-center justify-end sm:col-span-2 text-right">
-                    <div className="cursor-pointer text-primary-color">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                        </svg>
-                    </div>
-                    <label className="text-primary-color cursor-pointer block text-sm font-bold text-[18px] text-gray-700 dark:text-white">
-                        Adicionar Taxa
-                    </label>
-                </div>
-
             </div>
             <div class="-my-2    -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">

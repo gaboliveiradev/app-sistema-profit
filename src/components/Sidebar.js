@@ -2,19 +2,24 @@ import React, { useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import Logo from './../assets/logo_dark.png';
 import SidebarLinkGroup from './small_components/SidebarLinkGroup';
+import { useMainContext } from '../context/Main';
+import { IoIosArrowDown } from "react-icons/io";
+import { IoExit } from "react-icons/io5";
 
 export default function Sidebar(props) {
+
   const location = useLocation();
   const { pathname } = location;
 
   const trigger = useRef(null);
   const sidebar = useRef(null);
 
+  const { menu } = useMainContext();
+
   const storedSidebarExpanded = localStorage.getItem('sidebar-expanded');
   const [sidebarExpanded, setSidebarExpanded] = useState(
     storedSidebarExpanded === null ? false : storedSidebarExpanded === 'true'
   );
-
 
   // close on click outside
   useEffect(() => {
@@ -78,7 +83,62 @@ export default function Sidebar(props) {
         {/* <!-- Sidebar Menu --> */}
         <nav className="bg-sidebar dark:bg-boxdark duration-300 ease-linear h-full py-4 px-4 flex flex-col justify-start items-start">
           <div className='w-full'>
-            <SidebarLinkGroup activeCondition={pathname === '/'}>
+            {
+              menu.map((item) => {
+                return (
+                  <SidebarLinkGroup>
+                    {(handleClick, open) => {
+                      return (
+                        <React.Fragment>
+                          <NavLink to={(item.children) ? '#' : item.path} onClick={() => (item.children) ? (sidebarExpanded ? handleClick() : setSidebarExpanded(true)) : ''} className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4`}>
+                            <item.icon className="h-6 w-6" />
+                            {item.name}
+                            {
+                              (item.children) && (
+                                <IoIosArrowDown className={`absolute right-4 top-1/2 -translate-y-1/2 fill-current ${open && 'rotate-180'}`} width="20" height="20" />
+                              )
+                            }
+                          </NavLink>
+
+                          {
+                            (item.children) && (
+                              <div className={`translate transform overflow-hidden ${!open && 'hidden'}`}>
+                                <ul className="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
+                                  {
+                                    item.children.map((children) => {
+                                      return (
+                                        <li>
+                                          <NavLink to={children.path} className={({ isActive }) => 'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' + (isActive && '!text-white')}>
+                                            {children.name}
+                                          </NavLink>
+                                        </li>
+                                      )
+                                    })
+                                  }
+                                </ul>
+                              </div>
+                            )
+                          }
+                        </React.Fragment>
+                      );
+                    }}
+                  </SidebarLinkGroup>
+                )
+              })
+            }
+
+            <SidebarLinkGroup>
+              {(handleClick, open) => {
+                return (
+                  <NavLink to="#" className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4`}>
+                    <IoExit className="h-6 w-6" />
+                    Sair
+                  </NavLink>
+                );
+              }}
+            </SidebarLinkGroup>
+
+            {/*<SidebarLinkGroup activeCondition={pathname === '/'}>
               {(handleClick, open) => {
                 return (
                   <NavLink to="/" className={`${(pathname === '/') && 'bg-graydark dark:bg-meta-4'} group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4`}>
@@ -146,10 +206,7 @@ export default function Sidebar(props) {
               {(handleClick, open) => {
                 return (
                   <NavLink to="/planos" className={`${(pathname === '/planos' || pathname === '/plano') && 'bg-graydark dark:bg-meta-4'}group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4`}>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M6 6h.008v.008H6V6z" />
-                    </svg>
+                    <CgGym className='h-6 w-6'/>
                     Planos Academia
                   </NavLink>
                 );
@@ -214,7 +271,7 @@ export default function Sidebar(props) {
                   </React.Fragment>
                 );
               }}
-            </SidebarLinkGroup>
+            </SidebarLinkGroup>*/}
           </div>
         </nav>
         {/* <!-- Sidebar Menu --> */}

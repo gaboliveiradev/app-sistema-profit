@@ -2,6 +2,7 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Insert from './../components/pages/insert/GymGoer';
 import ButtonAdd from '../components/ButtonAdd';
+import GymGoerDesktop from '../components/pages/list/GymGoerDesktop';
 
 export default function GymGoer() {
     const navigate = useNavigate();
@@ -32,7 +33,7 @@ export default function GymGoer() {
                 pathname === URL_LIST ? (
                     <div className="mx-auto max-w-7xl px-4">
                         <div className='py-6 mx-auto'>
-                            Lista
+                            <GymGoerDesktop />
                         </div >
                     </div>
                 ) : pathname === URL_INSERT && (

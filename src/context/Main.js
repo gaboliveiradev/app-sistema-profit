@@ -4,7 +4,9 @@ import { FaGem } from "react-icons/fa";
 import { FaUserFriends } from "react-icons/fa";
 import { MdSpaceDashboard } from "react-icons/md";
 import { HiOutlineAdjustments } from "react-icons/hi";
-import { IoExit } from "react-icons/io5";
+import { PiFilesFill } from "react-icons/pi";
+import { RiUser2Fill } from "react-icons/ri";
+import { AiFillShop } from "react-icons/ai";
 
 export const MainContext = createContext();
 
@@ -25,6 +27,21 @@ export const MainProvider = ({ children }) => {
     {  
       name: 'Planos Academia',
       icon: FaGem,
+      path: '/planos' 
+    },
+    {  
+      name: 'Fichas de Treino',
+      icon: PiFilesFill,
+      path: '/planos' 
+    },
+    {  
+      name: 'Funcionários',
+      icon: RiUser2Fill,
+      path: '/planos' 
+    },
+    {  
+      name: 'Vitrine Virtual',
+      icon: AiFillShop,
       path: '/planos' 
     },
     {

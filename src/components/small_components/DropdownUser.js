@@ -1,8 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-
 import { useAuthContext } from "../../context/Auth";
-import { capitalizeFirstLetter } from "../../common/string";
 
 export default function DropdownUser() {
   const { user } = useAuthContext();
@@ -54,11 +52,11 @@ export default function DropdownUser() {
           <span className="block text-sm font-medium text-black dark:text-white">
             {user.first_name} {user.last_name}
           </span>
-          <span className="block text-xs">{capitalizeFirstLetter(user.profile)}</span>
+          <span className="block text-xs">{(user.profile === 1 ? 'Aluno(a)' : user.profile === 2 ? 'Personal' : user.profile === 3 ? 'Administrador(a)' : user.profile === 4 && 'Desenvolvedor(a)')}</span>
         </span>
 
         <span className="h-12 w-12 ">
-          <img src='https://imgur.com/S5h6KsO.png' className="rounded-full" />
+          <img src='https://imgur.com/S5h6KsO.png' alt='logo-user' className="rounded-full" />
         </span>
 
         <svg

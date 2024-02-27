@@ -5,6 +5,7 @@ import { toast, Flip } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { useMainContext } from './Main';
 import { useAuthContext } from './Auth';
+import { add30Days, getCurrentDate } from "../common/date";
 
 export const GymGoerContext = createContext();
 
@@ -33,8 +34,8 @@ export const GymGoerProvider = ({ children }) => {
   const [complement, setComplement] = useState('');
 
   const [idPlan, setIdPlan] = useState('');
-  const [billingDate, setBillingDate] = useState('');
-  const [paymentDate, setPaymentDate] = useState('');
+  const [billingDate, setBillingDate] = useState(getCurrentDate());
+  const [paymentDate, setPaymentDate] = useState(add30Days(getCurrentDate()));
   const [paymentMethod, setPaymentMethod] = useState('');
   const [amountPaid, setAmountPaid] = useState(0);
   const [amountReceived, setAmountReceived] = useState(0);

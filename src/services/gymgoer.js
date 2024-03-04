@@ -24,7 +24,6 @@ export const create = async (paramerts) => {
             complement: paramerts.complement,
             id_plan: paramerts.id_plan,
             billing_date: paramerts.billing_date,
-            payment_date: paramerts.payment_date,
             payment_method: paramerts.payment_method,
             amount_paid: paramerts.amount_paid,
             amount_received: paramerts.amount_received,

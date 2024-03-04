@@ -11,7 +11,6 @@ export default function Address() {
     const {
         idPlan, setIdPlan,
         billingDate, setBillingDate,
-        paymentDate, setPaymentDate,
         paymentMethod, setPaymentMethod,
         amountPaid, setAmountPaid,
         amountReceived, setAmountReceived,
@@ -171,29 +170,14 @@ export default function Address() {
                     </div>
                 </div>
 
-                <div className="sm:col-span-6">
+                <div className="sm:col-span-12">
                     <label className="block text-sm font-medium text-[16px] text-gray-700 dark:text-white">
-                        Primeiro Pagamento *
+                        Data de Pagamento *
                     </label>
                     <div className="mt-1">
                         <input
                             value={billingDate}
                             onChange={(e) => setBillingDate(e.target.value)}
-                            class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:ring-primary-color focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
-                            type="date"
-                            maxLength="255"
-                        />
-                    </div>
-                </div>
-
-                <div className="sm:col-span-6">
-                    <label className="block text-sm font-medium text-[16px] text-gray-700 dark:text-white">
-                        Próximo Pagamento *
-                    </label>
-                    <div className="mt-1">
-                        <input
-                            value={paymentDate}
-                            onChange={(e) => setPaymentDate(e.target.value)}
                             class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:ring-primary-color focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
                             type="date"
                             maxLength="255"

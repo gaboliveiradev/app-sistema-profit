@@ -35,7 +35,6 @@ export const GymGoerProvider = ({ children }) => {
 
   const [idPlan, setIdPlan] = useState('');
   const [billingDate, setBillingDate] = useState(getCurrentDate());
-  const [paymentDate, setPaymentDate] = useState(add30Days(getCurrentDate()));
   const [paymentMethod, setPaymentMethod] = useState('');
   const [amountPaid, setAmountPaid] = useState(0);
   const [amountReceived, setAmountReceived] = useState(0);
@@ -69,7 +68,6 @@ export const GymGoerProvider = ({ children }) => {
       complement: complement,
       id_plan: parseFloat(idPlan),
       billing_date: billingDate,
-      payment_date: paymentDate,
       payment_method: paymentMethod,
       amount_paid: amountPaid,
       amount_received: amountReceived,
@@ -118,8 +116,7 @@ export const GymGoerProvider = ({ children }) => {
     setComplement('');
 
     setIdPlan('')
-    setBillingDate('')
-    setPaymentDate('')
+    setBillingDate(getCurrentDate())
     setPaymentMethod('')
     setAmountPaid(0);
     setAmountReceived(0);
@@ -152,7 +149,6 @@ export const GymGoerProvider = ({ children }) => {
     // enroll
     idPlan, setIdPlan,
     billingDate, setBillingDate,
-    paymentDate, setPaymentDate,
     paymentMethod, setPaymentMethod,
     amountPaid, setAmountPaid,
     amountReceived, setAmountReceived,

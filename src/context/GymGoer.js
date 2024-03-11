@@ -5,7 +5,7 @@ import { toast, Flip } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { useMainContext } from './Main';
 import { useAuthContext } from './Auth';
-import { add30Days, getCurrentDate } from "../common/date";
+import { getCurrentDate } from "../common/date";
 
 export const GymGoerContext = createContext();
 
@@ -42,6 +42,16 @@ export const GymGoerProvider = ({ children }) => {
   const [idBillingFees, setIdBillingFees] = useState('');
   const [percentageRate, setPercentageRate] = useState(0);
   const [moneyRate, setMoneyRate] = useState(0);
+
+  const [listGymGoer, setListGymGoer] = useState([]);
+
+  const getGymGoers = async () => {
+    setIsLoader(true);
+
+    const response = await gymgoer.get();
+    setListGymGoer(response.data);
+    setIsLoader(false);
+  }
 
   const save = async (ev) => {
     ev.preventDefault();
@@ -156,8 +166,10 @@ export const GymGoerProvider = ({ children }) => {
     idBillingFees, setIdBillingFees,
     percentageRate, setPercentageRate,
     moneyRate, setMoneyRate,
+    // others
+    listGymGoer, setListGymGoer,
     // methods
-    clear, save,
+    clear, save, getGymGoers,
   };
 
   return (

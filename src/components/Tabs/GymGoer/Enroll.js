@@ -51,7 +51,7 @@ export default function Address() {
     return (
         <form>
             <div className="mt-[20px] grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-12 pb-8 border-b-2 border-gray-200 dark:border-gray-500">
-                <div className="sm:col-span-3">
+                <div className="sm:col-span-2">
                     <label className="block text-sm font-medium text-[16px] text-gray-700 dark:text-white">
                         Plano da Academia *
                     </label>
@@ -109,7 +109,7 @@ export default function Address() {
                     </div>
                 </div>
 
-                <div className="sm:col-span-3">
+                <div className="sm:col-span-2">
                     <label className="block text-sm font-medium text-[16px] text-gray-700 dark:text-white">
                         Forma de Pagamento *
                     </label>
@@ -170,7 +170,7 @@ export default function Address() {
                     </div>
                 </div>
 
-                <div className="sm:col-span-12">
+                <div className="sm:col-span-2">
                     <label className="block text-sm font-medium text-[16px] text-gray-700 dark:text-white">
                         Data de Pagamento *
                     </label>

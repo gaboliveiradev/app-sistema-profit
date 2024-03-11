@@ -1,18 +1,28 @@
 import React, { useEffect } from "react";
 import DataTable from 'react-data-table-component';
 import { optionsPagination } from "../../../common/options";
-import { formatCurrencyBRL } from "../../../common/format";
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import '../../../css/toastify.css';
-import { usePlanContext } from "../../../context/Plan";
+import { useGymGoerContext } from "../../../context/GymGoer";
+import { cpf, phone } from "../../../common/format";
 
 export default function GymGoerDesktop() {
+
+    const {
+        getGymGoers,
+        listGymGoer,
+    } = useGymGoerContext();
+
+    useEffect(() => {
+        getGymGoers();
+    }, []);
+
     const columns = [
         {
             name: <th scope="col" class="px-3 py-3.5 text-center text-sm font-normal text-gray-900"></th>,
             selector: row => (
-                <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
+                <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-3">
                     <button type="button" class="inline-flex items-center p-1 border border-transparent rounded-l shadow-sm text-white bg-verde2 hover:bg-verde1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
                             <path strokeLinecap="round" strokeLinejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
@@ -27,26 +37,36 @@ export default function GymGoerDesktop() {
             )
         },
         {
-            name: <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-normal text-gray-900">Descrição</th>,
+            name: <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-normal text-gray-900">Informações</th>,
             selector: row => (
                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                    <div class="text-gray-500">Nome: <strong>{row.description}</strong></div>
+                    <div class="text-gray-500">Nome: <strong>{row.first_name} {row.last_name}</strong></div>
+                    <div class="text-gray-500">CPF: <strong>{cpf(row.cpf)}</strong></div>
+                    <div class="text-gray-500">Genêro: <strong>{row.gender == "F" ? 'Feminino' : 'Masculino'}</strong></div>
                 </td>
             ),
         },
         {
-            name: <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-normal text-gray-900">Dias</th>,
+            name: <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-normal text-gray-900">Contato</th>,
             selector: row => (
                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                    <div class="text-gray-500">Tempo: <strong>{row.days}x por semana</strong></div>
+                    <div class="text-gray-500">Telefone: <strong>{phone(row.phone)}</strong></div>
+                    <div class="text-gray-500">Email: <strong>{row.email}</strong></div>
                 </td>
             ),
         },
         {
-            name: <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-normal text-gray-900">Valor</th>,
+            name: <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-normal text-gray-900">Matrícula</th>,
             selector: row => (
                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                    <div class="text-gray-500">Preço: <strong>{formatCurrencyBRL(row.price)}</strong></div>
+                    {
+                        row.currentBillings.payment_date === null ? (
+                            <span className="bg-bg-not-paid px-3 py-1 rounded-md text-not-paid font-bold">Não Pago</span>
+                        ) : (
+                            <span className="bg-bg-paid px-3 py-1 rounded-md text-paid font-bold">Pago</span>
+                        )
+                    }
+                    
                 </td>
             ),
         },
@@ -85,6 +105,7 @@ export default function GymGoerDesktop() {
                     <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
                         <DataTable
                             columns={columns}
+                            data={listGymGoer}
                             paginationPerPage={6}
                             pagination paginationComponentOptions={optionsPagination}
                             paginationRowsPerPageOptions={[6, 12, 18]}

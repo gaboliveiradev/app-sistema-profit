@@ -20,6 +20,8 @@ module.exports = {
       'verde1': '#00857C',
       'verde2': '#43AF99',
       'primary-color-green': '#46BC9C',
+      'bg-open': '#fff7ed',
+      'open': '#f7a13e',
       'bg-not-paid': '#ffeded',
       'not-paid': '#fa4343',
       'bg-paid': '#EDF7ED',

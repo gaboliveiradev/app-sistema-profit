@@ -8,6 +8,14 @@ export function getCurrentDate() {
     return `${ano}-${mes}-${dia}`;
 }
 
+export function dateFormat(dataString) {
+    if (dataString === null) return 'N/A'
+    const [ano, mes, dia] = dataString.split('-');
+    const novaData = `${dia}/${mes}/${ano}`;
+    
+    return novaData;
+}
+
 export function add30Days(data) {
     const dataOriginal = new Date(data);
     const dataNova = new Date(dataOriginal);

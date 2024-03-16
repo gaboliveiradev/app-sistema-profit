@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import '../../../css/toastify.css';
 import { useGymGoerContext } from "../../../context/GymGoer";
 import { cpf, phone } from "../../../common/format";
+import { dateFormat, getCurrentDate } from "../../../common/date";
 
 export default function GymGoerDesktop() {
 
@@ -22,7 +23,7 @@ export default function GymGoerDesktop() {
         {
             name: <th scope="col" class="px-3 py-3.5 text-center text-sm font-normal text-gray-900"></th>,
             selector: row => (
-                <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-3">
+                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                     <button type="button" class="inline-flex items-center p-1 border border-transparent rounded-l shadow-sm text-white bg-verde2 hover:bg-verde1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
                             <path strokeLinecap="round" strokeLinejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
@@ -42,7 +43,7 @@ export default function GymGoerDesktop() {
                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                     <div class="text-gray-500">Nome: <strong>{row.first_name} {row.last_name}</strong></div>
                     <div class="text-gray-500">CPF: <strong>{cpf(row.cpf)}</strong></div>
-                    <div class="text-gray-500">Genêro: <strong>{row.gender == "F" ? 'Feminino' : 'Masculino'}</strong></div>
+                    <div class="text-gray-500">Genêro: <strong>{row.gender === "F" ? 'Feminino' : 'Masculino'}</strong></div>
                 </td>
             ),
         },
@@ -56,17 +57,27 @@ export default function GymGoerDesktop() {
             ),
         },
         {
-            name: <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-normal text-gray-900">Matrícula</th>,
+            name: <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-normal text-gray-900">Mensalidade</th>,
+            selector: row => (
+                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                    <div class="text-gray-500">Vencimento: <strong>{dateFormat(row.currentBillings.billing_date)}</strong></div>
+                    <div class="text-gray-500">Data Pagamento: <strong>{dateFormat(row.currentBillings.payment_date)}</strong></div>
+                </td>
+            ),
+        },
+        {
+            name: <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-normal text-gray-900">Status</th>,
             selector: row => (
                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                     {
-                        row.currentBillings.payment_date === null ? (
-                            <span className="bg-bg-not-paid px-3 py-1 rounded-md text-not-paid font-bold">Não Pago</span>
-                        ) : (
+                        (getCurrentDate() <= row.currentBillings.billing_date && row.currentBillings.payment_date === null) ? (
+                            <span className="bg-bg-open px-3 py-1 rounded-md text-open font-bold">Em Aberto</span>
+                        ) : (getCurrentDate() > row.currentBillings.billing_date && row.currentBillings.payment_date === null) ? (
+                            <span className="bg-bg-not-paid px-3 py-1 rounded-md text-not-paid font-bold">Em Atraso</span>
+                        ) : (row.currentBillings.payment_date !== null) && (
                             <span className="bg-bg-paid px-3 py-1 rounded-md text-paid font-bold">Pago</span>
                         )
-                    }
-                    
+                    }            
                 </td>
             ),
         },

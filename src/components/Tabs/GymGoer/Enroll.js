@@ -126,6 +126,9 @@ export default function Address() {
                                 if (e.target.value === 'money') {
                                     setIdBillingFees('');
                                 }
+
+                                //const filteredBillingFees = (e.target.value === '' || e.target.value === null) ? '0' : listBillingFees.filter((billingfees) => billingfees.type === e.target.value);
+
                             }}
                             disabled={idPlan === '' || idPlan === null}
                             class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:ring-primary-color focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"

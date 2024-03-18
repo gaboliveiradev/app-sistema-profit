@@ -19,7 +19,7 @@ export default function Plan() {
     }
 
     return (
-        <main className="flex-1 px-2">
+        <main>
             <div className='flex items-center justify-between'>
                 <div className="py-6 md:py-0 sm:px-4 w-[100%] z-40 md:top-0 flex flex-row items-center justify-between">
                     <div className='w-[100%] px-4 flex flex-row items-start justify-between md:mx-0'>

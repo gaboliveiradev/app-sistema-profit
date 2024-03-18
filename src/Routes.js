@@ -8,6 +8,7 @@ import NotFound from './pages/NotFound';
 import GymGoer from './pages/GymGoer';
 import Plan from './pages/Plan';
 import BillingFees from './pages/BillingFees';
+import Dashboard from './pages/Dashboard';
 
 const Routing = () => {
     return (
@@ -18,7 +19,7 @@ const Routing = () => {
             {/* Dashboard */}
             <Route path="/" exact element={
                 <ProtectedRoutes>
-                    <DashboardLayout />
+                    <DashboardLayout page={<Dashboard />} />
                 </ProtectedRoutes>
             } />
 

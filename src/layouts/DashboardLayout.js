@@ -27,7 +27,7 @@ export default function DashboardLayout(props) {
                     {/* <!-- ===== Main Content Start ===== --> */}
                     {/* Retirar h-[100%] overflow-auto para voltar ao normal (porém layout buga, tem que arrumar) */}
                     <main className='h-full h-[100%] overflow-auto'>
-                        <div className="scrollbarConfig overflow-auto w-screen-2xl h-full p-4 md:p-6 2xl:p-4 bg-white dark:bg-boxdark duration-300 ease-linear rounded-xl shadow-xl">
+                        <div className="scrollbarConfig overflow-auto w-screen-2xl h-full p-4 md:p-6 2xl:p-4 bg-bottom dark:bg-boxdark duration-300 ease-linear dark:rounded-md dark:shadow:md">
                             {props.page}
                             {
                                 isLoader && (

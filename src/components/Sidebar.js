@@ -4,7 +4,7 @@ import Logo from './../assets/logo_dark.png';
 import SidebarLinkGroup from './small_components/SidebarLinkGroup';
 import { useMainContext } from '../context/Main';
 import { IoIosArrowDown } from "react-icons/io";
-import { IoExit } from "react-icons/io5";
+import deletarIcon from './../assets/icon/deletar.svg';
 
 export default function Sidebar(props) {
 
@@ -90,8 +90,8 @@ export default function Sidebar(props) {
                     {(handleClick, open) => {
                       return (
                         <React.Fragment>
-                          <NavLink to={(item.children) ? '#' : item.path} onClick={() => (item.children) ? (sidebarExpanded ? handleClick() : setSidebarExpanded(true)) : ''} className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4`}>
-                            <item.icon className="h-6 w-6" />
+                          <NavLink to={(item.children) ? '#' : item.path} onClick={() => (item.children) ? (sidebarExpanded ? handleClick() : setSidebarExpanded(true)) : ''} className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-[15px] text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4`}>
+                            {item.icon}
                             {item.name}
                             {
                               (item.children) && (
@@ -109,6 +109,7 @@ export default function Sidebar(props) {
                                       return (
                                         <li>
                                           <NavLink to={children.path} className={({ isActive }) => 'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' + (isActive && '!text-white')}>
+                                            {children.icon}
                                             {children.name}
                                           </NavLink>
                                         </li>
@@ -131,7 +132,7 @@ export default function Sidebar(props) {
               {(handleClick, open) => {
                 return (
                   <NavLink to="#" className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4`}>
-                    <IoExit className="h-6 w-6" />
+                    <img width="28" height="28" src={deletarIcon} alt="A"/>
                     Sair
                   </NavLink>
                 );

@@ -19,35 +19,15 @@ export default function Plan() {
     }
 
     return (
-        <main>
-            <div className='flex items-center justify-between'>
-                <div className="py-6 md:py-0 sm:px-4 w-[100%] z-40 md:top-0 flex flex-row items-center justify-between">
-                    <div className='w-[100%] px-4 flex flex-row items-start justify-between md:mx-0'>
-                        <div>
-                            <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">Planos</h1>
-                        </div>
-                        {
-                            (pathname === URL_LIST) && (
-                                <div className='px-4 flex flex-row items-start justify-start md:mx-0'>
-                                    <ButtonAdd method={handleAddPage} />
-                                </div>
-                            )
-                        }
-                    </div>
-                </div>
-            </div>
+        <main className="mx-auto max-w-7xl px-2">
             {
                 pathname === URL_LIST ? (
-                    <div className="mx-auto max-w-7xl px-4">
-                        <div className='py-4 mx-auto'>
-                            <PlanDesktop />
-                        </div >
-                    </div>
+                    <div className='py-2 mx-auto'>
+                        <PlanDesktop />
+                    </div >
                 ) : pathname === URL_INSERT && (
-                    <div className="mx-auto max-w-7xl px-4">
-                        <div className='mx-auto'>
-                            <Insert />
-                        </div>
+                    <div className='py-2 mx-auto'>
+                        <Insert />
                     </div>
                 )
             }

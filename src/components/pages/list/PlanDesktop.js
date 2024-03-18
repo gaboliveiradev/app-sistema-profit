@@ -8,10 +8,10 @@ import '../../../css/toastify.css';
 import { usePlanContext } from "../../../context/Plan";
 
 export default function PlanDesktop() {
-    const { 
-        getPlans, 
-        destroy, 
-        listPlans 
+    const {
+        getPlans,
+        destroy,
+        listPlans
     } = usePlanContext();
 
     useEffect(() => {
@@ -76,23 +76,33 @@ export default function PlanDesktop() {
                 pauseOnHover
                 theme="colored"
             />
-            <div className="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-12 pb-5">
-                <div className="sm:col-span-12">
-                    <label className="block text-sm font-medium text-[16px] text-gray-700 dark:text-white">
-                        Pesquisar
-                    </label>
-                    <div className="mt-1">
-                        <input
-                            class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2"
-                            type="text"
-                            maxLength="255"
-                        />
-                    </div>
-                </div>
-            </div>
+
             <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
                     <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+                        <div className="flex justify-between items-center bg-green-table">
+                            <div className="cursor-pointer flex items-center text-white p-3 text-[15px]">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                </svg>
+                                <span>Adiconar</span>
+                            </div>
+                            <div className="w-[25%] flex items-center">
+                                <div className="w-[100%] flex items-center">
+                                    <input
+                                        placeholder="Filtrar"
+                                        class="p-3 bg-green-table-items placeholder-white outline-none border-none text-white block flex-1  w-full text-sm border-transparent"
+                                        type="text"
+                                        maxLength="255"
+                                    />
+                                    <div className="cursor-pointer p-3 bg-green-table-items text-white">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <DataTable
                             columns={columns}
                             data={listPlans}

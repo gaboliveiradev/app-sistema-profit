@@ -12,7 +12,7 @@ module.exports = {
       Merriweather: ['Merriweather', 'serif']
     },
     colors: {
-      'bottom': '#edeff2',
+      'bottom': '#e4e6eb',
       'primary-color': '#05a670',
       'secondary-color': '#27bc88',
       'stepper-active': '#27bc88',
@@ -20,6 +20,11 @@ module.exports = {
       'roxo2': '#3E0075',
       'verde1': '#00857C',
       'verde2': '#43AF99',
+      'gray-sh': '#EBEBEB',
+      'text-sh': '#111826',
+      'trasparent': 'transparent',
+      'green-table': '#05A670',
+      'green-table-items': '#039665',
       'primary-color-green': '#46BC9C',
       'bg-open': '#fff7ed',
       'open': '#f7a13e',

@@ -47,14 +47,14 @@ export default function Header(props) {
                     </button>
                     {/* <!-- Hamburger Toggle BTN --> */}
 
-                    <Link className="block flex-shrink-0 lg:hidden" to="/">
+                    <Link className="block flex-shrink-0" to="/">
                         <img src={Logo} alt="Logo" className='w-10' />
                     </Link>
                 </div>
 
                 <div className="hidden sm:block">
                     <div className="relative">
-
+                        
                     </div>
                 </div>
 

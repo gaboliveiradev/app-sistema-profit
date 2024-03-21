@@ -5,7 +5,6 @@ import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import '../../../css/toastify.css';
 import { useBillingFeesContext } from "../../../context/BillingFees";
-import InsertCardFeesModal from "../../modals/InsertBillingFeesModal";
 import { capitalizeFirstLetter } from "../../../common/string";
 
 export default function CardFeesDesktop() {
@@ -88,11 +87,6 @@ export default function CardFeesDesktop() {
 
     return (
         <div class="mt-8 flex flex-col">
-            {
-                (isOpenModalInsert) && (
-                    <InsertCardFeesModal />
-                )
-            }
             <ToastContainer
                 position="top-right"
                 autoClose={5000}

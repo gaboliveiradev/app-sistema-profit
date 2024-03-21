@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import Logo from './../assets/logo.png';
 
-import DarkModeSwitcher from './small_components/DarkModeSwitcher';
-import DropdownUser from './small_components/DropdownUser';
+import DarkModeSwitcher from './SmallComponents/DarkModeSwitcher';
+import DropdownUser from './SmallComponents/DropdownUser';
 
 export default function Header(props) {
     return (

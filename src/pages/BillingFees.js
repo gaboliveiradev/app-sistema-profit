@@ -1,5 +1,5 @@
 import React from 'react';
-import BillingFeesDesktop from '../components/pages/list/BillingFeesDesktop';
+import BillingFeesDesktop from '../components/Pages/List/BillingFeesDesktop';
 import { useBillingFeesContext } from '../context/BillingFees';
 import ButtonAdd from '../components/ButtonAdd';
 

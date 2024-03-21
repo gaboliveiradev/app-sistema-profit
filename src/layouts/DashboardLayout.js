@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './style.css';
 import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
-import Loader from '../components/modals/Loader';
+import Loader from '../components/Modals/Loader';
 import { useMainContext } from '../context/Main';
 
 export default function DashboardLayout(props) {

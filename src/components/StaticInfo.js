@@ -19,9 +19,9 @@ export default function StaticInfo() {
         setIsLoader(false);
     }
 
-    useEffect(() => {
+    /*useEffect(() => {
         getIncomeMonthly();
-    }, [])
+    }, [])*/
 
     return (
         <main class="h-full overflow-y-auto">

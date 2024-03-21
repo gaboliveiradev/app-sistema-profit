@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import Logo from './../assets/logo_dark.png';
-import SidebarLinkGroup from './small_components/SidebarLinkGroup';
+import SidebarLinkGroup from './SmallComponents/SidebarLinkGroup';
 import { useMainContext } from '../context/Main';
 import { IoIosArrowDown } from "react-icons/io";
 import deletarIcon from './../assets/icon/deletar.svg';

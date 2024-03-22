@@ -1,6 +1,26 @@
 import api from './api';
 const url = '/plans';
 
+export const getModalities = async () => {
+    try {
+        const response = await api.get('/modalities');
+
+        return (response.status === 200) ? response : [];
+    } catch {
+        return false;
+    }
+}
+
+export const getServices = async () => {
+    try {
+        const response = await api.get('/services');
+
+        return (response.status === 200) ? response : [];
+    } catch {
+        return false;
+    }
+}
+
 export const get = async () => {
     try {
         const response = await api.get(url);

@@ -1,7 +1,7 @@
 import React from 'react';
 import PlanDesktop from '../components/Pages/List/PlanDesktop';
 import { usePlanContext } from '../context/Plan';
-import PlanModal from '../components/Modals/Insert/PlanModal';
+import PlanModal from '../components/Pages/Insert/Modals/PlanModal';
 
 export default function Plan() {
 

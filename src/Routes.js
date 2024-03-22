@@ -7,6 +7,7 @@ import ProtectedRoutes from './ProtectedRoutes';
 import NotFound from './pages/NotFound';
 import GymGoer from './pages/GymGoer';
 import Plan from './pages/Plan';
+import PlanInsert from './components/Pages/Insert/Plan';
 import BillingFees from './pages/BillingFees';
 import Dashboard from './pages/Dashboard';
 
@@ -43,7 +44,7 @@ const Routing = () => {
             } />
             <Route path="/plano" exact element={
                 <ProtectedRoutes>
-                    <DashboardLayout page={<Plan />} />
+                    <DashboardLayout page={<PlanInsert />} />
                 </ProtectedRoutes>
             } />
 

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 import '../../../css/toastify.css';
 import { usePlanContext } from "../../../context/Plan";
 import CardPlan from "../../SmallComponents/CardPlan";
@@ -13,6 +14,8 @@ export default function PlanDesktop() {
         listPlans,
         setIsModalVisible,
     } = usePlanContext();
+
+    const navigate = useNavigate();
 
 
     /*useEffect(() => {
@@ -38,7 +41,7 @@ export default function PlanDesktop() {
                 <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
                     <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5">
                         <div className="flex justify-between items-center bg-green-table">
-                            <div onClick={() => setIsModalVisible(true)} className="cursor-pointer flex items-center text-white p-3 text-[15px]">
+                            <div onClick={() => navigate('/plano')} className="cursor-pointer flex items-center text-white p-3 text-[15px]">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                                 </svg>
@@ -61,10 +64,9 @@ export default function PlanDesktop() {
                             </div>
                         </div>
                         <div class="bg-white shadow-md grid grid-cols-4 gap-4 p-4">
-                            <CardPlan />
 
                             {/* ===@ Card Adicionar Novo Plano @=== */}
-                            <div onClick={() => setIsModalVisible(true)} className="h-[190px] cursor-pointer flex flex-col justify-center items-center bg-transparent border border-dashed border-2 border-green-table-items">
+                            <div onClick={() => navigate('/plano')} className="h-[190px] cursor-pointer flex flex-col justify-center items-center bg-transparent border border-dashed border-2 border-green-table-items">
                                 <h1 className="font-bold uppercase text-[16px] text-gray79">
                                     <img width="64" height="64" src={addIcon} alt="+" />
                                 </h1>

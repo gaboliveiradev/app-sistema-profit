@@ -18,7 +18,6 @@ export const PlanProvider = ({ children }) => {
   const [days, setDays] = useState('');
   const [price, setPrice] = useState('');
   const [listPlans, setListPlans] = useState([]); 
-  const [isModalVisible, setIsModalVisible] = useState(false); 
 
   const getPlans = async () => {
     setIsLoader(true);
@@ -123,7 +122,6 @@ export const PlanProvider = ({ children }) => {
     days, setDays,
     price, setPrice,
     listPlans, setListPlans,
-    isModalVisible, setIsModalVisible,
     // methods
     clear, save, getPlans, destroy
   };

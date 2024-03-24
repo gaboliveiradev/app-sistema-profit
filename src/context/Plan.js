@@ -21,6 +21,7 @@ export const PlanProvider = ({ children }) => {
   const [listPlans, setListPlans] = useState([]);
   
   const [defineModalityRulesModal, setDefineModalityRulesModal] = useState(false);
+  const [addValuePlanModal, setAddValuePlanModal] = useState(false);
 
   const getPlans = async () => {
     setIsLoader(true);
@@ -126,6 +127,7 @@ export const PlanProvider = ({ children }) => {
     selectedServicesPlan, setSelectedServicesPlan,
     selectedModalitiesPlan, setSelectedModalitiesPlan,
     selectedModalityDefineRules, setSelectedModalityDefineRules,
+    addValuePlanModal, setAddValuePlanModal,
     // modals controls
     defineModalityRulesModal, setDefineModalityRulesModal,
     // methods

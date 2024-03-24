@@ -21,6 +21,7 @@ import avaliacaoFisica from '../../../assets/icon/balanca.svg';
 import DefineModalityRulesModal from '../../Modals/DefineModalityRulesModal';
 import ButtonsFooterForms from '../../SmallComponents/ButtonsFooterForms';
 import HorizontalSeparator from '../../SmallComponents/HorizontalSeparator';
+import AddValuePlanModal from '../../Modals/AddValuePlanModal';
 
 export default function Plan() {
 
@@ -32,6 +33,7 @@ export default function Plan() {
         selectedServicesPlan, setSelectedServicesPlan,
         selectedModalitiesPlan, setSelectedModalitiesPlan,
         defineModalityRulesModal, setDefineModalityRulesModal,
+        addValuePlanModal, setAddValuePlanModal,
         setSelectedModalityDefineRules,
         clear
     } = usePlanContext();
@@ -97,6 +99,7 @@ export default function Plan() {
             />
 
             {(defineModalityRulesModal) && <DefineModalityRulesModal />}
+            {(addValuePlanModal) && <AddValuePlanModal />}
 
             <div class="w-full max-w-6xl relative shadow-lg mr-10">
                 <div className='bg-green-table-items p-4 flex flex-row justify-between items-center'>
@@ -212,7 +215,7 @@ export default function Plan() {
                             </div>
                         </div>
                         <div className="mt-4 text-center p-2 text-[14px] text-green-table-items sm:col-span-12 border border-dashed border-2 border-gray80">
-                            <div className='cursor-pointer flex flex-row justify-center items-center'>
+                            <div onClick={() => setAddValuePlanModal(true)} className='cursor-pointer flex flex-row justify-center items-center'>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                                 </svg>

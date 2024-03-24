@@ -22,6 +22,7 @@ module.exports = {
       'verde2': '#43AF99',
       'grayF5': '#f5f5f5',
       'gray79': '#797979',
+      'gray80': '#808080',
       'gray-sh': '#EBEBEB',
       'text-sh': '#111826',
       'trasparent': 'transparent',

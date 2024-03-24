@@ -5,19 +5,22 @@ import * as plan from '../services/plan';
 import { toast, Flip } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { useMainContext } from './Main';
-import { useAuthContext } from './Auth';
 
 export const PlanContext = createContext();
 
 export const PlanProvider = ({ children }) => {
 
   const { setIsLoader } = useMainContext();
-  const { gym } = useAuthContext();
 
-  const [name, setName] = useState('');
-  const [days, setDays] = useState('');
-  const [price, setPrice] = useState('');
-  const [listPlans, setListPlans] = useState([]); 
+  const [namePlan, setNamePlan] = useState('');
+  const [selectedModalitiesPlan, setSelectedModalitiesPlan] = useState([]);
+  const [selectedServicesPlan, setSelectedServicesPlan] = useState([]);
+
+  const [selectedModalityDefineRules, setSelectedModalityDefineRules] = useState([]);
+
+  const [listPlans, setListPlans] = useState([]);
+  
+  const [defineModalityRulesModal, setDefineModalityRulesModal] = useState(false);
 
   const getPlans = async () => {
     setIsLoader(true);
@@ -29,7 +32,7 @@ export const PlanProvider = ({ children }) => {
 
   const save = async (ev) => {
     ev.preventDefault();
-    setIsLoader(true);
+    /*setIsLoader(true);
 
     const paramerts = {
       id_gym: gym.id,
@@ -55,7 +58,7 @@ export const PlanProvider = ({ children }) => {
     }
 
     clear(ev);
-    setIsLoader(false);
+    setIsLoader(false);*/
   }
 
   const destroy = async (e, id) => {
@@ -112,16 +115,19 @@ export const PlanProvider = ({ children }) => {
   const clear = async (ev) => {
     ev.preventDefault();
 
-    setName('');
-    setDays('');
-    setPrice('');
+    setNamePlan('');
+    setSelectedModalitiesPlan([]);
+    setSelectedServicesPlan([]);
   }
 
   const context = {
-    name, setName,
-    days, setDays,
-    price, setPrice,
+    namePlan, setNamePlan,
     listPlans, setListPlans,
+    selectedServicesPlan, setSelectedServicesPlan,
+    selectedModalitiesPlan, setSelectedModalitiesPlan,
+    selectedModalityDefineRules, setSelectedModalityDefineRules,
+    // modals controls
+    defineModalityRulesModal, setDefineModalityRulesModal,
     // methods
     clear, save, getPlans, destroy
   };

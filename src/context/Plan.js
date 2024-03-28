@@ -13,6 +13,7 @@ export const PlanProvider = ({ children }) => {
   const { setIsLoader } = useMainContext();
 
   const [namePlan, setNamePlan] = useState('');
+  const [selectedValuesPlan, setSelectedValuesPlan] = useState('');
   const [selectedModalitiesPlan, setSelectedModalitiesPlan] = useState([]);
   const [selectedServicesPlan, setSelectedServicesPlan] = useState([]);
 
@@ -119,6 +120,7 @@ export const PlanProvider = ({ children }) => {
     setNamePlan('');
     setSelectedModalitiesPlan([]);
     setSelectedServicesPlan([]);
+    setSelectedValuesPlan([]);
   }
 
   const context = {
@@ -128,6 +130,7 @@ export const PlanProvider = ({ children }) => {
     selectedModalitiesPlan, setSelectedModalitiesPlan,
     selectedModalityDefineRules, setSelectedModalityDefineRules,
     addValuePlanModal, setAddValuePlanModal,
+    selectedValuesPlan, setSelectedValuesPlan,
     // modals controls
     defineModalityRulesModal, setDefineModalityRulesModal,
     // methods

@@ -22,6 +22,7 @@ import DefineModalityRulesModal from '../../Modals/DefineModalityRulesModal';
 import ButtonsFooterForms from '../../SmallComponents/ButtonsFooterForms';
 import HorizontalSeparator from '../../SmallComponents/HorizontalSeparator';
 import AddValuePlanModal from '../../Modals/AddValuePlanModal';
+import { formatCurrencyBRL } from '../../../common/format';
 
 export default function Plan() {
 
@@ -34,8 +35,9 @@ export default function Plan() {
         selectedModalitiesPlan, setSelectedModalitiesPlan,
         defineModalityRulesModal, setDefineModalityRulesModal,
         addValuePlanModal, setAddValuePlanModal,
+        selectedValuesPlan,
         setSelectedModalityDefineRules,
-        clear
+        clear,
     } = usePlanContext();
     const { setIsLoader } = useMainContext();
 
@@ -82,6 +84,8 @@ export default function Plan() {
             setSelectedModalitiesPlan(newArray);
         }
     }
+
+    console.log(selectedValuesPlan);
 
     return (
         <form className='flex flex-row flex-wrap justify-center'>
@@ -205,15 +209,34 @@ export default function Plan() {
                         </div>
                         <div className="sm:col-span-6"></div>
                         <HorizontalSeparator />
-                        <div className="mt-4 sm:col-span-12">
-                            <div className='flex flex-row items-center justify-start'>
-                                <img width="48" height="48" src={pagamento} alt='pagamento' />
-                                <div className='ml-3'>
-                                    <h1 className='text-[14px]'>Nenhum valor adicionado</h1>
-                                    <h1 className='text-[12px] text-gray80'>Defina as periodicidades e valores de seu plano</h1>
+                        {
+                            (selectedValuesPlan.length <= 0) && (
+                                <div className="mt-4 sm:col-span-12">
+                                    <div className='flex flex-row items-center justify-start'>
+                                        <img width="48" height="48" src={pagamento} alt='pagamento' />
+                                        <div className='ml-3'>
+                                            <h1 className='text-[14px]'>Nenhum valor adicionado</h1>
+                                            <h1 className='text-[12px] text-gray80'>Defina as periodicidades e valores de seu plano</h1>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
+                            )
+                        }
+                        {
+                            (selectedValuesPlan.length > 0) && (
+                                selectedValuesPlan.map((value) => {
+                                    return (
+                                        <div className="mt-4 sm:col-span-12">
+                                            <div className='flex flex-row items-center justify-between'>
+                                                <div className='text-[16px]'>{value.name}</div>
+                                                <div className='text-[16px]font-bold'>{formatCurrencyBRL(value.value)}</div>
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            )
+                        }
+
                         <div className="mt-4 text-center p-2 text-[14px] text-green-table-items sm:col-span-12 border border-dashed border-2 border-gray80">
                             <div onClick={() => setAddValuePlanModal(true)} className='cursor-pointer flex flex-row justify-center items-center'>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">

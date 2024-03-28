@@ -1,14 +1,61 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import HorizontalSeparator from '../SmallComponents/HorizontalSeparator';
 import { usePlanContext } from '../../context/Plan';
 import ButtonsFooterForms from '../SmallComponents/ButtonsFooterForms';
+import { useMainContext } from '../../context/Main';
+import * as plan from '../../services/plan';
 
 export default function AddValuePlanModal() {
-    const { setAddValuePlanModal } = usePlanContext();
+    const {
+        selectedValuesPlan, setSelectedValuesPlan,
+        setAddValuePlanModal
+    } = usePlanContext();
+
+    const [idFrequency, setIdFrequency] = useState('');
+    const [valueFrequency, setValueFrequency] = useState('');
+    const [valuesPlan, setValuesPlan] = useState([]);
+
+    const { setIsLoader } = useMainContext();
 
     const clear = async (ev) => {
         ev.preventDefault();
         setAddValuePlanModal(false);
+    }
+
+    useEffect(() => {
+        getValues();
+    }, []);
+
+    const getValues = async () => {
+        try {
+            setIsLoader(true);
+
+            const response = await plan.getValues();
+            setValuesPlan(response.data);
+            setIdFrequency(1);
+        } finally {
+            setIsLoader(false);
+        }
+    }
+
+    const addValues = async (e) => {
+        e.preventDefault();
+
+        if (idFrequency === '' || valueFrequency === '') {
+            alert('Selecione uma periodicidade e/ou valor.');
+            return;
+        }
+
+        let nameFrequency = valuesPlan.filter((value) => value.id === idFrequency)[0].name;
+
+        setSelectedValuesPlan([...selectedValuesPlan, {
+            id: idFrequency,
+            name: nameFrequency, 
+            value: valueFrequency,
+        }]);
+
+        setIdFrequency(1);
+        setValueFrequency('');
     }
 
     return (
@@ -30,12 +77,18 @@ export default function AddValuePlanModal() {
                                 Periodicidade *
                             </label>
                             <div className="mt-1">
-                                <select class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:ring-primary-color focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-1.5">
-                                    <option value="1">Mensal</option>
-                                    <option value="2">Bimestral</option>
-                                    <option value="3">Trimestral</option>
-                                    <option value="4">Semestral</option>
-                                    <option value="5">Anual</option>
+                                <select
+                                    value={idFrequency}
+                                    onChange={(e) => setIdFrequency(parseInt(e.target.value))}
+                                    class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:ring-primary-color focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-1.5"
+                                >
+                                    {
+                                        valuesPlan.map((value) => {
+                                            return (
+                                                <option value={value.id}>{value.name}</option>
+                                            )
+                                        })
+                                    }
                                 </select>
                             </div>
                         </div>
@@ -43,19 +96,26 @@ export default function AddValuePlanModal() {
                             <label className="block text-sm text-[12px] font-medium text-gray-700 dark:text-white">
                                 Valor Total *
                             </label>
-                            <div className="mt-1">
+                            <div className="mt-1 relative">
+                                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                    <span class="text-gray-500 sm:text-sm">R$</span>
+                                </div>
                                 <input
-                                    class="dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:ring-primary-color focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-1.5"
-                                    type="text"
-                                    maxLength="255"
+                                    value={valueFrequency}
+                                    onChange={(e) => setValueFrequency(e.target.value)}
+                                    class="pl-9 dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:ring-primary-color focus:border-primary-color rounded-md bg-gray-50 border text-gray-900 block flex-1 min-w-0 w-full text-sm border-gray-300 p-1.5"
+                                    type='text'
                                 />
+                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                    <span class="text-gray-500 sm:text-sm" id="valor">BRL</span>
+                                </div>
                             </div>
                         </div>
                         <HorizontalSeparator />
                         <div className="mt-4 sm:col-span-12 flex flex-row justify-end">
                             <ButtonsFooterForms
                                 clearMethod={clear}
-                                saveMethod={clear}
+                                saveMethod={addValues}
                                 labelClear='Cancelar'
                                 labelSave='Salvar'
                             />

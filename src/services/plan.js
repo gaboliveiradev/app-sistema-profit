@@ -7,7 +7,7 @@ export const getModalities = async () => {
 
         return (response.status === 200) ? response : [];
     } catch {
-        return false;
+        return [];
     }
 }
 
@@ -17,7 +17,17 @@ export const getServices = async () => {
 
         return (response.status === 200) ? response : [];
     } catch {
-        return false;
+        return [];
+    }
+}
+
+export const getValues = async () => {
+    try {
+        const response = await api.get('/frequency');
+
+        return (response.status === 200) ? response : [];
+    } catch {
+        return []
     }
 }
 

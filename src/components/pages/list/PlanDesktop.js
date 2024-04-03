@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
-import '../../../css/toastify.css';
 import { usePlanContext } from "../../../context/Plan";
 import CardPlan from "../../SmallComponents/CardPlan";
 import addIcon from '../../../assets/icon/add.png';

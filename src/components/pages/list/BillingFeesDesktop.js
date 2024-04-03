@@ -3,7 +3,6 @@ import DataTable from 'react-data-table-component';
 import { optionsPagination } from "../../../common/options";
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-import '../../../css/toastify.css';
 import { useBillingFeesContext } from "../../../context/BillingFees";
 import { capitalizeFirstLetter } from "../../../common/string";
 

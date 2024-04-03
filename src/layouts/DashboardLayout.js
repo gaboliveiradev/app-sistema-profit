@@ -5,6 +5,9 @@ import Header from '../components/Header';
 import Loader from '../components/Modals/Loader';
 import { useMainContext } from '../context/Main';
 
+import { ReactNotifications } from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
+
 export default function DashboardLayout(props) {
     const { isLoader } = useMainContext();
 
@@ -12,6 +15,8 @@ export default function DashboardLayout(props) {
 
     return (
         <div className="dark:bg-boxdark-2 dark:text-bodydark">
+            <ReactNotifications />
+
             {/* <!-- ===== Page Wrapper Start ===== --> */}
             <div className="flex h-screen">
                 {/* <!-- ===== Sidebar Start ===== --> */}

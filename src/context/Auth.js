@@ -9,15 +9,15 @@ export const AuthProvider = ({ children }) => {
 
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
-  const [gym, setGym] = useState(null);
+  const [businessPartners, setBusinessPartners] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem('adm-profit-token');
     const user = localStorage.getItem('adm-profit-user');
-    const gym = localStorage.getItem('adm-profit-gym');
+    const businessPartners = localStorage.getItem('adm-profit-business-partners');
 
-    if (token && user && gym) {
-      setGym(JSON.parse(gym));
+    if (token && user && businessPartners) {
+      setBusinessPartners(JSON.parse(businessPartners));
       setUser(JSON.parse(user));
       setToken(token);
 
@@ -34,8 +34,8 @@ export const AuthProvider = ({ children }) => {
       return false
     }
 
-    const { token, user, gym } = response.data;
-    const { id, first_name, last_name, email, phone, id_gym, profile, avatar_url, gender, cpf, rg, birthday, height, weight, observation, zip_code, street, district, number, city, state, complement, created_at, updated_at } = user;
+    const { token, user, businessPartners } = response.data;
+    const { id, first_name, last_name, email, phone, type, avatar_url, gender, cpf, rg, birthday, height, weight, observation } = user;
 
     setUser({
       id: id, 
@@ -43,8 +43,7 @@ export const AuthProvider = ({ children }) => {
       last_name: last_name, 
       email: email, 
       phone: phone, 
-      id_gym: id_gym, 
-      profile: profile, 
+      type: type, 
       avatar_url: avatar_url, 
       gender: gender, 
       cpf: cpf, 
@@ -53,18 +52,9 @@ export const AuthProvider = ({ children }) => {
       height: height, 
       weight: weight, 
       observation: observation, 
-      zip_code: zip_code, 
-      street: street, 
-      district: district, 
-      number: number, 
-      city: city, 
-      state: state, 
-      complement: complement, 
-      created_at: created_at, 
-      updated_at: updated_at,
     })
 
-    setGym(gym);
+    setBusinessPartners(businessPartners);
     setToken(token)
 
     localStorage.setItem('adm-profit-token', token)
@@ -74,8 +64,7 @@ export const AuthProvider = ({ children }) => {
       last_name: last_name, 
       email: email, 
       phone: phone, 
-      id_gym: id_gym, 
-      profile: profile, 
+      type: type, 
       avatar_url: avatar_url, 
       gender: gender, 
       cpf: cpf, 
@@ -84,17 +73,8 @@ export const AuthProvider = ({ children }) => {
       height: height, 
       weight: weight, 
       observation: observation, 
-      zip_code: zip_code, 
-      street: street, 
-      district: district, 
-      number: number, 
-      city: city, 
-      state: state, 
-      complement: complement, 
-      created_at: created_at, 
-      updated_at: updated_at,
     }))
-    localStorage.setItem('adm-profit-gym', JSON.stringify(gym))
+    localStorage.setItem('adm-profit-business-partners', JSON.stringify(businessPartners))
 
     return true
   }
@@ -108,18 +88,18 @@ export const AuthProvider = ({ children }) => {
 
     setUser(null);
     setToken(null);
-    setGym(null);
+    setBusinessPartners(null);
 
     localStorage.removeItem('adm-profit-token');
     localStorage.removeItem('adm-profit-user');
-    localStorage.removeItem('adm-profit-gym');
+    localStorage.removeItem('adm-profit-business-partners');
 
     return true
   }
 
   const context = {
     user: user,
-    gym: gym,
+    businessPartners: businessPartners,
     token: token,
     signed: Boolean(user),
     signIn: signIn,

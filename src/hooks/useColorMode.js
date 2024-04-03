@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import useLocalStorage from './useLocalStorage';
 
 export default function useColorMode() {
-  const [colorMode, setColorMode] = useLocalStorage('app-star-fitness-color-theme', 'light');
+  const [colorMode, setColorMode] = useLocalStorage('adm-profit-color-theme', 'light');
 
   useEffect(() => {
     const className = 'dark';

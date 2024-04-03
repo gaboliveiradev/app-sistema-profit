@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import HorizontalSeparator from '../SmallComponents/HorizontalSeparator';
-import { usePlanContext } from '../../context/Plan';
 import ButtonsFooterForms from '../SmallComponents/ButtonsFooterForms';
 import { useMainContext } from '../../context/Main';
+import { usePlanContext } from '../../context/Plan';
 import * as plan from '../../services/plan';
+
+import { Store } from 'react-notifications-component';
+import 'animate.css/animate.min.css';
 
 export default function AddValuePlanModal() {
     const {
@@ -42,7 +45,18 @@ export default function AddValuePlanModal() {
         e.preventDefault();
 
         if (idFrequency === '' || valueFrequency === '') {
-            alert('Selecione uma periodicidade e/ou valor.');
+            Store.addNotification({
+                message: "Selecione uma periodicidade e/ou valor.",
+                type: "warning",
+                insert: "top",
+                container: "bottom-right",
+                animationIn: ["animate__animated animate__flipInX"],
+                animationOut: ["animate__animated animate__flipOutX"],
+                dismiss: {
+                  duration: 3000,
+                  onScreen: false
+                }
+            });
             return;
         }
 
@@ -50,9 +64,22 @@ export default function AddValuePlanModal() {
 
         setSelectedValuesPlan([...selectedValuesPlan, {
             id: idFrequency,
-            name: nameFrequency, 
+            name: nameFrequency,
             value: valueFrequency,
         }]);
+
+        Store.addNotification({
+            message: "Valor Adicionado.",
+            type: "success",
+            insert: "top",
+            container: "bottom-right",
+            animationIn: ["animate__animated animate__flipInX"],
+            animationOut: ["animate__animated animate__flipOutX"],
+            dismiss: {
+              duration: 3000,
+              onScreen: false
+            }
+        });
 
         setIdFrequency(1);
         setValueFrequency('');
@@ -61,6 +88,7 @@ export default function AddValuePlanModal() {
     return (
         <div class="min-w-screen h-screen animated fadeIn faster fixed left-0 top-0 flex justify-center items-center inset-0 z-1 outline-none focus:outline-none" id="modal-id">
             <div class="absolute bg-black opacity-80 inset-0 z-2"></div>
+
             <div class="w-full max-w-2xl relative mx-auto my-auto shadow-lg ">
                 <div className='bg-green-table-items p-4 flex flex-row justify-between items-center'>
                     <h1 className='text-white font-bold text-[13px] uppercase'>Adicionando Valores</h1>

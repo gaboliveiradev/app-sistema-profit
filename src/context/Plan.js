@@ -5,12 +5,18 @@ import * as plan from '../services/plan';
 import { toast, Flip } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { useMainContext } from './Main';
+import { useAuthContext } from './Auth';
+
+import { Store } from 'react-notifications-component';
+import { optionsToastStore } from '../common/options';
+import 'animate.css/animate.min.css';
 
 export const PlanContext = createContext();
 
 export const PlanProvider = ({ children }) => {
 
   const { setIsLoader } = useMainContext();
+  const { businessPartners } = useAuthContext();
 
   const [namePlan, setNamePlan] = useState('');
   const [selectedValuesPlan, setSelectedValuesPlan] = useState('');
@@ -34,33 +40,30 @@ export const PlanProvider = ({ children }) => {
 
   const save = async (ev) => {
     ev.preventDefault();
-    /*setIsLoader(true);
+    setIsLoader(true);
 
     const paramerts = {
-      id_gym: gym.id,
-      description: name,
-      days: days,
-      price: price,
+      id_business_partners: businessPartners.id,
+      name: namePlan,
+      services: selectedServicesPlan,
+      modalities: selectedModalitiesPlan,
+      prices: selectedValuesPlan,
     };
 
     const response = await plan.create(paramerts);
 
     if (response) {
-      toast.success('🏋🏻‍♀️ Plano criado com sucesso!', {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-        transition: Flip,
-      });
+      Store.addNotification({
+        ...optionsToastStore,
+        message: "Plano criado com sucesso.",
+        type: "success",
+        insert: "top",
+        container: "top-right",
+    });
     }
 
     clear(ev);
-    setIsLoader(false);*/
+    setIsLoader(false);
   }
 
   const destroy = async (e, id) => {

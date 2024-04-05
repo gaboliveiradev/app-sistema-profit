@@ -44,10 +44,11 @@ export const get = async () => {
 export const create = async (paramerts) => {
     try {
         const respose = await api.post(url, {
-            id_gym: paramerts.id_gym,
-            description: paramerts.description,
-            days: paramerts.days,
-            price: paramerts.price,
+            id_business_partners: paramerts.id_business_partners,
+            name: paramerts.name,
+            services: paramerts.services,
+            modalities: paramerts.modalities,
+            prices: paramerts.prices,
         });
 
         return (respose.status === 201) ? true : false;

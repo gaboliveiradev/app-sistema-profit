@@ -34,7 +34,7 @@ export default function Plan() {
         addValuePlanModal, setAddValuePlanModal,
         selectedValuesPlan,
         setSelectedModalityDefineRules,
-        clear,
+        clear, save,
     } = usePlanContext();
     const { setIsLoader } = useMainContext();
 
@@ -80,10 +80,6 @@ export default function Plan() {
             const newArray = selectedModalitiesPlan.filter(item => item !== idModality);
             setSelectedModalitiesPlan(newArray);
         }
-    }
-
-    const exibirToast = async (e) => {
-        e.preventDefault();
     }
 
     return (
@@ -175,7 +171,7 @@ export default function Plan() {
                             <div className="mt-4 sm:col-span-12 flex flex-row justify-end">
                                 <ButtonsFooterForms
                                     clearMethod={clear}
-                                    saveMethod={exibirToast}
+                                    saveMethod={save}
                                     labelClear='Cancelar'
                                     labelSave='Concluir e Ativar'
                                 />

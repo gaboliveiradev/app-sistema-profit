@@ -6,6 +6,7 @@ import { usePlanContext } from '../../context/Plan';
 import * as plan from '../../services/plan';
 
 import { Store } from 'react-notifications-component';
+import { optionsToastStore } from '../../common/options';
 import 'animate.css/animate.min.css';
 
 export default function AddValuePlanModal() {
@@ -46,39 +47,30 @@ export default function AddValuePlanModal() {
 
         if (idFrequency === '' || valueFrequency === '') {
             Store.addNotification({
+                ...optionsToastStore,
                 message: "Selecione uma periodicidade e/ou valor.",
                 type: "warning",
                 insert: "top",
                 container: "bottom-right",
-                animationIn: ["animate__animated animate__flipInX"],
-                animationOut: ["animate__animated animate__flipOutX"],
-                dismiss: {
-                  duration: 3000,
-                  onScreen: false
-                }
             });
+
             return;
         }
 
-        let nameFrequency = valuesPlan.filter((value) => value.id === idFrequency)[0].name;
+        let isFrequencyExist = valuesPlan.filter((value) => value.id === idFrequency);
 
         setSelectedValuesPlan([...selectedValuesPlan, {
             id: idFrequency,
-            name: nameFrequency,
+            name: isFrequencyExist[0].name,
             value: valueFrequency,
         }]);
 
         Store.addNotification({
+            ...optionsToastStore,
             message: "Valor Adicionado.",
             type: "success",
             insert: "top",
             container: "bottom-right",
-            animationIn: ["animate__animated animate__flipInX"],
-            animationOut: ["animate__animated animate__flipOutX"],
-            dismiss: {
-              duration: 3000,
-              onScreen: false
-            }
         });
 
         setIdFrequency(1);

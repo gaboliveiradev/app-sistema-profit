@@ -49,7 +49,7 @@ export default function AddValuePlanModal() {
             Store.addNotification({
                 ...optionsToastStore,
                 message: "Selecione uma periodicidade e/ou valor.",
-                type: "warning",
+                type: "danger",
                 insert: "top",
                 container: "bottom-right",
             });
@@ -57,11 +57,25 @@ export default function AddValuePlanModal() {
             return;
         }
 
-        let isFrequencyExist = valuesPlan.filter((value) => value.id === idFrequency);
+        let isExist = (selectedValuesPlan.length > 0) ? selectedValuesPlan.filter((value) => value.id === idFrequency) : [];
+
+        if (isExist.length > 0) {
+            Store.addNotification({ 
+                ...optionsToastStore,
+                message: "Essa váriação já está adicionada.",
+                type: "danger",
+                insert: "top",
+                container: "bottom-right",
+            });
+
+            return;
+        }
+
+        let nameFrequency = valuesPlan.filter((value) => value.id === idFrequency)[0].name;
 
         setSelectedValuesPlan([...selectedValuesPlan, {
             id: idFrequency,
-            name: isFrequencyExist[0].name,
+            name: nameFrequency,
             value: valueFrequency,
         }]);
 

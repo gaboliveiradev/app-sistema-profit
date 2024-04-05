@@ -88,7 +88,7 @@ export default function Plan() {
                 {(defineModalityRulesModal) && <DefineModalityRulesModal />}
                 {(addValuePlanModal) && <AddValuePlanModal />}
 
-                <div class="w-full max-w-6xl relative shadow-lg mr-10">
+                <div class="w-full max-w-5xl relative shadow-lg mr-10">
                     <div className='bg-green-table-items p-4 flex flex-row justify-between items-center'>
                         <h1 className='text-white font-bold text-[13px] uppercase'>Configurações</h1>
                     </div>
@@ -179,7 +179,7 @@ export default function Plan() {
                         </div>
                     </div>
                 </div>
-                <div class="w-full max-w-2xl relative bg-white shadow-lg">
+                <div class="w-full max-w-xl relative bg-white shadow-lg">
                     <div className='bg-green-table-items p-4 flex flex-row justify-between items-center'>
                         <h1 className='text-white font-bold text-[13px] uppercase'>Configurações</h1>
                     </div>

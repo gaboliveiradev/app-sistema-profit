@@ -19,7 +19,7 @@ export const PlanProvider = ({ children }) => {
   const { businessPartners } = useAuthContext();
 
   const [namePlan, setNamePlan] = useState('');
-  const [selectedValuesPlan, setSelectedValuesPlan] = useState('');
+  const [selectedValuesPlan, setSelectedValuesPlan] = useState([]);
   const [selectedModalitiesPlan, setSelectedModalitiesPlan] = useState([]);
   const [selectedServicesPlan, setSelectedServicesPlan] = useState([]);
 

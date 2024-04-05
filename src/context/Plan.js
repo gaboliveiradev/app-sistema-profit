@@ -40,30 +40,73 @@ export const PlanProvider = ({ children }) => {
 
   const save = async (ev) => {
     ev.preventDefault();
-    setIsLoader(true);
 
-    const paramerts = {
-      id_business_partners: businessPartners.id,
-      name: namePlan,
-      services: selectedServicesPlan,
-      modalities: selectedModalitiesPlan,
-      prices: selectedValuesPlan,
-    };
+    try {
+      setIsLoader(true);
 
-    const response = await plan.create(paramerts);
+      if (namePlan === '') {
+        Store.addNotification({
+          ...optionsToastStore,
+          title: 'Dados Obrigatórios',
+          message: "Defina o nome do plano para continuar.",
+          type: "danger",
+          insert: "top",
+          container: "top-right",
+        });
 
-    if (response) {
-      Store.addNotification({
-        ...optionsToastStore,
-        message: "Plano criado com sucesso.",
-        type: "success",
-        insert: "top",
-        container: "top-right",
-    });
+        return;  
+      }
+
+      if (selectedModalitiesPlan.length === 0) {
+        Store.addNotification({
+          ...optionsToastStore,
+          title: 'Dados Obrigatórios',
+          message: "Selecione ao menos uma modalidade e defina as regras.",
+          type: "danger",
+          insert: "top",
+          container: "top-right",
+        });
+
+        return;
+      }
+
+      if (selectedValuesPlan.length === 0) {
+        Store.addNotification({
+          ...optionsToastStore,
+          title: 'Dados Obrigatórios',
+          message: "Defina as periodicidades e valores do plano.",
+          type: "danger",
+          insert: "top",
+          container: "top-right",
+        });
+
+        return;
+      }
+
+      const paramerts = {
+        id_business_partners: businessPartners.id,
+        name: namePlan,
+        services: selectedServicesPlan,
+        modalities: selectedModalitiesPlan,
+        prices: selectedValuesPlan,
+      };
+
+      const response = await plan.create(paramerts);
+
+      if (response) {
+        Store.addNotification({
+          ...optionsToastStore,
+          message: "Plano criado com sucesso.",
+          type: "success",
+          insert: "top",
+          container: "top-right",
+        });
+      }
+
+      clear(ev);
+    } finally {
+      setIsLoader(false);
     }
-
-    clear(ev);
-    setIsLoader(false);
   }
 
   const destroy = async (e, id) => {

@@ -96,7 +96,8 @@ export const PlanProvider = ({ children }) => {
       if (response) {
         Store.addNotification({
           ...optionsToastStore,
-          message: "Plano criado com sucesso.",
+          title: 'Plano Criado',
+          message: "Seu plano foi criado com sucesso, você poderá atualizar-lo quando quiser.",
           type: "success",
           insert: "top",
           container: "top-right",

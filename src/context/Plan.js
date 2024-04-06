@@ -20,14 +20,13 @@ export const PlanProvider = ({ children }) => {
 
   const [namePlan, setNamePlan] = useState('');
   const [selectedValuesPlan, setSelectedValuesPlan] = useState([]);
-  const [selectedModalitiesPlan, setSelectedModalitiesPlan] = useState([]);
+  const [modalitiesSelected, setModalitiesSelected] = useState([]);
   const [selectedServicesPlan, setSelectedServicesPlan] = useState([]);
-
-  const [selectedModalityDefineRules, setSelectedModalityDefineRules] = useState([]);
 
   const [listPlans, setListPlans] = useState([]);
   
-  const [defineModalityRulesModal, setDefineModalityRulesModal] = useState(false);
+  // Controle de Modals
+  const [isOpenMdlAddModality, setIsOpenMdlAddModality] = useState(false);
   const [addValuePlanModal, setAddValuePlanModal] = useState(false);
 
   const getPlans = async () => {
@@ -50,21 +49,17 @@ export const PlanProvider = ({ children }) => {
           title: 'Dados Obrigatórios',
           message: "Defina o nome do plano para continuar.",
           type: "danger",
-          insert: "top",
-          container: "top-right",
         });
 
         return;  
       }
 
-      if (selectedModalitiesPlan.length === 0) {
+      if (modalitiesSelected.length === 0) {
         Store.addNotification({
           ...optionsToastStore,
           title: 'Dados Obrigatórios',
           message: "Selecione ao menos uma modalidade e defina as regras.",
           type: "danger",
-          insert: "top",
-          container: "top-right",
         });
 
         return;
@@ -76,8 +71,6 @@ export const PlanProvider = ({ children }) => {
           title: 'Dados Obrigatórios',
           message: "Defina as periodicidades e valores do plano.",
           type: "danger",
-          insert: "top",
-          container: "top-right",
         });
 
         return;
@@ -87,7 +80,7 @@ export const PlanProvider = ({ children }) => {
         id_business_partners: businessPartners.id,
         name: namePlan,
         services: selectedServicesPlan,
-        modalities: selectedModalitiesPlan,
+        modalities: modalitiesSelected,
         prices: selectedValuesPlan,
       };
 
@@ -99,8 +92,6 @@ export const PlanProvider = ({ children }) => {
           title: 'Plano Criado',
           message: "Seu plano foi criado com sucesso, você poderá atualizar-lo quando quiser.",
           type: "success",
-          insert: "top",
-          container: "top-right",
         });
       }
 
@@ -165,7 +156,7 @@ export const PlanProvider = ({ children }) => {
     ev.preventDefault();
 
     setNamePlan('');
-    setSelectedModalitiesPlan([]);
+    setModalitiesSelected([]);
     setSelectedServicesPlan([]);
     setSelectedValuesPlan([]);
   }
@@ -174,12 +165,11 @@ export const PlanProvider = ({ children }) => {
     namePlan, setNamePlan,
     listPlans, setListPlans,
     selectedServicesPlan, setSelectedServicesPlan,
-    selectedModalitiesPlan, setSelectedModalitiesPlan,
-    selectedModalityDefineRules, setSelectedModalityDefineRules,
+    modalitiesSelected, setModalitiesSelected,
     addValuePlanModal, setAddValuePlanModal,
     selectedValuesPlan, setSelectedValuesPlan,
     // modals controls
-    defineModalityRulesModal, setDefineModalityRulesModal,
+    isOpenMdlAddModality, setIsOpenMdlAddModality,
     // methods
     clear, save, getPlans, destroy
   };

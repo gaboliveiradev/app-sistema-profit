@@ -48,10 +48,9 @@ export default function AddValuePlanModal() {
         if (idFrequency === '' || valueFrequency === '') {
             Store.addNotification({
                 ...optionsToastStore,
+                title: 'Dados Obrigatório',
                 message: "Selecione uma periodicidade e/ou valor.",
                 type: "danger",
-                insert: "top",
-                container: "bottom-right",
             });
 
             return;
@@ -62,10 +61,9 @@ export default function AddValuePlanModal() {
         if (isExist.length > 0) {
             Store.addNotification({ 
                 ...optionsToastStore,
+                title: 'Erro ao Adicionar',
                 message: "Essa váriação já está adicionada.",
                 type: "danger",
-                insert: "top",
-                container: "bottom-right",
             });
 
             return;
@@ -81,10 +79,9 @@ export default function AddValuePlanModal() {
 
         Store.addNotification({
             ...optionsToastStore,
-            message: "Valor Adicionado.",
+            title: 'Adicionado com Sucesso',
+            message: "Seu valor e periodicidade foram adicionados com sucesso.",
             type: "success",
-            insert: "top",
-            container: "bottom-right",
         });
 
         setIdFrequency(1);

@@ -6,6 +6,8 @@ export const optionsPagination = {
 };
 
 export const optionsToastStore = {
+    insert: "top",
+    container: "top-right",
     animationIn: ["animate__animated animate__flipInX"],
     animationOut: ["animate__animated animate__flipOutX"],
     dismiss: {

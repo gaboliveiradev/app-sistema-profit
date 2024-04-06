@@ -8,32 +8,31 @@ import biceps from '../../../assets/icon/biceps.svg';
 import crossfit from '../../../assets/icon/crossfit.svg';
 import funcional from '../../../assets/icon/agachamento.svg';
 import geral from '../../../assets/icon/corrida.svg';
-import lapis from '../../../assets/icon/lapis-grande.svg'
 import pagamento from '../../../assets/icon/pagamento-dinheiro.svg';
+import fechar from '../../../assets/icon/deletar.svg';
 
 import estacionamento from '../../../assets/icon/carro.svg';
 import armario from './../../../assets/icon/guarda-roupas.svg';
 import nutricionista from '../../../assets/icon/frutas-calculadora.svg';
 import avaliacaoFisica from '../../../assets/icon/balanca.svg';
-import DefineModalityRulesModal from '../../Modals/DefineModalityRulesModal';
 import ButtonsFooterForms from '../../SmallComponents/ButtonsFooterForms';
 import HorizontalSeparator from '../../SmallComponents/HorizontalSeparator';
 import AddValuePlanModal from '../../Modals/AddValuePlanModal';
 import { formatCurrencyBRL } from '../../../common/format';
+import ModalAddModality from '../../Modals/ModalAddModality';
 
 export default function Plan() {
 
-    const [modalities, setModalities] = useState([]);
     const [services, setServices] = useState([]);
 
     const {
         namePlan, setNamePlan,
+        modalitiesSelected, setModalitiesSelected,
         selectedServicesPlan, setSelectedServicesPlan,
-        selectedModalitiesPlan, setSelectedModalitiesPlan,
-        defineModalityRulesModal, setDefineModalityRulesModal,
         addValuePlanModal, setAddValuePlanModal,
         selectedValuesPlan,
-        setSelectedModalityDefineRules,
+        setIsOpenMdlAddModality,
+        isOpenMdlAddModality,
         clear, save,
     } = usePlanContext();
     const { setIsLoader } = useMainContext();
@@ -49,7 +48,6 @@ export default function Plan() {
             const modality = await plan.getModalities();
             const service = await plan.getServices();
 
-            setModalities(modality.data);
             setServices(service.data);
         } finally {
             setIsLoader(false);
@@ -69,24 +67,11 @@ export default function Plan() {
         }
     }
 
-    const addModalities = async (idModality) => {
-        if (!selectedModalitiesPlan.includes(idModality)) {
-            setSelectedModalitiesPlan([...selectedModalitiesPlan, idModality]);
-        }
-    }
-
-    const deleteModalities = async (idModality) => {
-        if (selectedModalitiesPlan.includes(idModality)) {
-            const newArray = selectedModalitiesPlan.filter(item => item !== idModality);
-            setSelectedModalitiesPlan(newArray);
-        }
-    }
-
     return (
         <>
             <form className='flex flex-row flex-wrap justify-center'>
-                {(defineModalityRulesModal) && <DefineModalityRulesModal />}
                 {(addValuePlanModal) && <AddValuePlanModal />}
+                {(isOpenMdlAddModality) && <ModalAddModality />}
 
                 <div class="w-full max-w-5xl relative shadow-lg mr-10">
                     <div className='bg-green-table-items p-4 flex flex-row justify-between items-center'>
@@ -107,29 +92,28 @@ export default function Plan() {
                             </div>
                             <div className="mt-4 sm:col-span-6">
                                 <label className="text-green-table-items block text-sm font-medium text-[14px] text-gray-600 dark:text-white">
-                                    Selecione as <strong>modalidades</strong> e defina as <strong>regras</strong>. ({selectedModalitiesPlan.length}/4)
+                                    Selecione as <strong>modalidades</strong> e defina as <strong>regras</strong>. ({modalitiesSelected.length}/4)
                                 </label>
                             </div>
                             <div className="mt-4 sm:col-span-6"></div>
                             <div key={1} className="mt-4 sm:col-span-12">
                                 <div class="flex flex-wrap">
                                     {
-                                        modalities.map((modality, index) => {
+                                        modalitiesSelected.map((modality, index) => {
                                             return (
                                                 <>
                                                     <div key={index} class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 p-4">
-                                                        <div onDoubleClick={() => deleteModalities(modality.id)} onClick={() => addModalities(modality.id)} className='cursor-pointer flex items-center'>
-                                                            <div className={`text-center flex justify-center items-center rounded-full w-[60px] h-[60px] bg-grayF5 ${selectedModalitiesPlan.includes(modality.id) && ' border border-dashed border-2 border-green-table-items'}`}>
+                                                        <div className='cursor-pointer flex items-center'>
+                                                            <div className='text-center flex justify-center items-center rounded-full w-[60px] h-[60px] bg-grayF5'>
                                                                 <img width="32" height="32" src={(modality.id === 1) ? geral : (modality.id === 2) ? biceps : (modality.id === 3) ? funcional : (modality.id === 4) && crossfit} alt="A" />
                                                             </div>
-                                                            <div className={`px-3 ${selectedModalitiesPlan.includes(modality.id) && 'text-green-table-items'}`}>
-                                                                <h1>{modality.name}</h1>
-                                                                <div onClick={() => {
-                                                                    setDefineModalityRulesModal(true);
-                                                                    setSelectedModalityDefineRules(modality);
-                                                                }} className='flex flex-row justify-start items-center'>
-                                                                    <img width="12" height="12" src={lapis} alt="A" />
-                                                                    <p className='pl-1 text-[12px] text-red-700'>Configurar</p>
+                                                            <div className='px-3 text-gray80'>
+                                                                <h1 className='flex flex-row'>
+                                                                    {modality.name}
+                                                                    <img width="14" height="14" src={fechar} alt='A' />
+                                                                </h1>
+                                                                <div className='flex flex-row justify-start items-center'>
+                                                                    <p className='text-[12px] text-green-table-items'>{modality.days} Dia(s) Semanal(is)</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -138,6 +122,16 @@ export default function Plan() {
                                             )
                                         })
                                     }
+
+                                    <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 p-4">
+                                        <div onClick={(e) => setIsOpenMdlAddModality(true)} className='cursor-pointer flex items-center'>
+                                            <div className='text-center flex justify-center items-center rounded-full w-[60px] h-[60px] bg-grayF5 border border-dashed border-2 border-green-table-items'>
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="#039665" className="w-8 h-8">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 

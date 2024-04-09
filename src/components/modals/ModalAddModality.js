@@ -156,7 +156,7 @@ export default function ModalAddModality() {
                         <div className="sm:col-span-8 mt-4 ml-8">
                             <div class="flex items-center mb-4">
                                 <div>
-                                    <input checked id="unic-access" type="radio" value="" name="default-radio" class="w-4 h-4 text-green-table-items bg-gray-100 border-gray-300 focus:ring-primary-color dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                                    <input defaultChecked id="unic-access" type="radio" value="" name="default-radio" class="w-4 h-4 text-green-table-items bg-gray-100 border-gray-300 focus:ring-primary-color dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                                     <label for="unic-access" class="ms-2 text-[13px] font-medium text-gray-900 dark:text-gray-300">Acesso único por dia</label>
                                 </div>
                             </div>
@@ -165,7 +165,7 @@ export default function ModalAddModality() {
                                     <input id="default-radio-1" type="radio" value="" name="default-radio" class="w-4 h-4 text-green-table-items bg-gray-100 border-gray-300 focus:ring-primary-color dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                                     <label for="default-radio-1" class="ms-2 text-[13px] font-medium text-gray-900 dark:text-gray-300">Poderá acessar no mesmo dia</label>
                                 </div>
-                                <select class="text-[14px] dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:ring-primary-color focus:border-primary-color rounded-md bg-grayF5 border text-gray-900 block flex-1 text-sm border-gray-300 p-1.5">
+                                <select disabled class="text-[14px] dark:text-gray-300 dark:bg-boxdark-2 dark:border-gray-600 focus:ring-primary-color focus:border-primary-color rounded-md bg-grayF5 border text-gray-900 block flex-1 text-sm border-gray-300 p-1.5">
                                     <option value="2">2 vezes</option>
                                     <option value="3">3 vezes</option>
                                     <option value="4">4 vezes</option>

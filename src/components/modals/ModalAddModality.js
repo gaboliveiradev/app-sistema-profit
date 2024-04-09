@@ -51,12 +51,10 @@ export default function ModalAddModality() {
         setIsOpenMdlAddModality(false);
     }
 
-
     const save = async (e) => {
         e.preventDefault();
 
         if (idModality === '') {
-
             Store.addNotification({
                 ...optionsToastStore,
                 title: 'Dados Obrigatórios',
@@ -90,6 +88,13 @@ export default function ModalAddModality() {
 
         setIdModality('');
         setDays('1');
+
+        Store.addNotification({
+            ...optionsToastStore,
+            title: 'Adicionado com Sucesso',
+            message: "Está modalidade foi adicionada com sucesso ao plano.",
+            type: "success",
+        });
     }
 
     return (
@@ -184,7 +189,7 @@ export default function ModalAddModality() {
                                 clearMethod={clear}
                                 saveMethod={save}
                                 labelClear='Cancelar'
-                                labelSave='Salvar Modalidade'
+                                labelSave='Incluir Modalidade'
                             />
                         </div>
                     </div>

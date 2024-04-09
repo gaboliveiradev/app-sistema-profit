@@ -80,7 +80,7 @@ export default function AddValuePlanModal() {
         Store.addNotification({
             ...optionsToastStore,
             title: 'Adicionado com Sucesso',
-            message: "Seu valor e periodicidade foram adicionados com sucesso.",
+            message: "Este valor e periodicidade foram adicionados com sucesso.",
             type: "success",
         });
 

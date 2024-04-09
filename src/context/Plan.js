@@ -20,13 +20,14 @@ export const PlanProvider = ({ children }) => {
 
   const [namePlan, setNamePlan] = useState('');
   const [selectedValuesPlan, setSelectedValuesPlan] = useState([]);
+  const [servicesSelected, setServicesSelected] = useState([]);
   const [modalitiesSelected, setModalitiesSelected] = useState([]);
-  const [selectedServicesPlan, setSelectedServicesPlan] = useState([]);
 
   const [listPlans, setListPlans] = useState([]);
   
   // Controle de Modals
   const [isOpenMdlAddModality, setIsOpenMdlAddModality] = useState(false);
+  const [isOpenMdlAddService, setIsOpenMdlAddService] = useState(false);
   const [addValuePlanModal, setAddValuePlanModal] = useState(false);
 
   const getPlans = async () => {
@@ -79,7 +80,7 @@ export const PlanProvider = ({ children }) => {
       const paramerts = {
         id_business_partners: businessPartners.id,
         name: namePlan,
-        services: selectedServicesPlan,
+        services: servicesSelected,
         modalities: modalitiesSelected,
         prices: selectedValuesPlan,
       };
@@ -157,19 +158,21 @@ export const PlanProvider = ({ children }) => {
 
     setNamePlan('');
     setModalitiesSelected([]);
-    setSelectedServicesPlan([]);
+    setServicesSelected([]);
+
     setSelectedValuesPlan([]);
   }
 
   const context = {
     namePlan, setNamePlan,
     listPlans, setListPlans,
-    selectedServicesPlan, setSelectedServicesPlan,
+    servicesSelected, setServicesSelected,
     modalitiesSelected, setModalitiesSelected,
     addValuePlanModal, setAddValuePlanModal,
     selectedValuesPlan, setSelectedValuesPlan,
     // modals controls
     isOpenMdlAddModality, setIsOpenMdlAddModality,
+    isOpenMdlAddService, setIsOpenMdlAddService,
     // methods
     clear, save, getPlans, destroy
   };

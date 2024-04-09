@@ -20,60 +20,30 @@ import HorizontalSeparator from '../../SmallComponents/HorizontalSeparator';
 import AddValuePlanModal from '../../Modals/AddValuePlanModal';
 import { formatCurrencyBRL } from '../../../common/format';
 import ModalAddModality from '../../Modals/ModalAddModality';
+import ModalAddService from '../../Modals/ModalAddService';
 
 export default function Plan() {
 
-    const [services, setServices] = useState([]);
-
     const {
         namePlan, setNamePlan,
-        modalitiesSelected, setModalitiesSelected,
+        modalitiesSelected, servicesSelected,
         selectedServicesPlan, setSelectedServicesPlan,
         addValuePlanModal, setAddValuePlanModal,
         selectedValuesPlan,
-        setIsOpenMdlAddModality,
-        isOpenMdlAddModality,
+        // Controls Open Modal
+        isOpenMdlAddModality, setIsOpenMdlAddModality,
+        isOpenMdlAddService, setIsOpenMdlAddService,
         clear, save,
     } = usePlanContext();
-    const { setIsLoader } = useMainContext();
-
-    useEffect(() => {
-        getModalitiesAndServices();
-    }, []);
-
-    const getModalitiesAndServices = async () => {
-        try {
-            setIsLoader(true);
-
-            const modality = await plan.getModalities();
-            const service = await plan.getServices();
-
-            setServices(service.data);
-        } finally {
-            setIsLoader(false);
-        }
-    }
-
-    const addServices = async (idService) => {
-        if (!selectedServicesPlan.includes(idService)) {
-            setSelectedServicesPlan([...selectedServicesPlan, idService]);
-        }
-    }
-
-    const deleteServices = async (idService) => {
-        if (selectedServicesPlan.includes(idService)) {
-            const newArray = selectedServicesPlan.filter(item => item !== idService);
-            setSelectedServicesPlan(newArray);
-        }
-    }
 
     return (
         <>
             <form className='flex flex-row flex-wrap justify-center'>
                 {(addValuePlanModal) && <AddValuePlanModal />}
                 {(isOpenMdlAddModality) && <ModalAddModality />}
+                {(isOpenMdlAddService) && <ModalAddService />}
 
-                <div class="w-full max-w-5xl relative shadow-lg mr-10">
+                <div class="w-full max-w-4xl relative shadow-lg mr-10">
                     <div className='bg-green-table-items p-4 flex flex-row justify-between items-center'>
                         <h1 className='text-white font-bold text-[13px] uppercase'>Configurações</h1>
                     </div>
@@ -102,7 +72,7 @@ export default function Plan() {
                                         modalitiesSelected.map((modality, index) => {
                                             return (
                                                 <>
-                                                    <div key={index} class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 p-4">
+                                                    <div key={index} class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/3 p-4">
                                                         <div className='cursor-pointer flex items-center'>
                                                             <div className='text-center flex justify-center items-center rounded-full w-[60px] h-[60px] bg-grayF5'>
                                                                 <img width="32" height="32" src={(modality.id === 1) ? geral : (modality.id === 2) ? biceps : (modality.id === 3) ? funcional : (modality.id === 4) && crossfit} alt="A" />
@@ -137,28 +107,41 @@ export default function Plan() {
 
                             <div className="mt-4 sm:col-span-6">
                                 <label className="text-green-table-items block text-sm font-medium text-[14px] text-gray-600 dark:text-white">
-                                    Selecione os <strong>serviços</strong> incluso no plano. ({selectedServicesPlan.length}/4)
+                                    Selecione os <strong>serviços</strong> incluso no plano. ({servicesSelected.length}/4)
                                 </label>
                             </div>
                             <div className="mt-4 sm:col-span-6"></div>
                             <div className="mt-4 sm:col-span-12">
                                 <div class="flex flex-wrap">
                                     {
-                                        services.map((service, index) => {
+                                        servicesSelected.map((service, index) => {
                                             return (
-                                                <div key={index} class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 p-4">
-                                                    <div onDoubleClick={() => deleteServices(service.id)} onClick={() => addServices(service.id)} className='cursor-pointer flex items-center'>
-                                                        <div className={`text-center flex justify-center items-center rounded-full w-[60px] h-[60px] bg-grayF5 ${selectedServicesPlan.includes(service.id) && ' border border-dashed border-2 border-green-table-items'}`}>
+                                                <div key={index} class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/3 p-4">
+                                                    <div className='cursor-pointer flex items-center'>
+                                                        <div className='text-center flex justify-center items-center rounded-full w-[60px] h-[60px] bg-grayF5'>
                                                             <img width="32" height="32" src={(service.id === 1) ? armario : (service.id === 2) ? estacionamento : (service.id === 3) ? avaliacaoFisica : (service.id === 4) && nutricionista} alt="A" />
                                                         </div>
-                                                        <div className={`px-3 ${selectedServicesPlan.includes(service.id) && 'text-green-table-items'}`}>
-                                                            <h1>{service.name}</h1>
+                                                        <div className='px-3'>
+                                                            <h1 className='flex flex-row '>
+                                                                {service.name}
+                                                                <img width="14" height="14" src={fechar} alt='A' />
+                                                            </h1>
                                                         </div>
                                                     </div>
                                                 </div>
                                             )
                                         })
                                     }
+
+                                    <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 p-4">
+                                        <div onClick={(e) => setIsOpenMdlAddService(true)} className='cursor-pointer flex items-center'>
+                                            <div className='text-center flex justify-center items-center rounded-full w-[60px] h-[60px] bg-grayF5 border border-dashed border-2 border-green-table-items'>
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="#039665" className="w-8 h-8">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <HorizontalSeparator />

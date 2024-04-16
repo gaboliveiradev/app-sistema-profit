@@ -31,9 +31,9 @@ export const getValues = async () => {
     }
 }
 
-export const get = async () => {
+export const get = async (idBusinessPartners) => {
     try {
-        const response = await api.get(url);
+        const response = await api.get(url+`/${idBusinessPartners}`);
 
         return (response.status === 200) ? response : false;
     } catch {

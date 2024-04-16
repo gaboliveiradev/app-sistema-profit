@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { useMainContext } from '../../../context/Main';
+import React from 'react';
+import { Tooltip } from "flowbite-react";
+import { useNavigate } from "react-router-dom";
 import { usePlanContext } from '../../../context/Plan';
 import "react-toastify/dist/ReactToastify.css";
-import * as plan from '../../../services/plan';
 
 import biceps from '../../../assets/icon/biceps.svg';
 import crossfit from '../../../assets/icon/crossfit.svg';
@@ -23,6 +23,7 @@ import ModalAddModality from '../../Modals/ModalAddModality';
 import ModalAddService from '../../Modals/ModalAddService';
 
 export default function Plan() {
+    const navigate = useNavigate();
 
     const {
         namePlan, setNamePlan,
@@ -35,6 +36,13 @@ export default function Plan() {
         isOpenMdlAddService, setIsOpenMdlAddService,
         clear, save,
     } = usePlanContext();
+
+    const clearAndBackToList = async (ev) => {
+        ev.preventDefault();
+
+        clear(ev);
+        navigate('/planos');
+    }
 
     return (
         <>
@@ -75,7 +83,9 @@ export default function Plan() {
                                                     <div key={index} class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/3 p-4">
                                                         <div className='cursor-pointer flex items-center'>
                                                             <div className='text-center flex justify-center items-center rounded-full w-[60px] h-[60px] bg-grayF5'>
-                                                                <img width="32" height="32" src={(modality.id === 1) ? geral : (modality.id === 2) ? biceps : (modality.id === 3) ? funcional : (modality.id === 4) && crossfit} alt="A" />
+                                                                <Tooltip content={modality.name}>
+                                                                    <img width="32" height="32" src={(modality.id === 1) ? geral : (modality.id === 2) ? biceps : (modality.id === 3) ? funcional : (modality.id === 4) && crossfit} alt="A" />
+                                                                </Tooltip>
                                                             </div>
                                                             <div className='px-3 text-gray80'>
                                                                 <h1 className='flex flex-row'>
@@ -119,7 +129,9 @@ export default function Plan() {
                                                 <div key={index} class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/3 p-4">
                                                     <div className='cursor-pointer flex items-center'>
                                                         <div className='text-center flex justify-center items-center rounded-full w-[60px] h-[60px] bg-grayF5'>
-                                                            <img width="32" height="32" src={(service.id === 1) ? armario : (service.id === 2) ? estacionamento : (service.id === 3) ? avaliacaoFisica : (service.id === 4) && nutricionista} alt="A" />
+                                                            <Tooltip content={service.name}>
+                                                                <img width="32" height="32" src={(service.id === 1) ? armario : (service.id === 2) ? estacionamento : (service.id === 3) ? avaliacaoFisica : (service.id === 4) && nutricionista} alt="A" />
+                                                            </Tooltip>
                                                         </div>
                                                         <div className='px-3'>
                                                             <h1 className='flex flex-row '>
@@ -147,7 +159,7 @@ export default function Plan() {
                             <HorizontalSeparator />
                             <div className="mt-4 sm:col-span-12 flex flex-row justify-end">
                                 <ButtonsFooterForms
-                                    clearMethod={clear}
+                                    clearMethod={clearAndBackToList}
                                     saveMethod={save}
                                     labelClear='Cancelar'
                                     labelSave='Concluir e Ativar'

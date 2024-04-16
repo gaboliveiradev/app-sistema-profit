@@ -33,7 +33,7 @@ export const PlanProvider = ({ children }) => {
   const getPlans = async () => {
     setIsLoader(true);
 
-    const response = await plan.get();
+    const response = await plan.get(businessPartners.id);
     setListPlans(response.data);
     setIsLoader(false);
   }

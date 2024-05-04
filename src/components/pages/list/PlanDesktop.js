@@ -4,8 +4,6 @@ import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { usePlanContext } from "../../../context/Plan";
-import CardPlan from "../../SmallComponents/CardPlan";
-import addIcon from '../../../assets/icon/add.png';
 
 import biceps from '../../../assets/icon/biceps.svg';
 import crossfit from '../../../assets/icon/crossfit.svg';
@@ -22,9 +20,8 @@ import { formatCurrencyBRL } from "../../../common/format";
 export default function PlanDesktop() {
     const {
         getPlans,
-        destroy,
+        getPlanById,
         listPlans,
-        setIsModalVisible,
     } = usePlanContext();
 
     const navigate = useNavigate();
@@ -32,6 +29,10 @@ export default function PlanDesktop() {
     useEffect(() => {
         getPlans();
     }, []);
+
+    const getById = async (idPlan) => {
+        getPlanById(idPlan)
+    }
 
     return (
         <div class="mt-8 flex flex-col">
@@ -82,10 +83,10 @@ export default function PlanDesktop() {
                                             listPlans.map((plan, index) => {
                                                 return (
                                                     <div key={index} class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 p-4">
-                                                        <div>
+                                                        <div onDoubleClick={(e) => getById(plan.id)}>
                                                             <div className="p-8 flex flex-col justify-center items-center bg-green-table-items">
                                                                 <h1 className="text-[14px] text-center text-white">{plan.name}</h1>
-                                                                <p className="-mb-1 lowercase text-blackd text-[14px] font-bold opacity-[0.6]">a partIr de</p>
+                                                                <p className="-mb-1 lowercase text-blackd text-[14px] font-bold opacity-[0.6]">a partir de</p>
                                                                 <h1 className="text-[20px] text-white">
                                                                     {formatCurrencyBRL(plan.prices[0].price)}
                                                                 </h1>

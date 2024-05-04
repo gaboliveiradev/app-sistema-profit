@@ -6,6 +6,7 @@ import { toast, Flip } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { useMainContext } from './Main';
 import { useAuthContext } from './Auth';
+import { useNavigate } from 'react-router-dom';
 
 import { Store } from 'react-notifications-component';
 import { optionsToastStore } from '../common/options';
@@ -14,6 +15,7 @@ import 'animate.css/animate.min.css';
 export const PlanContext = createContext();
 
 export const PlanProvider = ({ children }) => {
+  const navigate = useNavigate();
 
   const { setIsLoader } = useMainContext();
   const { businessPartners } = useAuthContext();
@@ -35,6 +37,20 @@ export const PlanProvider = ({ children }) => {
 
     const response = await plan.get(businessPartners.id);
     setListPlans(response.data);
+    setIsLoader(false);
+  }
+
+  const getPlanById = async (idPlan) => {
+    setIsLoader(true);
+
+    const response = await plan.getById(businessPartners.id, idPlan);
+
+    setNamePlan(response.data.name);
+
+    navigate('/plano');
+
+    console.log(response.data);
+
     setIsLoader(false);
   }
 
@@ -174,7 +190,7 @@ export const PlanProvider = ({ children }) => {
     isOpenMdlAddModality, setIsOpenMdlAddModality,
     isOpenMdlAddService, setIsOpenMdlAddService,
     // methods
-    clear, save, getPlans, destroy
+    clear, save, getPlans, getPlanById, destroy
   };
 
   return (

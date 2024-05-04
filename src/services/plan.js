@@ -41,6 +41,16 @@ export const get = async (idBusinessPartners) => {
     }
 }
 
+export const getById = async (idBusinessPartners, idPlan) => {
+    try {
+        const response = await api.get(url+`/${idBusinessPartners}/${idPlan}`);
+
+        return (response.status === 200) ? response : false;
+    } catch {
+        return false;
+    }
+}
+
 export const create = async (paramerts) => {
     try {
         const respose = await api.post(url, {

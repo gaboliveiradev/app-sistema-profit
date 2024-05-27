@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { Tooltip } from "flowbite-react";
-import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { usePlanContext } from "../../../context/Plan";
@@ -16,18 +15,30 @@ import avaliacaoFisica from '../../../assets/icon/balanca.svg';
 import close from '../../../assets/icon/deletar.svg';
 
 import { formatCurrencyBRL } from "../../../common/format";
+import { useQueryContext } from "../../../context/Query";
 
 export default function PlanDesktop() {
     const {
-        getPlans,
         getPlanById,
-        listPlans,
+        setNamePlan,
+        setSelectedValuesPlan,
+        setServicesSelected,
+        setModalitiesSelected,
     } = usePlanContext();
+
+    const { _GET, _GETBYID, records } = useQueryContext();
 
     const navigate = useNavigate();
 
+    const arrSetState = {
+        'name': setNamePlan,
+        'prices': setSelectedValuesPlan,
+        'services': setServicesSelected,
+        'modalitires': setModalitiesSelected,
+    }
+
     useEffect(() => {
-        getPlans();
+        _GET('/plans');
     }, []);
 
     const getById = async (idPlan) => {
@@ -36,19 +47,6 @@ export default function PlanDesktop() {
 
     return (
         <div class="mt-8 flex flex-col">
-            <ToastContainer
-                position="top-right"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="colored"
-            />
-
             <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
                     <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5">
@@ -80,10 +78,10 @@ export default function PlanDesktop() {
                                 <div className="sm:col-span-12">
                                     <div class="flex flex-wrap">
                                         {
-                                            listPlans.map((plan, index) => {
+                                            records.map((plan, index) => {
                                                 return (
                                                     <div key={index} class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 p-4">
-                                                        <div onDoubleClick={(e) => getById(plan.id)}>
+                                                        <div onDoubleClick={(e) => _GETBYID('/plans', plan.id, arrSetState)}>
                                                             <div className="p-8 flex flex-col justify-center items-center bg-green-table-items">
                                                                 <h1 className="text-[14px] text-center text-white">{plan.name}</h1>
                                                                 <p className="-mb-1 lowercase text-blackd text-[14px] font-bold opacity-[0.6]">a partir de</p>

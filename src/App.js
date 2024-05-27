@@ -6,6 +6,7 @@ import { ConfigProvider } from './context/Config';
 import { GymGoerProvider } from './context/GymGoer';
 import { MainProvider } from './context/Main';
 import { PlanProvider } from './context/Plan';
+import { QueryProvider } from './context/Query';
 
 function App() {
   return (
@@ -15,7 +16,9 @@ function App() {
           <GymGoerProvider>
             <PlanProvider>
               <BillingFeesProvider>
-                <Routing />
+                <QueryProvider>
+                  <Routing />
+                </QueryProvider>
               </BillingFeesProvider>
             </PlanProvider>
           </GymGoerProvider>

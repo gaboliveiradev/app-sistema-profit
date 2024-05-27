@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 import { useAuthContext } from './Auth';
 import { useMainContext } from './Main';
@@ -8,6 +9,7 @@ import api from './../services/api';
 export const QueryContext = createContext();
 
 export const QueryProvider = ({ children }) => {
+    const [searchParams] = useSearchParams();
 
     const { setIsLoader } = useMainContext();
     const { businessPartners } = useAuthContext();
@@ -33,16 +35,12 @@ export const QueryProvider = ({ children }) => {
         }
     }
 
-    const _GETBYID = async (urlApi, id, arrSetState) => {
+    const _GETBYID = async (urlApi, id) => {
         try {
             setIsLoader(true);
             const response = await api.get(`${urlApi}/${businessPartners.id}/${id}`);
 
-            if (response.status === 200) {
-                console.log(response.data)
-
-                return;
-            }
+            return (response.status === 200) ? response.data : [];
         } catch {
             return;
         } finally {
@@ -50,10 +48,22 @@ export const QueryProvider = ({ children }) => {
         }
     }
 
+    const _ISUPDATE = async (urlApi) => {
+        const idEdit = searchParams.get('id');
+        
+        if (idEdit != null) {
+            const response = _GETBYID(urlApi, idEdit);
+            
+            return response;
+        }
+
+        return null;
+    }
+
     const context = {
         records, setRecords,
         // methods
-        _GET, _GETBYID,
+        _GET, _GETBYID, _ISUPDATE,
     };
 
     return (

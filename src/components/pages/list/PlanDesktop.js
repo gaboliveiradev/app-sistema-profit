@@ -41,8 +41,8 @@ export default function PlanDesktop() {
         _GET('/plans');
     }, []);
 
-    const getById = async (idPlan) => {
-        getPlanById(idPlan)
+    const update = async (idPlan) => {
+        navigate(`/plano?id=${idPlan}`);
     }
 
     return (
@@ -81,7 +81,7 @@ export default function PlanDesktop() {
                                             records.map((plan, index) => {
                                                 return (
                                                     <div key={index} class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 p-4">
-                                                        <div onDoubleClick={(e) => _GETBYID('/plans', plan.id, arrSetState)}>
+                                                        <div onDoubleClick={(e) => update(plan.id)}>
                                                             <div className="p-8 flex flex-col justify-center items-center bg-green-table-items">
                                                                 <h1 className="text-[14px] text-center text-white">{plan.name}</h1>
                                                                 <p className="-mb-1 lowercase text-blackd text-[14px] font-bold opacity-[0.6]">a partir de</p>

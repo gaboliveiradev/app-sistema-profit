@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Tooltip } from "flowbite-react";
 import { useNavigate } from "react-router-dom";
+
 import { usePlanContext } from '../../../context/Plan';
 import "react-toastify/dist/ReactToastify.css";
 
@@ -21,6 +22,7 @@ import AddValuePlanModal from '../../Modals/AddValuePlanModal';
 import { formatCurrencyBRL } from '../../../common/format';
 import ModalAddModality from '../../Modals/ModalAddModality';
 import ModalAddService from '../../Modals/ModalAddService';
+import { useQueryContext } from '../../../context/Query';
 
 export default function Plan() {
     const navigate = useNavigate();

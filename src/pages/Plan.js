@@ -1,5 +1,5 @@
 import React from 'react';
-import PlanDesktop from '../components/Pages/List/PlanDesktop';
+import PlanDesktop from '../components/pages/list/PlanDesktop';
 
 export default function Plan() {
     return (

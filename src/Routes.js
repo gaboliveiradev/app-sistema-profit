@@ -7,7 +7,7 @@ import ProtectedRoutes from './ProtectedRoutes';
 import NotFound from './pages/NotFound';
 import GymGoer from './pages/GymGoer';
 import Plan from './pages/Plan';
-import PlanInsert from './components/Pages/Insert/Plan';
+import PlanInsert from './components/pages/insert/Plan';
 import BillingFees from './pages/BillingFees';
 import Dashboard from './pages/Dashboard';
 

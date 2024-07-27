@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import Insert from './../components/Pages/Insert/GymGoer';
-import GymGoerDesktop from '../components/Pages/List/GymGoerDesktop';
+import Insert from './../components/pages/insert/GymGoer';
+import GymGoerDesktop from '../components/pages/list/GymGoerDesktop';
 
 export default function GymGoer() {
     const navigate = useNavigate();

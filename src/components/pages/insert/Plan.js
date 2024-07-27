@@ -10,6 +10,7 @@ import crossfit from '../../../assets/icon/crossfit.svg';
 import funcional from '../../../assets/icon/agachamento.svg';
 import geral from '../../../assets/icon/corrida.svg';
 import pagamento from '../../../assets/icon/pagamento-dinheiro.svg';
+import moedas from '../../../assets/icon/dinheiro-moedas.svg';
 import fechar from '../../../assets/icon/deletar.svg';
 
 import estacionamento from '../../../assets/icon/carro.svg';
@@ -18,10 +19,10 @@ import nutricionista from '../../../assets/icon/frutas-calculadora.svg';
 import avaliacaoFisica from '../../../assets/icon/balanca.svg';
 import ButtonsFooterForms from '../../SmallComponents/ButtonsFooterForms';
 import HorizontalSeparator from '../../SmallComponents/HorizontalSeparator';
-import AddValuePlanModal from '../../Modals/AddValuePlanModal';
+import AddValuePlanModal from '../../modals/AddValuePlanModal';
 import { formatCurrencyBRL } from '../../../common/format';
-import ModalAddModality from '../../Modals/ModalAddModality';
-import ModalAddService from '../../Modals/ModalAddService';
+import ModalAddModality from '../../modals/ModalAddModality';
+import ModalAddService from '../../modals/ModalAddService';
 import { useQueryContext } from '../../../context/Query';
 
 export default function Plan() {
@@ -47,18 +48,18 @@ export default function Plan() {
     }
 
     return (
-        <>
-            <form className='flex flex-row flex-wrap justify-center'>
-                {(addValuePlanModal) && <AddValuePlanModal />}
-                {(isOpenMdlAddModality) && <ModalAddModality />}
-                {(isOpenMdlAddService) && <ModalAddService />}
+        <form className='h-[100%]'>
+            {(addValuePlanModal) && <AddValuePlanModal />}
+            {(isOpenMdlAddModality) && <ModalAddModality />}
+            {(isOpenMdlAddService) && <ModalAddService />}
 
-                <div class="w-full max-w-4xl relative shadow-lg mr-10">
-                    <div className='bg-green-table-items p-4 flex flex-row justify-between items-center'>
-                        <h1 className='text-white font-bold text-[13px] uppercase'>Configurações</h1>
-                    </div>
-                    <div className='bg-white'>
-                        <div className="p-4 grid grid-cols-1 sm:grid-cols-12">
+            <div class="w-full h-full relative flex flex-col shadow-lg">
+                <div className='bg-green-table-items p-4 flex flex-row justify-between items-center'>
+                    <h1 className='text-white font-bold text-[13px] uppercase'>Configurações de Plano</h1>
+                </div>
+                <div className='bg-white flex flex-col justify-between flex-1'>
+                    <div className="flex-1 p-4 grid grid-cols-1 sm:grid-cols-12">
+                        <div className="sm:col-span-12">
                             <div className="sm:col-span-12">
                                 <div>
                                     <input
@@ -138,7 +139,7 @@ export default function Plan() {
                                                         <div className='px-3'>
                                                             <h1 className='flex flex-row '>
                                                                 {service.name}
-                                                                <img width="14" height="14" src={fechar} alt='A' />
+                                                                <img width="14" height="14" src={fechar} alt='close' />
                                                             </h1>
                                                         </div>
                                                     </div>
@@ -158,71 +159,74 @@ export default function Plan() {
                                     </div>
                                 </div>
                             </div>
-                            <HorizontalSeparator />
-                            <div className="mt-4 sm:col-span-12 flex flex-row justify-end">
-                                <ButtonsFooterForms
-                                    clearMethod={clearAndBackToList}
-                                    saveMethod={save}
-                                    labelClear='Cancelar'
-                                    labelSave='Concluir e Ativar'
-                                />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="w-full max-w-xl relative bg-white shadow-lg">
-                    <div className='bg-green-table-items p-4 flex flex-row justify-between items-center'>
-                        <h1 className='text-white font-bold text-[13px] uppercase'>Configurações</h1>
-                    </div>
-                    <div>
-                        <div className="p-4 grid grid-cols-1 sm:grid-cols-12">
-                            <div className="sm:col-span-6">
-                                <label className="text-green-table-items block text-sm font-medium text-[14px] text-gray-600 dark:text-white">
-                                    Defina as <strong>periodicidades</strong> e <strong>valores</strong> do plano.
-                                </label>
-                            </div>
-                            <div className="sm:col-span-6"></div>
-                            <HorizontalSeparator />
-                            {
-                                (selectedValuesPlan.length <= 0) && (
-                                    <div className="mt-4 sm:col-span-12">
-                                        <div className='flex flex-row items-center justify-start'>
-                                            <img width="48" height="48" src={pagamento} alt='pagamento' />
-                                            <div className='ml-3'>
-                                                <h1 className='text-[14px]'>Nenhum valor adicionado</h1>
-                                                <h1 className='text-[12px] text-gray80'>Defina as periodicidades e valores de seu plano</h1>
-                                            </div>
-                                        </div>
-                                    </div>
-                                )
-                            }
-                            {
-                                (selectedValuesPlan.length > 0) && (
-                                    selectedValuesPlan.map((value) => {
-                                        return (
+                            <div className="mt-4 sm:col-span-12">
+                                <div className="sm:col-span-6">
+                                    <label className="text-green-table-items block text-sm font-medium text-[14px] text-gray-600 dark:text-white">
+                                        Defina as <strong>periodicidades</strong> e <strong>valores</strong> do plano.
+                                    </label>
+                                </div>
+                                <div className="sm:col-span-6"></div>
+                                <HorizontalSeparator />
+                                <div className="flex flex-row justify-between flex-wrap sm:col-span-12">
+                                    {
+                                        (selectedValuesPlan.length <= 0) && (
                                             <div className="mt-4 sm:col-span-12">
-                                                <div className='flex flex-row items-center justify-between'>
-                                                    <div className='text-[16px]'>{value.name}</div>
-                                                    <div className='text-[16px]font-bold'>{formatCurrencyBRL(value.value)}</div>
+                                                <div className='flex flex-row items-center justify-start'>
+                                                    <img width="48" height="48" src={pagamento} alt='pagamento' />
+                                                    <div className='ml-3'>
+                                                        <h1 className='text-[14px]'>Nenhum valor adicionado</h1>
+                                                        <h1 className='text-[12px] text-gray80'>Defina as periodicidades e valores de seu plano</h1>
+                                                    </div>
                                                 </div>
                                             </div>
                                         )
-                                    })
-                                )
-                            }
+                                    }
+                                    {
+                                        (selectedValuesPlan.length > 0) && (
+                                            selectedValuesPlan.map((value) => {
+                                                return (
+                                                    <div className="mt-4 sm:col-span-12">
+                                                        <div className='flex flex-row items-center justify-start'>
+                                                            <img width="48" height="48" src={moedas} alt='pagamento' />
+                                                            <div className='ml-3 flex flex-row justify-center items-start'>
+                                                                <div>
+                                                                    <h1 className='text-[14px]'>{value.name}</h1>
+                                                                    <h1 className='text-[12px] text-gray80'>{formatCurrencyBRL(value.value)}</h1>
+                                                                </div>
+                                                                <img width="14" height="14" src={fechar} alt='close' />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                )
+                                            })
+                                        )
+                                    }
+                                </div>
 
-                            <div className="mt-4 text-center p-2 text-[14px] text-green-table-items sm:col-span-12 border border-dashed border-2 border-gray80">
-                                <div onClick={() => setAddValuePlanModal(true)} className='cursor-pointer flex flex-row justify-center items-center'>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                                    </svg>
-                                    <span>Novo Valor</span>
+                                <div className="mt-4 text-center p-2 text-[14px] text-green-table-items sm:col-span-12 border border-dashed border-2 border-gray80">
+                                    <div onClick={() => setAddValuePlanModal(true)} className='cursor-pointer flex flex-row justify-center items-center'>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                        </svg>
+                                        <span>Novo Valor</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div className="sm:col-span-12 px-4 py-4">
+                        <HorizontalSeparator />
+                        <div className="sm:col-span-12 flex flex-row justify-end">
+                            <ButtonsFooterForms
+                                clearMethod={clearAndBackToList}
+                                saveMethod={save}
+                                labelClear='Cancelar'
+                                labelSave='Concluir e Ativar'
+                            />
+                        </div>
+                    </div>
                 </div>
-            </form>
-        </>
+            </div>
+        </form>
     );
 }
